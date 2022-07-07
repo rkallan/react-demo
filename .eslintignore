@@ -1,0 +1,6 @@
+prettier*
+**/coverage
+**/build*
+**/examples
+**/node_modules
+.eslintrc.js
