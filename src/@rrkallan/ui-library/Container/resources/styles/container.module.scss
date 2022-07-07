@@ -1,0 +1,49 @@
+@import "resources/styles/mixins/mixins";
+@import "resources/styles/variables/variables";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    color: inherit;
+    min-width: 100%;
+    padding: map-get($gap, default);
+
+    &[variant~="black"] {
+        background-color: safe-hsla(map-get($colorBlack, lighter));
+        color: safe-hsla(map-get($colorWhite, default));
+
+        a {
+            color: inherit;
+        }
+    }
+
+    &[variant~="red"] {
+        background-color: safe-hsla(map-get($colorRed, default));
+        color: safe-hsla(map-get($colorWhite, default));
+
+        a {
+            color: inherit;
+        }
+    }
+
+    &[variant~="default"],
+    &[variant~="white"] {
+        background-color: safe-hsla(map-get($colorWhite, default));
+        color: safe-hsla(map-get($colorBlack, lighter));
+
+        a {
+            color: inherit;
+        }
+    }
+
+    &[variant~="text-color-red"] {
+        color: safe-hsla(map-get($colorRed, default));
+    }
+
+    .unit {
+        display: flex;
+        flex-direction: column;
+    }
+}

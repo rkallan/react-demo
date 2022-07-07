@@ -1,0 +1,98 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: map-get($gap, default);
+
+    &[variant~="overview"] {
+        padding-bottom: map-get($gap, default);
+    }
+
+    &[variant~="pagination"] {
+        position: sticky;
+        z-index: 15;
+        background: safe-hsla(map-get($colorWhite, default), 0.95);
+        bottom: 0;
+        margin-bottom: -#{map-get($gap, default)};
+        transition: map-get($transition, default);
+        padding: map-get($gap, default) 0;
+    }
+
+    .unit {
+        display: flex;
+        flex-direction: column;
+        width: calc((100% - map-get($gap, default)) / 2);
+        min-width: 8.5rem;
+        max-width: 13.125rem;
+        min-height: 15rem;
+        max-height: 100%;
+        font-size: 1rem;
+        transition: map-get($transition, default);
+
+        @include respond-to("xxsmall") {
+            width: calc((100% - map-get($gap, default) * 2) / 3);
+        }
+
+        @include respond-to("small") {
+            width: calc((100% - map-get($gap, default) * 3) / 4);
+        }
+
+        @include respond-to("large") {
+            width: calc((100% - map-get($gap, default) * 4) / 5);
+            font-size: 1.25rem;
+        }
+
+        @include respond-to("xlarge") {
+            width: calc((100% - map-get($gap, default) * 5) / 6);
+        }
+
+        @include respond-to("xxlarge") {
+            width: calc((100% - map-get($gap, default) * 7) / 8);
+        }
+
+        .link {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border-radius: map-get($borderRadius, small);
+            box-shadow: hsl(0deg 0% 0% / 25%) 0 0.125rem 0.625rem;
+            overflow: hidden;
+            background-color: safe-hsla(map-get($colorWhite, default));
+            transition: map-get($transition, default);
+            justify-content: flex-end;
+
+            &:hover,
+            &:focus {
+                transform: scale(1.05);
+                z-index: 2;
+            }
+
+            .imageContainer {
+                position: relative;
+                flex: 1;
+
+                .caption {
+                    position: absolute;
+                    bottom: -1rem;
+                    width: 100%;
+                    background-color: safe-hsla(map-get($colorWhite, default), 0.5);
+                }
+            }
+        }
+
+        .title {
+            font-size: inherit;
+            padding: map-get($gap, default);
+            color: safe-hsla(map-get($colorRed, default));
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: pre;
+            text-align: center;
+        }
+    }
+}

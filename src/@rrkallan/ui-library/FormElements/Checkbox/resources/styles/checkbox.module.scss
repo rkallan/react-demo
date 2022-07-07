@@ -1,0 +1,78 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    &[variant="margin-right"] {
+        margin-right: 0.5rem;
+    }
+
+    .input {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: safe-hsla(map-get($colorWhite, default));
+
+        &:checked + .label {
+            .checkbox {
+                border-color: safe-hsla(map-get($colorBlack, default));
+                background-color: safe-hsla(map-get($colorBlack, default));
+
+                svg {
+                    opacity: 1;
+                    color: safe-hsla(map-get($colorWhite, default));
+                }
+            }
+        }
+
+        &:hover + .label,
+        &:focus + .label {
+            .checkbox {
+                border-color: safe-hsla(map-get($colorBlack, default));
+            }
+        }
+
+        &:checked {
+            &:focus + .label,
+            &:hover + .label {
+                .checkbox {
+                    background-color: safe-hsla(map-get($colorWhite, default));
+
+                    svg {
+                        color: safe-hsla(map-get($colorBlack, default));
+                    }
+                }
+            }
+        }
+    }
+
+    .label {
+        display: flex;
+        flex-direction: row;
+        gap: map-get($gap, small);
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 0.0625rem solid safe-hsla(map-get($colorGray, default), 0.5);
+            transition: map-get($transition, default);
+
+            svg {
+                opacity: 0;
+                width: 1rem;
+                transition: map-get($transition, default);
+            }
+        }
+    }
+
+    &:hover,
+    &:focus {
+        .label {
+            .checkbox {
+                border-color: safe-hsla(map-get($colorBlack, default));
+            }
+        }
+    }
+}

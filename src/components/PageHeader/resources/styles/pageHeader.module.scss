@@ -1,0 +1,16 @@
+@import "./src/resources/styles/variables/variables";
+@import "./src/resources/styles/mixins/mixins";
+
+.container {
+    position: sticky;
+    top: 5.5rem;
+    z-index: 5;
+    box-shadow: safe-hsla(map-get($colorBlack, default), 0.25) 0 0.125rem 0.625rem;
+
+    @for $index from 1 through 6 {
+        h#{$index} {
+            padding: 0;
+            margin: 0;
+        }
+    }
+}

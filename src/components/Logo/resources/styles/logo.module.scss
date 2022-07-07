@@ -1,0 +1,23 @@
+@import "./src/resources/styles/variables/variables";
+@import "./src/resources/styles/mixins/mixins";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+    .link {
+        &:after {
+            display: none;
+        }
+    }
+
+    svg {
+        width: 100%;
+        max-height: 100%;
+        color: safe-hsla(map-get($colorWhite, default));
+        filter: drop-shadow(0 0.0625rem 0.0625rem safe-hsla(map-get($colorBlack, lighter)))
+            drop-shadow(0 0.25rem 0.5rem safe-hsla(map-get($colorBlack, lighter), 0.15));
+    }
+}

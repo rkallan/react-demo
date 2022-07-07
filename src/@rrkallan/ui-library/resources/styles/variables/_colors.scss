@@ -1,0 +1,30 @@
+$colorWhite: (
+    default: hsla(0, 0%, 100%, 1),
+);
+
+$colorBlack: (
+    default: hsla(0, 0%, 0%, 1),
+    lighter: hsla(0, 0%, 14%, 1),
+);
+
+$colorGray: (
+    default: hsla(0, 0%, 14%, 1),
+);
+
+$colorYellow: (
+    default: hsla(53, 100%, 50%, 1),
+);
+
+$colorRed: (
+    default: hsla(352, 89%, 40%, 1),
+);
+
+$colorGreen: (
+    default: hsla(143, 61%, 41%, 1),
+);
+
+$colorOrange: (
+    default: hsla(37, 100%, 50%, 1),
+);
+
+$background: map-get($colorWhite, default);

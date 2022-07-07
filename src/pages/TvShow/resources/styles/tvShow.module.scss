@@ -1,0 +1,27 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    display: flex;
+    gap: map-get($gap, default);
+    flex-direction: column;
+    transition: map-get($transition, default);
+
+    @include respond-to("xxsmall") {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .unit {
+        &[variant~="title"] {
+            flex: none;
+            font-size: 2.5rem;
+            text-align: center;
+            transition: map-get($transition, default);
+
+            @include respond-to("large") {
+                font-size: 4.375rem;
+            }
+        }
+    }
+}
