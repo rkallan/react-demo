@@ -29,7 +29,6 @@ const searchForm = () => {
                         name: "q",
                         title: "Search tv shows by title",
                         type: "search",
-                        required: false,
                         validationTypes: {
                             hasMinimalAndMaximalCharacters: { minCharacters: 2, maxCharacters: 256 },
                         },

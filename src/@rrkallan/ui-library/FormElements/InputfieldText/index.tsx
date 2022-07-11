@@ -30,7 +30,8 @@ function InputfieldText({
     const [inputValue, setInputValue] = useState(() => defaultValue);
     const [containerVariant, setContainerVariant] = useState((): string | undefined => undefined);
     const [containerState, setContainerState] = useState(() => (required ? "isEmpty" : "isValid"));
-    const [icon, setIcon] = useState((): string | null => null);
+    const [iconValidated, setIconValidated] = useState((): string | undefined => undefined);
+    // const [icon, setIcon] = useState((): string | undefined => undefined);
     const [inputState, setInputState] = useState(() => (required ? "isEmpty" : "isValid"));
     const [titleVariant, setTitleVariant] = useState(() => (defaultValue ? "legend" : "placeholder"));
     const [inputId] = useState(() => `${name}-${id}`);
@@ -64,6 +65,8 @@ function InputfieldText({
     const onFocusHandler: FocusEventHandler<HTMLInputElement> = () => {
         setTitleVariant("legend focussed");
         setContainerState("isFocussed");
+
+        setIconValidated(() => undefined);
     };
 
     const onBlurHandler: FocusEventHandler<HTMLInputElement> = (event) => {
@@ -80,10 +83,9 @@ function InputfieldText({
 
         setTitleVariant(variant);
         setContainerState(elementState);
+
         if (required) {
-            setIcon(() => {
-                return elementState === "isValid" ? "check" : "close";
-            });
+            setIconValidated(() => (elementState === "isValid" ? "check" : "alert"));
         }
     };
 
@@ -140,13 +142,15 @@ function InputfieldText({
                         state={inputState}
                     />
                 </div>
-                {!!icon && (
-                    <div className={styles.icon} state={icon ? "visible" : "hidden"}>
-                        <Icons icon={icon} svgProps={undefined} noContainer={undefined} variant="small" />
-                        <span className={styles.text}>{icon && icon === "isValid" ? "correct" : "errror"}</span>
-                    </div>
-                )}
             </fieldset>
+            <div className={styles.iconValidated} state={[iconValidated ? "visible" : "hidden", containerState].join(" ")}>
+                {!!iconValidated && (
+                    <>
+                        <Icons icon={iconValidated} svgProps={undefined} noContainer={undefined} variant="normal" />
+                        <span className={styles.text}>{iconValidated === "isValid" ? "correct" : "errror"}</span>
+                    </>
+                )}
+            </div>
         </section>
     );
 }

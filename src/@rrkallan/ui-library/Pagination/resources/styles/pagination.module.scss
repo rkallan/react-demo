@@ -11,26 +11,21 @@
     .navigation {
         display: flex;
         flex-direction: row;
-        gap: map-get($gap, default);
+        gap: 1rem;
         min-height: 4.25rem;
 
         .unit {
             position: relative;
             display: flex;
-            flex: auto;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: center;
+            flex: auto;
             align-items: center;
             list-style-type: none;
-            margin: 0;
-            padding: 0;
             gap: map-get($gap, small);
 
             &[variant~="text"] {
                 flex: none;
-                flex-direction: column;
-                justify-content: center;
 
                 .button {
                     padding: 0 0.75rem;
@@ -38,15 +33,16 @@
             }
 
             &[variant~="number"] {
-                .item {
-                    display: flex;
-                    flex-direction: row;
-                    margin: 0;
-                    padding: 0;
+                justify-content: center;
+            }
 
-                    &[state~="hidden"] {
-                        display: none;
-                    }
+            .item {
+                display: flex;
+                margin: 0;
+                padding: 0;
+
+                &[state~="hidden"] {
+                    display: none;
                 }
 
                 &[variant~="charLength-2"] {

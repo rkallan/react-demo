@@ -12,6 +12,8 @@ function Pagination({
     showing = Pagination.defaultProps.showing,
     buttonPrevText = Pagination.defaultProps.buttonPrevText,
     buttonNextText = Pagination.defaultProps.buttonNextText,
+    buttonFirstText = Pagination.defaultProps.buttonFirstText,
+    buttonLastText = Pagination.defaultProps.buttonLastText,
 }) {
     const paginationNumberRef = useRef();
     const { width } = useBoundingClientRect({ element: paginationNumberRef, delay: 5, includeUnit: false }) || {};
@@ -38,7 +40,7 @@ function Pagination({
     };
 
     useLayoutEffect(() => {
-        const possibleMaxPageLinks = roundDown(width / (1.5 + (charLengthTotalPages + 1) * 0.5)) || 0;
+        const possibleMaxPageLinks = roundDown(width / (1 + (charLengthTotalPages + 1) * 0.5)) || 0;
         const isPossibleMaxPageLinksOdd = !!(possibleMaxPageLinks % 2);
         const maxPageLinks = possibleMaxPageLinks - !isPossibleMaxPageLinksOdd;
 
@@ -72,18 +74,35 @@ function Pagination({
             <nav className={styles.navigation}>
                 {pages?.length > 1 && (
                     <>
-                        <div className={styles.unit} variant="text">
-                            <button
-                                className={styles.button}
-                                type="button"
-                                onClick={onClickHandlerPagination}
-                                value="prev"
-                                disabled={currentPage === 1 ? "disabled" : undefined}
-                                variant="text"
-                            >
-                                {buttonPrevText}
-                            </button>
-                        </div>
+                        <ul className={styles.unit} variant="text">
+                            <li className={styles.item}>
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    onClick={onClickHandlerPagination}
+                                    value="first"
+                                    disabled={currentPage === 1 ? "disabled" : undefined}
+                                    variant="text"
+                                    title="Go to first page"
+                                >
+                                    {buttonFirstText}
+                                </button>
+                            </li>
+                            <li className={styles.item}>
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    onClick={onClickHandlerPagination}
+                                    value="prev"
+                                    disabled={currentPage === 1 ? "disabled" : undefined}
+                                    variant="text"
+                                    title="Go to previous page"
+                                >
+                                    {buttonPrevText}
+                                </button>
+                            </li>
+                        </ul>
+
                         <ul
                             className={styles.unit}
                             variant={["number", `charLength-${charLengthTotalPages}`].join(" ")}
@@ -105,6 +124,7 @@ function Pagination({
                                             state={page === currentPage ? "is-active" : undefined}
                                             disabled={page === currentPage ? "disabled" : undefined}
                                             variant="number"
+                                            title={`Go to page ${page}`}
                                         >
                                             {page}
                                         </button>
@@ -112,18 +132,35 @@ function Pagination({
                                 );
                             })}
                         </ul>
-                        <div className={styles.unit} variant="text">
-                            <button
-                                className={styles.button}
-                                type="button"
-                                onClick={onClickHandlerPagination}
-                                value="next"
-                                disabled={currentPage === totalPages ? "disabled" : undefined}
-                                variant="text"
-                            >
-                                {buttonNextText}
-                            </button>
-                        </div>
+
+                        <ul className={styles.unit} variant="text">
+                            <li className={styles.item}>
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    onClick={onClickHandlerPagination}
+                                    value="next"
+                                    disabled={currentPage === totalPages ? "disabled" : undefined}
+                                    variant="text"
+                                    title="Go to next page"
+                                >
+                                    {buttonNextText}
+                                </button>
+                            </li>
+                            <li className={styles.item}>
+                                <button
+                                    className={styles.button}
+                                    type="button"
+                                    onClick={onClickHandlerPagination}
+                                    value="last"
+                                    disabled={currentPage === totalPages ? "disabled" : undefined}
+                                    variant="text"
+                                    title="Go to last page"
+                                >
+                                    {buttonLastText}
+                                </button>
+                            </li>
+                        </ul>
                     </>
                 )}
             </nav>
@@ -143,6 +180,8 @@ function Pagination({
 Pagination.defaultProps = {
     buttonPrevText: "Previous",
     buttonNextText: "Next",
+    buttonLastText: "Last",
+    buttonFirstText: "First",
     showing: "showing %pagination.from% to %pagination.to% of total %pagination.total%",
     data: [],
     itemsPerPage: 16,
@@ -154,6 +193,8 @@ Pagination.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({})),
     buttonPrevText: PropTypes.string,
     buttonNextText: PropTypes.string,
+    buttonLastText: PropTypes.string,
+    buttonFirstText: PropTypes.string,
     showing: PropTypes.string,
     itemsPerPage: PropTypes.number,
     prefixSearchParam: PropTypes.string,
