@@ -12,6 +12,29 @@
         align-items: center;
     }
 
+    &[variant~="content"] {
+        align-items: flex-start;
+
+        .unit {
+            .imageContainer {
+                float: left;
+                flex: 0;
+                padding: 0 1rem 1rem 0;
+                width: 40%;
+                max-width: 13.125rem;
+
+                .image {
+                    border-radius: map-get($borderRadius, small);
+                    overflow: hidden;
+                }
+            }
+
+            .text {
+                display: inline;
+            }
+        }
+    }
+
     .unit {
         &[variant~="title"] {
             flex: none;

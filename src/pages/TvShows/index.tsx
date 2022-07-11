@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
 import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
@@ -62,8 +64,8 @@ function TvShows(): JSX.Element {
                     </article>
                 </div>
             </PageHeader>
-            <Container>
-                {!!error && (
+            {!!error && (
+                <Container>
                     <Notification
                         variant="error"
                         state="visible"
@@ -75,9 +77,9 @@ function TvShows(): JSX.Element {
                     >
                         {error}
                     </Notification>
-                )}
-                <TvShowsList />
-            </Container>
+                </Container>
+            )}
+            <TvShowsList />
         </>
     );
 }

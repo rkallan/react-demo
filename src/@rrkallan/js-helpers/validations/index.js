@@ -270,21 +270,25 @@ const validations = {
             message: errorMessage,
         };
     },
-    numberIsOrBetween: (value, validateBy = { minimal: -2147483648, maximum: 2147483648 }) => {
-        const errorMessage = `number is not between ${validateBy.minimal} and ${validateBy.maximum}`;
+    numberIsOrBetween: (value, validateBy = { minimal: -2147483648, maximum: 2147483648 }, returnBoolean = false) => {
+        const errorMessage = `number is or not between ${validateBy.minimal} and ${validateBy.maximum}`;
         const isEmpty = validations.isEmpty(value);
 
-        if (isEmpty) return { error: true, message: errorMessage };
+        if (isEmpty && returnBoolean) return false;
+        if (isEmpty && !returnBoolean) return { error: true, message: errorMessage };
 
         const validateValue = getType(value) === "string" ? value.trim() : value;
-        if (!validations.number(validateValue)) return { error: true, message: errorMessage };
+        const valueIsNumber = validations.number(validateValue, true);
 
-        const valueAsPointedNumber = parseFloat(validateValue);
+        if (!valueIsNumber && returnBoolean) return { error: true, message: errorMessage };
+        if (!valueIsNumber && !returnBoolean) return false;
 
-        if (valueAsPointedNumber >= validateBy.minimal && valueAsPointedNumber <= validateBy.maximum)
-            return { error: false, message: undefined };
+        const valueAsNumber = parseFloat(value);
+        const isValid = valueAsNumber >= validateBy.minimal && valueAsNumber <= validateBy.maximum;
 
-        return { error: true, message: errorMessage };
+        if (returnBoolean) return isValid;
+
+        return { error: !isValid, message: isValid ? undefined : errorMessage };
     },
     float: (value, validateBy = { maxDecimals: Infinity }) => {
         let errorMessage = `is not a float number`;

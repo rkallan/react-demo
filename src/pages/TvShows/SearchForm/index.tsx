@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, ChangeEvent } from "react";
 import loadable from "@loadable/component";
 import Loading from "@rrkallan/ui-library/Loading";
@@ -17,33 +14,37 @@ const Form = loadable(() => import(/* webpackChunkName: "LoginForm" */ "@rrkalla
 
 function SearchFornm(): JSX.Element {
     const dispatch = useAppDispatch();
-    const [currentValue, setCurrentValue] = useState(() => {
-        const value = urlParamsAsObject(window.location.search);
-
-        return value?.q;
-    });
-    const debouncedCurrentValue = useDebounce(currentValue, 250);
+    const searchFormData = formData();
+    const [currentValue, setCurrentValue] = useState((): string | undefined => undefined);
+    const debouncedCurrentValue = useDebounce(currentValue, 500);
 
     const formOnChangeHandler = async (event: ChangeEvent<HTMLFormElement>) => {
         const element = event.target;
-        const { value } = element || {};
+        const { name, value } = element || {};
 
-        setCurrentValue(value.trim());
+        setCurrentValue(`${name}:${value.trim()}`);
     };
 
     useEffect(() => {
-        if (debouncedCurrentValue || debouncedCurrentValue === "") {
-            const isValueEmpty = validations.isEmpty(debouncedCurrentValue);
+        if (debouncedCurrentValue || validations.isEmpty(debouncedCurrentValue)) {
+            const currentUrlSearch = window.location.search;
+            const currentUrlSearchAsObject = urlParamsAsObject(currentUrlSearch);
+            const [key, value] = debouncedCurrentValue?.split(":") || [];
+
             const searchObject = {
-                q: debouncedCurrentValue,
+                ...currentUrlSearchAsObject,
+                [key]: value ?? currentUrlSearchAsObject[key],
             };
             const search = objectAsUrlParams(searchObject);
+            const isSearchCurrentUrlSearch = search === currentUrlSearch;
 
             const payloadValue = {
-                searchValue: isValueEmpty ? undefined : debouncedCurrentValue,
+                searchValue: searchObject.q,
             };
+
             dispatch(setSearchValue(payloadValue));
-            window.history.pushState({}, "", isValueEmpty ? window.location.pathname : search);
+
+            if (!isSearchCurrentUrlSearch) window.history.pushState({}, "", !search ? window.location.pathname : search);
         }
     }, [debouncedCurrentValue, dispatch]);
 
@@ -54,7 +55,7 @@ function SearchFornm(): JSX.Element {
             disableForm={undefined}
             resetForm={undefined}
             submitButtonDisabled={undefined}
-            {...formData}
+            {...searchFormData}
             postFormWithApiCall
             postData={undefined}
         />

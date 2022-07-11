@@ -5,7 +5,7 @@ import type { TypeFetchTvShowsDataProp, TypeEntitiesList } from "./types";
 
 const fetchTvShows = createAsyncThunk(
     "shows/fetchTvShows",
-    async ({ urlParam }: TypeFetchTvShowsDataProp, { rejectWithValue, getState, requestId }) => {
+    async ({ urlParam }: TypeFetchTvShowsDataProp, { rejectWithValue, getState, requestId, signal }) => {
         const isSearchFetch = !!urlParam.q;
         const stateShowKey = isSearchFetch ? "search" : "overview";
         const { tvShows }: RootState = getState();
@@ -19,6 +19,7 @@ const fetchTvShows = createAsyncThunk(
         const response = await apiCall({
             url,
             method: "GET",
+            signal,
         });
         const contentType = response.headers.get("content-type").split(";")[0];
         if (contentType !== "application/json" || !response.ok) return rejectWithValue({ error: "Rejected" });

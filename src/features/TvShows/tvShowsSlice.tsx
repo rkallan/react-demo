@@ -56,6 +56,7 @@ const tvShows = createSlice({
             }
 
             newState.search.value = searchValue;
+            newState.search.error = undefined;
 
             return newState;
         },
@@ -72,10 +73,9 @@ const tvShows = createSlice({
                 const isSearchFetch = !!action.meta.arg.urlParam.q;
                 const stateShowKey = isSearchFetch ? "search" : "overview";
 
-                if (!state[stateShowKey].loading) {
-                    tempState[stateShowKey].loading = true;
-                    tempState[stateShowKey].currentRequestId = action.meta.requestId;
-                }
+                tempState[stateShowKey].loading = true;
+                tempState[stateShowKey].error = undefined;
+                tempState[stateShowKey].currentRequestId = action.meta.requestId;
 
                 return tempState;
             })
@@ -90,6 +90,7 @@ const tvShows = createSlice({
                     tempState[stateShowKey].loading = false;
                     tempState[stateShowKey].entities = action.payload;
                     tempState[stateShowKey].currentRequestId = undefined;
+                    tempState[stateShowKey].error = undefined;
                 }
 
                 if (isSearchFetch && !action.payload.length) {
@@ -166,15 +167,11 @@ const tvShows = createSlice({
             })
             .addCase(fetchTvShow.fulfilled, (state, { meta, payload }) => {
                 const tempState = state;
-                const { items } = state || {};
-                const { requestId } = meta || {};
 
-                if (items.loading && items.currentRequestId === requestId) {
-                    tempState.items.loading = false;
-                    tempState.items.entities = { ...payload };
-                    tempState.items.currentRequestId = undefined;
-                    tempState.items.error = undefined;
-                }
+                tempState.items.loading = false;
+                tempState.items.entities = { ...payload };
+                tempState.items.currentRequestId = undefined;
+                tempState.items.error = undefined;
 
                 return tempState;
             })

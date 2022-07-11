@@ -14,12 +14,11 @@
 
     &[variant~="pagination"] {
         position: sticky;
-        z-index: 15;
+        z-index: 10;
         background: safe-hsla(map-get($colorWhite, default), 0.95);
         bottom: 0;
-        margin-bottom: -#{map-get($gap, default)};
         transition: map-get($transition, default);
-        padding: map-get($gap, default) 0;
+        padding: map-get($gap, default);
     }
 
     .unit {

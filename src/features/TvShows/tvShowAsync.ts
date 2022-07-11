@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "Store/types";
-import { apiCall } from "@rrkallan/js-helpers";
+import { apiCall, htmlStringToPlain } from "@rrkallan/js-helpers";
 import type { TypeFetchTvShowDataProp } from "./types";
 
 const fetchTvShow = createAsyncThunk(
@@ -17,6 +17,7 @@ const fetchTvShow = createAsyncThunk(
             url,
             method: "GET",
         });
+
         const contentType = response.headers.get("content-type").split(";")[0];
         if (contentType !== "application/json" || !response.ok) return rejectWithValue({ error: "Rejected" });
 
@@ -36,17 +37,19 @@ const fetchTvShow = createAsyncThunk(
             _embedded: embed,
         } = jsonResult;
 
+        const options: Intl.DateTimeFormatOptions = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
         const { seasons, episodes, cast, images } = embed || {};
+
         const newItem = {
             [id]: {
                 id,
                 title: name,
-                avarageRating: rating?.avarage || undefined,
+                avarageRating: rating?.average || undefined,
                 imageUrl: image?.medium || image?.original || undefined,
                 updated,
-                summary,
-                premiered,
-                ended,
+                summary: htmlStringToPlain(summary),
+                premiered: (premiered && new Date(premiered).toLocaleDateString("en-GB", options)) || undefined,
+                ended: (ended && new Date(ended).toLocaleDateString("en-GB", options)) || undefined,
                 officialSite,
                 genres,
                 language,

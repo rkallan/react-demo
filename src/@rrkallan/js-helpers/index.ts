@@ -34,7 +34,13 @@ import keyEvent from "./keyEvent";
 import { mimeTypeExtension, getExtensionForMimeType, getMimeTypeForExtension } from "./mimeTypeExtensions";
 import { roundNearest, roundDown, roundUp } from "./roundNumber";
 import serializeForm from "./serializeForm";
-import { urlParamsAsObject, objectAsUrlParams } from "./urlParams";
+import {
+    urlParamsAsObject,
+    objectAsUrlParams,
+    getCurrentUrlSearchAsObject,
+    getNewUrlSearchAsObjectAndString,
+    setSearchPageParam,
+} from "./urlParams";
 import { validations, formPostValidation, getValidationTypes, isElementValid } from "./validations";
 import { getStorageItem, setStorageItem, removeStorageItem, clearStorage } from "./webStorageData";
 
@@ -82,6 +88,9 @@ export {
     serializeForm,
     urlParamsAsObject,
     objectAsUrlParams,
+    getCurrentUrlSearchAsObject,
+    getNewUrlSearchAsObjectAndString,
+    setSearchPageParam,
     validations,
     formPostValidation,
     getValidationTypes,

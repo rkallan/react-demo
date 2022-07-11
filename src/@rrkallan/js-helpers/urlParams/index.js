@@ -97,4 +97,33 @@ const objectAsUrlParams = (data, addQuestionMark = true, addPrefix = true) => {
     return decodeURIComponent(urlSearch);
 };
 
-export { urlParamsAsObject, objectAsUrlParams };
+const getCurrentUrlSearchAsObject = () => {
+    const currentUrlSearch = window.location.search;
+    const currentUrlSearchAsObject = urlParamsAsObject(currentUrlSearch);
+
+    return currentUrlSearchAsObject;
+};
+
+const getNewUrlSearchAsObjectAndString = (data) => {
+    const currentUrlSearchAsObject = getCurrentUrlSearchAsObject();
+
+    const searchObject = {
+        ...currentUrlSearchAsObject,
+        ...data,
+    };
+    const search = objectAsUrlParams(searchObject);
+
+    return {
+        searchObject,
+        search,
+    };
+};
+
+const setSearchPageParam = (data) => {
+    const currentUrlSearch = window.location.search;
+    const { search } = getNewUrlSearchAsObjectAndString(data);
+    const isSearchCurrentUrlSearch = search === currentUrlSearch;
+    if (!isSearchCurrentUrlSearch) window.history.pushState({}, "", !search ? window.location.pathname : search);
+};
+
+export { urlParamsAsObject, objectAsUrlParams, getCurrentUrlSearchAsObject, getNewUrlSearchAsObjectAndString, setSearchPageParam };

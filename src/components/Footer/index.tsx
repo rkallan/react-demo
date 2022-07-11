@@ -9,16 +9,16 @@ import styles from "./resources/styles/footer.module.scss";
 function Footer(): JSX.Element {
     const dispatch = useAppDispatch();
     const footerRef = useRef<HTMLDivElement>(null);
-    const boundingClientRect = useBoundingClientRect({ element: footerRef, delay: 5 });
+    const { height } = useBoundingClientRect({ element: footerRef, delay: 5 }) || {};
     const [currentYear] = useState(() => new Date().getFullYear());
 
     useLayoutEffect(() => {
-        dispatch(setElementClientRect({ element: "footer", boundingClientRect }));
-    }, [boundingClientRect, dispatch]);
+        dispatch(setElementClientRect({ element: "footer", height }));
+    }, [dispatch, height]);
 
     return (
         <footer className={styles.container} ref={footerRef}>
-            <article className={styles.unit}>
+            <section className={styles.unit}>
                 <address className={styles.infoContainer}>
                     <ul className={styles.infoUnit}>
                         <li className={styles.item}>
@@ -44,8 +44,8 @@ function Footer(): JSX.Element {
                         </li>
                     </ul>
                 </address>
-            </article>
-            <article className={styles.unit} variant="legal">
+            </section>
+            <section className={styles.unit} variant="legal">
                 <p className={styles.content}>{currentYear} Copyright © RR Kallan. All Rights Reserved.</p>
                 {!!footerMenu && (
                     <ul className={styles.menu}>
@@ -58,7 +58,7 @@ function Footer(): JSX.Element {
                         ))}
                     </ul>
                 )}
-            </article>
+            </section>
         </footer>
     );
 }
