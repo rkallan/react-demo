@@ -95,9 +95,9 @@ function TvShowsList(): JSX.Element | null {
                         })}
                 </section>
             </Container>
-            <article className={styles.container} variant="pagination" style={{ bottom: height }}>
+            <section className={styles.container} variant="pagination" style={{ bottom: height }}>
                 <Pagination getPageContent={getPageContent} data={tvShowsList} itemsPerPage={8} prefixSearchParam={undefined} />
-            </article>
+            </section>
         </>
     );
 }

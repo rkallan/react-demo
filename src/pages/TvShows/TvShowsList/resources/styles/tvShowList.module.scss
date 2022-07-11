@@ -19,6 +19,7 @@
         bottom: 0;
         transition: map-get($transition, default);
         padding: map-get($gap, default);
+        box-shadow: #5d5b5b 0px 2px 10px;
     }
 
     .unit {
