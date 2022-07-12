@@ -21,10 +21,9 @@ const getValueOfElement = {
         return undefined;
     },
 
-    textarea: (element) => {
+    textarea: ({ element }) => {
         if (element) {
             const value = element.value?.trim() || undefined;
-
             if (validations.isEmpty(value)) return undefined;
 
             return value;

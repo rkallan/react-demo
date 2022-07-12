@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
 import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";

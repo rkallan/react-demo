@@ -1,8 +1,20 @@
 [
     {
+        "id": 5,
+        "title": "Home",
+        "url": "/",
+        "exact": true
+    },
+    {
         "id": 10,
         "title": "Tv Shows",
         "url": "/tv-shows",
+        "exact": true
+    },
+    {
+        "id": 15,
+        "title": "Work",
+        "url": "/work",
         "exact": true
     }
 ]

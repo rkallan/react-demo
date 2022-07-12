@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState, ChangeEvent } from "react";
 import loadable from "@loadable/component";
 import Loading from "@rrkallan/ui-library/Loading";

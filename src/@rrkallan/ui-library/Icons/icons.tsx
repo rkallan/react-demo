@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import styles from "./resources/styles/icons.module.scss";
 import { ReactComponent as Check } from "./resources/svg/check.svg";
 import { ReactComponent as Close } from "./resources/svg/close.svg";

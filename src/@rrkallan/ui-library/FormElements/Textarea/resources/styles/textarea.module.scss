@@ -61,11 +61,11 @@
         transition: map-get($transition, default);
 
         &[variant~="read-only"] {
-            background-color: safe-hsla(map-get($colorWhite, darken));
+            background-color: safe-hsla(map-get($colorWhite, default));
         }
 
         &[variant~="disabled"] {
-            background-color: safe-hsla(map-get($colorGray, extraLighter), map-get($opacity, disabled));
+            background-color: safe-hsla(map-get($colorGray, default), map-get($opacity, disabled));
         }
 
         &[state~="isFocussed"] {
@@ -105,6 +105,7 @@
             flex-direction: column;
             flex: 1;
             justify-self: stretch;
+            min-height: 12rem;
             padding: 0.25rem 0.75rem 0;
 
             .textarea {

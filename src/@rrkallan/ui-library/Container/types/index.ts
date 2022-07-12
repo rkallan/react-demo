@@ -2,11 +2,13 @@ import { ReactNode } from "react";
 
 interface InterfaceContainer {
     children?: ReactNode;
-    className?: string | undefined;
+    classNameContainer?: string | undefined;
+    classNameUnit?: string | undefined;
     variant?: "default" | "black" | "red" | "white";
     textColor?: "default" | "black" | "red" | "white";
     containerElementTag?: TypeElementTag;
     unitElementTag?: TypeElementTag;
+    fullWidth?: boolean;
 }
 
 type TypeElementTag = keyof JSX.IntrinsicElements;

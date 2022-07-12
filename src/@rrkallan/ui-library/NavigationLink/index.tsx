@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useState, useEffect, MouseEvent } from "react";
 import { NavLink, NavLinkProps, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import { getType } from "@rrkallan/js-helpers";

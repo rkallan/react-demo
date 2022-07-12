@@ -1,0 +1,28 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: map-get($gap, default);
+
+    .unit {
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        gap: 4rem;
+
+        &[variant~="title"] {
+            flex: 1;
+            font-size: 4rem;
+            color: safe-hsla(map-get($colorRed, default));
+        }
+
+        &[variant~="form"] {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+        }
+    }
+}

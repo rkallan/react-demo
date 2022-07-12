@@ -5,14 +5,13 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: map-get($gap, default);
     width: 100%;
 
     .navigation {
         display: flex;
         flex-direction: row;
-        gap: 1rem;
-        min-height: 4.25rem;
+        gap: map-get($gap, small);
 
         .unit {
             position: relative;

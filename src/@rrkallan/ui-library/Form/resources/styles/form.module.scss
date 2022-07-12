@@ -11,5 +11,14 @@
                 margin: 0.5rem 0 0.5rem 0.5rem;
             }
         }
+        &[variant~="row"] {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+
+            > * {
+                flex: 1;
+            }
+        }
     }
 }

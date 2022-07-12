@@ -6,18 +6,23 @@ function Container({
     children,
     variant = "white",
     textColor = "default",
-    className,
+    classNameContainer,
+    classNameUnit,
     containerElementTag = "section",
     unitElementTag = "section",
+    fullWidth = false,
 }: InterfaceContainer): JSX.Element {
-    const [containerVariant] = useState(() => `${variant} ${textColor !== "default" ? `text-color-${textColor}` : ""}`.trim());
-    const [containerClassName] = useState(() => [styles.container, className].join(" "));
+    const [containerVariant] = useState(() =>
+        `${variant} ${textColor !== "default" ? `text-color-${textColor}` : ""} ${fullWidth ? `full-width` : ""}`.trim()
+    );
+    const [containerClassName] = useState(() => [styles.container, classNameContainer].join(" "));
+    const [unitClassName] = useState(() => [styles.container, classNameUnit].join(" "));
     const [ContainerElementTag] = useState((): TypeElementTag => containerElementTag);
-    const [UnitElementTag] = useState((): TypeElementTag => containerElementTag);
+    const [UnitElementTag] = useState((): TypeElementTag => unitElementTag);
 
     return (
         <ContainerElementTag className={containerClassName} variant={containerVariant}>
-            <UnitElementTag className={styles.unit}>{children}</UnitElementTag>
+            <UnitElementTag className={unitClassName}>{children}</UnitElementTag>
         </ContainerElementTag>
     );
 }

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import loadable from "@loadable/component";
@@ -18,6 +17,10 @@ const SliderButton = loadable(() => import(/* webpackChunkName: "SliderButton" *
 });
 
 const Button = loadable(() => import(/* webpackChunkName: "Button" */ "@rrkallan/ui-library/FormElements/Button"), {
+    fallback: <Loading />,
+});
+
+const Textarea = loadable(() => import(/* webpackChunkName: "Textarea" */ "@rrkallan/ui-library/FormElements/Textarea"), {
     fallback: <Loading />,
 });
 
@@ -197,7 +200,6 @@ function Form({
         const formObject = event.currentTarget || event.target;
         const formObjectData = serializeForm(formObject, formData);
         const postDataObject = { ...postData, ...formObjectData.postData };
-
         const errorMessages = formPostValidation(postDataObject);
 
         if (errorMessages) {
@@ -262,6 +264,8 @@ function Form({
                                         return <InputTypeText key={id} id={id} {...element} clearValue={clearValue} />;
                                     case "slider":
                                         return <SliderButton key={id} id={id} {...element} clearValue={clearValue} />;
+                                    case "textarea":
+                                        return <Textarea key={id} id={id} {...element} clearValue={clearValue} />;
                                     case "button":
                                         if (element.type === "submit") element.disabled = submitDisabled;
 
