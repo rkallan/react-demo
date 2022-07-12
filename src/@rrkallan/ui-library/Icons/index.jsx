@@ -1,18 +1,17 @@
 import PropTypes from "prop-types";
-import { getType } from "@rrkallan/js-helpers";
 import icons from "./icons";
 import styles from "./resources/styles/icons.module.scss";
 
 function Icons({ icon, svgProps, noContainer, variant }) {
-    const svgIcon = getType(icons[icon]) === "function" ? icons[icon](svgProps) : icons.fallback(svgProps);
+    const SvgIcon = icons[icon] || icon.fallback;
 
-    if (!svgIcon) return null;
+    if (!SvgIcon) return null;
 
-    if (noContainer) return svgIcon;
+    if (noContainer) return <SvgIcon {...svgProps} />;
 
     return (
         <div className={styles.container} variant={variant}>
-            {svgIcon}
+            <SvgIcon {...svgProps} />
         </div>
     );
 }

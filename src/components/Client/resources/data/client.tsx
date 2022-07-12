@@ -66,6 +66,18 @@ const content = {
             logo: clientLogo.shell,
             url: "//www.shell.com",
         },
+        {
+            id: 11,
+            name: "Feyenoord Rotterdam",
+            logo: clientLogo.feyenoord,
+            url: "//www.feyenoord.nl",
+        },
+        {
+            id: 12,
+            name: "Gemeente Goeree overflakkee",
+            logo: clientLogo.goereeOverflakkee,
+            url: "//www.go.nl",
+        },
     ],
 };
 

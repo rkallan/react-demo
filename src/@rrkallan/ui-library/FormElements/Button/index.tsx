@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable react/button-has-type */
 import { MouseEvent } from "react";
 import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
@@ -18,6 +16,7 @@ function Button({ children, type = "button", disabled = false }: InterfaceButton
         currentTarget.blur();
     };
 
+    /* eslint-disable react/button-has-type */
     return (
         <button className={styles.container} type={type} disabled={disabled} onClick={onClickHandlerButton}>
             <div className={styles.unit} variant="loading">

@@ -17,6 +17,10 @@ const Footer = loadable(() => import(/* webpackChunkName: "Footer" */ "component
     fallback: <Loading />,
 });
 
+const ScrollToTop = loadable(() => import(/* webpackChunkName: "ScrollToTop" */ "@rrkallan/ui-library/ScrollToTop"), {
+    fallback: <Loading />,
+});
+
 function Template(): JSX.Element {
     return (
         <>
@@ -29,6 +33,7 @@ function Template(): JSX.Element {
                 </PersistGate>
             </main>
             <Footer />
+            <ScrollToTop />
         </>
     );
 }

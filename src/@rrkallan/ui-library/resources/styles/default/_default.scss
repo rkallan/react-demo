@@ -30,6 +30,7 @@ html {
     min-height: 100%;
     text-size-adjust: none;
     background: safe-hsla($background);
+    scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
 
     &[variant~="no-scroll"],
