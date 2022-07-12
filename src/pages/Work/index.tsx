@@ -1,19 +1,14 @@
-// import { useEffect } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
-// import { Link } from "react-router-dom";
-import styles from "./resources/styles/work.module.scss";
-import headerImage from "./resources/images/header.png";
+import content from "./resources/data/content";
 
 const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rrkallan/ui-library/Container"), {
     fallback: <Loading />,
 });
 
-const PageHeader = loadable(() => import(/* webpackChunkName: "PageHeader" */ "components/PageHeader"), {
-    fallback: <Loading />,
-});
-
-const Contact = loadable(() => import(/* webpackChunkName: "Contact" */ "components/Contact"), {
+const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
     fallback: <Loading />,
 });
 
@@ -21,21 +16,16 @@ const Client = loadable(() => import(/* webpackChunkName: "Client" */ "component
     fallback: <Loading />,
 });
 
+const Contact = loadable(() => import(/* webpackChunkName: "Contact" */ "components/Contact"), {
+    fallback: <Loading />,
+});
+
 function Work(): JSX.Element {
+    const { pageHeader } = content;
+
     return (
         <>
-            <PageHeader variant="black" textColor="white" fullWidth>
-                <div className={styles.container}>
-                    <h1 className={styles.unit} variant="title">
-                        A selection of projects that <b>pioneer</b> <b>tech</b> and <b>marketing</b> to help brands stay ahead.
-                    </h1>
-                    <div className={styles.unit} variant="image">
-                        <figure className={styles.imageContainer}>
-                            <img className={styles.image} src={headerImage} alt="Header image for page Work" aria-hidden />
-                        </figure>
-                    </div>
-                </div>
-            </PageHeader>
+            <Hero {...pageHeader} />
 
             <Container>Blog items</Container>
 
