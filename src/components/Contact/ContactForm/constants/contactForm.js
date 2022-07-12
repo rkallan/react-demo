@@ -1,7 +1,7 @@
 const contactForm = {
     attributes: {
         method: "get",
-        name: "search-tv-shows-form",
+        name: "contact-form",
         autoComplete: "off",
         "data-required": true,
         action: undefined,
