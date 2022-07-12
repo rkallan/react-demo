@@ -1,0 +1,7 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    display: flex;
+    padding: map-get($gap, large) 0;
+}

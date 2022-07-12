@@ -2,11 +2,11 @@ import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
 import content from "./resources/data/content";
 
-const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rrkallan/ui-library/Container"), {
+const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
     fallback: <Loading />,
 });
 
-const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
+const Assignments = loadable(() => import(/* webpackChunkName: "Assignments" */ "components/Client/Assignments"), {
     fallback: <Loading />,
 });
 
@@ -24,9 +24,7 @@ function Work(): JSX.Element {
     return (
         <>
             <Hero {...pageHeader} />
-
-            <Container>Blog items</Container>
-
+            <Assignments />
             <Client />
             <Contact />
         </>

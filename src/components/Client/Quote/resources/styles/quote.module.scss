@@ -1,0 +1,14 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: map-get($gap, extraLarge) map-get($gap, extraLarge) * 2;
+    gap: map-get($gap, default);
+
+    .unit {
+        text-align: center;
+    }
+}
