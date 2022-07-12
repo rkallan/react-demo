@@ -6,7 +6,7 @@ const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rr
     fallback: <Loading />,
 });
 
-const Quote = loadable(() => import(/* webpackChunkName: "Quote" */ "components/Client/Quote"), {
+const Quote = loadable(() => import(/* webpackChunkName: "Quote" */ "features/Client/Quote"), {
     fallback: <Loading />,
 });
 
