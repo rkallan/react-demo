@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
 import content from "./resources/data/content";
@@ -30,7 +28,6 @@ function Work(): JSX.Element {
             <Container>Blog items</Container>
 
             <Client />
-
             <Contact />
         </>
     );
