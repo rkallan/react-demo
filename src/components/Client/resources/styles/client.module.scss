@@ -9,20 +9,23 @@
 
     .unit {
         display: flex;
-        flex-direction: row;
-        align-self: center;
+        flex-direction: column;
         gap: 4rem;
+    }
 
-        &[variant~="title"] {
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: map-get($gap, defauilt);
+
+        .title {
             flex: 1;
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: safe-hsla(map-get($colorRed, default));
         }
 
-        &[variant~="form"] {
-            display: flex;
-            flex-direction: column;
-            flex: 2;
+        .text {
+            line-height: 2;
         }
     }
 }

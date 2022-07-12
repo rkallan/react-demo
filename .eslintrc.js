@@ -52,11 +52,7 @@ module.exports = {
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
-        "react/jsx-props-no-spreading": ["error", {
-            "html": "ignore",
-            "explicitSpread": "enforce",
-            "custom": "ignore",
-        }],
+        "react/jsx-props-no-spreading": "off",
         "react/no-unescaped-entities": ["error", { forbid: [] }],
         "import/extensions": [
             "error",

@@ -17,6 +17,10 @@ const Contact = loadable(() => import(/* webpackChunkName: "Contact" */ "compone
     fallback: <Loading />,
 });
 
+const Client = loadable(() => import(/* webpackChunkName: "Client" */ "components/Client"), {
+    fallback: <Loading />,
+});
+
 function Work(): JSX.Element {
     return (
         <>
@@ -34,6 +38,9 @@ function Work(): JSX.Element {
             </PageHeader>
 
             <Container>Blog items</Container>
+
+            <Client />
+
             <Contact />
         </>
     );

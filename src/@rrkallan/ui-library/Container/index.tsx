@@ -16,7 +16,7 @@ function Container({
         `${variant} ${textColor !== "default" ? `text-color-${textColor}` : ""} ${fullWidth ? `full-width` : ""}`.trim()
     );
     const [containerClassName] = useState(() => [styles.container, classNameContainer].join(" "));
-    const [unitClassName] = useState(() => [styles.container, classNameUnit].join(" "));
+    const [unitClassName] = useState(() => [styles.unit, classNameUnit].join(" "));
     const [ContainerElementTag] = useState((): TypeElementTag => containerElementTag);
     const [UnitElementTag] = useState((): TypeElementTag => unitElementTag);
 

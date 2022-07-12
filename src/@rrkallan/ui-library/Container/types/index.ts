@@ -4,8 +4,8 @@ interface InterfaceContainer {
     children?: ReactNode;
     classNameContainer?: string | undefined;
     classNameUnit?: string | undefined;
-    variant?: "default" | "black" | "red" | "white";
-    textColor?: "default" | "black" | "red" | "white";
+    variant?: string | undefined;
+    textColor?: string | undefined;
     containerElementTag?: TypeElementTag;
     unitElementTag?: TypeElementTag;
     fullWidth?: boolean;
