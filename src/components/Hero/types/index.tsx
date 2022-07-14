@@ -5,6 +5,7 @@ interface InterfaceHeroProps {
     variant?: "default" | "black" | "red" | "white" | string;
     textColor?: "default" | "black" | "red" | "white" | string;
     hero: TypeHeroObject;
+    children?: ReactNode;
 }
 
 type TypeHeroObject = {

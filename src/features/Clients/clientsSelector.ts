@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "Store/types";
 import { validations } from "@rrkallan/js-helpers";
@@ -10,8 +9,25 @@ const clientsState = ({ clients }: RootState): InterfaceClientsState => clients;
 const getAssignmentsLoading = createSelector(clientsState, ({ assignments }) => assignments.loading);
 const getAssignmentsError = createSelector(clientsState, ({ assignments }) => assignments.error);
 const getAssignmentsEntities = createSelector(clientsState, ({ assignments }) => {
-    const { entities } = assignments || {};
+    const { entities, filter } = assignments || {};
     if (validations.isEmpty(entities)) return [];
+    const filterKeys = Object.entries(filter || {});
+
+    const entitiesFiltered =
+        (filterKeys.length > 0 &&
+            entities?.reduce((previousValue, currentValue: any): any => {
+                const tempResult: any = previousValue;
+
+                let isFilterValues = true;
+                filterKeys.forEach(([key, value]: any) => {
+                    if (isFilterValues && value !== undefined) isFilterValues = currentValue?.[key] === value;
+                });
+
+                if (isFilterValues) tempResult.push(currentValue);
+
+                return tempResult;
+            }, [])) ||
+        entities;
 
     const entitiesSplittedByRow = clientLayout.reduce(
         (previousValue: any, currentValue): TypeEntitiesSelector => {
@@ -19,11 +35,17 @@ const getAssignmentsEntities = createSelector(clientsState, ({ assignments }) =>
             const { items, row, component, deviding }: TypeRowLayout = currentValue;
             const tempResult = result;
             const endWidth = startWith + items;
-            const itemsForRow = entities?.slice(startWith, endWidth) || [];
+            const itemsForRow = entitiesFiltered?.slice(startWith, endWidth) || [];
             const isListView = deviding?.startsWith("list");
 
+            if (validations.isEmpty(itemsForRow) && validations.isEmpty(component))
+                return {
+                    result: tempResult,
+                    startWith: endWidth,
+                };
+
             const block: any = [[], []];
-            if (isListView) {
+            if (isListView && validations.isEmpty(component)) {
                 const keysAsList =
                     deviding
                         ?.split("=")[1]
@@ -59,6 +81,19 @@ const getAssignmentsEntities = createSelector(clientsState, ({ assignments }) =>
         { result: [], startWith: 0 }
     );
 
+    if (entitiesFiltered?.length === 0) {
+        const error = {
+            items: 0,
+            layout: {
+                items: 0,
+                row: 1,
+                component: "noResult",
+                deviding: "full",
+            },
+        };
+        entitiesSplittedByRow.result.unshift(error);
+    }
+
     return entitiesSplittedByRow.result;
 });
 const assignmentsIsLoaded = createSelector(clientsState, ({ assignments }) => {
@@ -67,4 +102,30 @@ const assignmentsIsLoaded = createSelector(clientsState, ({ assignments }) => {
     return isLoaded;
 });
 
-export { getAssignmentsLoading, getAssignmentsError, getAssignmentsEntities, assignmentsIsLoaded };
+const getQuotesLoading = createSelector(clientsState, ({ quotes }) => quotes.loading);
+const getQuotesError = createSelector(clientsState, ({ quotes }) => quotes.error);
+const getQuotesIsLoaded = createSelector(clientsState, ({ quotes }) => {
+    const { loading, entities, error } = quotes;
+    const isLoaded = (!loading && !!entities) || !!error;
+    return isLoaded;
+});
+const getQuotes = createSelector(clientsState, ({ quotes }) => quotes.entities);
+const getQuote = createSelector(clientsState, ({ quotes }) => {
+    const { entities } = quotes || {};
+    const length = entities?.length || 0;
+    const key = length - 1;
+
+    return entities?.[key];
+});
+
+export {
+    getAssignmentsLoading,
+    getAssignmentsError,
+    getAssignmentsEntities,
+    assignmentsIsLoaded,
+    getQuotesError,
+    getQuotesIsLoaded,
+    getQuotesLoading,
+    getQuotes,
+    getQuote,
+};

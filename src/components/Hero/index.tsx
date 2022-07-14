@@ -9,7 +9,7 @@ const PageHeader = loadable(() => import(/* webpackChunkName: "PageHeader" */ "c
     fallback: <Loading />,
 });
 
-function Hero({ variant, fullWidth, textColor, hero }: InterfaceHeroProps): JSX.Element {
+function Hero({ variant, fullWidth, textColor, hero, children }: InterfaceHeroProps): JSX.Element {
     const { scrollPositionY } = useScrollPosition();
     const [headerVariant, setHeaderVariant] = useState(() => "default");
     const [changeOnPosition] = useState(() => 450);
@@ -31,6 +31,7 @@ function Hero({ variant, fullWidth, textColor, hero }: InterfaceHeroProps): JSX.
                     </figure>
                 </div>
             </div>
+            {children}
         </PageHeader>
     );
 }

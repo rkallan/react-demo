@@ -60,7 +60,6 @@ function TvShowsList(): JSX.Element | null {
             <Container>
                 {tvShowsLoading && (
                     <section className={styles.container}>
-                        {" "}
                         <Loading text="Loading shows" delay={5} />
                     </section>
                 )}

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { validations } from "@rrkallan/js-helpers";
 import fetchClients from "./clientsAsync";
+import fetchClientsQuotes from "./clientsQuotesAsync";
 import type { InterfaceClientsState } from "./types";
 
 const initialState: InterfaceClientsState = {
@@ -16,6 +18,7 @@ const initialState: InterfaceClientsState = {
         loading: false,
         currentRequestId: undefined,
         error: undefined,
+        filter: undefined,
     },
 };
 
@@ -23,6 +26,20 @@ const clients = createSlice({
     name: "clients",
     initialState,
     reducers: {
+        setAssignmentsFilter: (state, action) => {
+            const newState = state;
+            const { filter } = action.payload;
+
+            if (validations.isEmpty(filter)) {
+                newState.assignments.filter = {
+                    ...initialState.assignments.filter,
+                };
+            }
+
+            newState.assignments.filter = filter;
+
+            return newState;
+        },
         resetClient: () => {
             const newState = initialState;
 
@@ -54,6 +71,7 @@ const clients = createSlice({
 
                     tempState[stateKey].loading = false;
                     tempState[stateKey].entities = action.payload?.entities;
+                    tempState[stateKey].ids = action.payload?.ids;
                     tempState[stateKey].currentRequestId = undefined;
                     tempState[stateKey].error = undefined;
                 }
@@ -76,7 +94,7 @@ const clients = createSlice({
     },
 });
 
-const { resetClient } = clients.actions;
+const { resetClient, setAssignmentsFilter } = clients.actions;
 const clientsReducers = clients.reducer;
 
-export { clientsReducers, resetClient, fetchClients };
+export { clientsReducers, resetClient, setAssignmentsFilter, fetchClients, fetchClientsQuotes };

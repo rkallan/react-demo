@@ -1,9 +1,9 @@
 interface InterfaceClientsState {
-    quotes: TypeItems;
+    quotes: TypeItems2;
     assignments: TypeItems;
 }
 
-interface TypeAssignments {
+interface InterfaceAssignments {
     id?: number;
     name?: string;
     title?: string | undefined;
@@ -17,9 +17,30 @@ interface TypeAssignments {
     category?: string;
     categoryId?: number;
 }
+interface InterfaceQuotes {
+    id: number;
+    text: string;
+    person: TypePerson;
+}
+
+type TypePerson = {
+    personId: number;
+    name: string;
+    client: string;
+    function?: string | undefined;
+};
 
 type TypeItems = {
-    entities: TypeAssignments[] | undefined;
+    entities: InterfaceAssignments[] | undefined;
+    ids: TypeItemIds | undefined;
+    loading: boolean;
+    currentRequestId: string | undefined;
+    error: string | undefined;
+    filter?: TypeFetchClientsDataProp;
+};
+
+type TypeItems2 = {
+    entities: InterfaceQuotes[] | undefined;
     ids: TypeItemIds | undefined;
     loading: boolean;
     currentRequestId: string | undefined;
@@ -27,9 +48,7 @@ type TypeItems = {
 };
 
 type TypeItemIds = {
-    [key: number]: {
-        [key: string]: string;
-    };
+    [key: number]: InterfaceAssignments | InterfaceQuotes;
 };
 
 type TypeFetchClientsDataProp = {
@@ -53,4 +72,14 @@ type TypeEntitiesSelector = {
     startWith: number;
 };
 
-export type { InterfaceClientsState, TypeItems, TypeFetchClientsDataProp, TypeAssignments, TypeRowLayout, TypeEntitiesSelector };
+export type {
+    InterfaceClientsState,
+    TypeItems,
+    TypeFetchClientsDataProp,
+    InterfaceAssignments,
+    TypeRowLayout,
+    TypeEntitiesSelector,
+    TypeItemIds,
+    InterfaceQuotes,
+    TypePerson,
+};

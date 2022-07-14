@@ -119,11 +119,11 @@ const getNewUrlSearchAsObjectAndString = (data) => {
     };
 };
 
-const setSearchPageParam = (data) => {
+const setUrlSearchParam = (data) => {
     const currentUrlSearch = window.location.search;
     const { search } = getNewUrlSearchAsObjectAndString(data);
     const isSearchCurrentUrlSearch = search === currentUrlSearch;
     if (!isSearchCurrentUrlSearch) window.history.pushState({}, "", !search ? window.location.pathname : search);
 };
 
-export { urlParamsAsObject, objectAsUrlParams, getCurrentUrlSearchAsObject, getNewUrlSearchAsObjectAndString, setSearchPageParam };
+export { urlParamsAsObject, objectAsUrlParams, getCurrentUrlSearchAsObject, getNewUrlSearchAsObjectAndString, setUrlSearchParam };

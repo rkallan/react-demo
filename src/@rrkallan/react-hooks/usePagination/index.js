@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { validations, getCurrentUrlSearchAsObject, setSearchPageParam } from "@rrkallan/js-helpers";
+import { validations, getCurrentUrlSearchAsObject, setUrlSearchParam } from "@rrkallan/js-helpers";
 
 const usePagination = (data, itemsPerPage = 10, prefixSearchParam = undefined) => {
     const [totalItems, setTotalItems] = useState(() => data?.length || 0);
@@ -16,7 +16,7 @@ const usePagination = (data, itemsPerPage = 10, prefixSearchParam = undefined) =
                     [searchParamKeyPage]: page,
                 };
                 setCurrentPage(() => page);
-                setSearchPageParam(param);
+                setUrlSearchParam(param);
             }
         },
         [searchParamKeyPage]

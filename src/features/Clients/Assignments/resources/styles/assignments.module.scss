@@ -18,6 +18,15 @@
                 .item {
                     &[variant~="single"] {
                         flex-grow: 2;
+                        max-width: unset;
+                    }
+                }
+            }
+
+            &[variant~="equal"] {
+                .item {
+                    &[variant~="single"] {
+                        max-width: 50%;
                     }
                 }
             }
@@ -30,6 +39,23 @@
             height: 100%;
             flex: 1;
             overflow: hidden;
+
+            &[variant~="no-image"] {
+                max-width: 50%;
+
+                .text {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    bottom: unset;
+                    left: unset;
+                    right: unset;
+                    padding: 2rem;
+                    justify-content: flex-end;
+                    height: 100%;
+                }
+            }
 
             .link {
                 display: flex;

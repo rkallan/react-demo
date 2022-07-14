@@ -39,7 +39,7 @@ import {
     objectAsUrlParams,
     getCurrentUrlSearchAsObject,
     getNewUrlSearchAsObjectAndString,
-    setSearchPageParam,
+    setUrlSearchParam,
 } from "./urlParams";
 import { validations, formPostValidation, getValidationTypes, isElementValid } from "./validations";
 import { getStorageItem, setStorageItem, removeStorageItem, clearStorage } from "./webStorageData";
@@ -90,7 +90,7 @@ export {
     objectAsUrlParams,
     getCurrentUrlSearchAsObject,
     getNewUrlSearchAsObjectAndString,
-    setSearchPageParam,
+    setUrlSearchParam,
     validations,
     formPostValidation,
     getValidationTypes,

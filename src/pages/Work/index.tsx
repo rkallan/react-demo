@@ -2,6 +2,10 @@ import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
 import content from "./resources/data/content";
 
+const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rrkallan/ui-library/Container"), {
+    fallback: <Loading />,
+});
+
 const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
     fallback: <Loading />,
 });
@@ -18,12 +22,20 @@ const Contact = loadable(() => import(/* webpackChunkName: "Contact" */ "compone
     fallback: <Loading />,
 });
 
+const FilterClients = loadable(() => import(/* webpackChunkName: "FilterClients" */ "features/Clients/Assignments/Filter"), {
+    fallback: <Loading />,
+});
+
 function Work(): JSX.Element {
     const { pageHeader } = content;
 
     return (
         <>
-            <Hero {...pageHeader} />
+            <Hero {...pageHeader}>
+                <Container variant="white" textColor="black" fullWidth>
+                    <FilterClients />
+                </Container>
+            </Hero>
             <Assignments />
             <Client />
             <Contact />

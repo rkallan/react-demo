@@ -1,21 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "Store/types";
-import { assignments } from "./Assignments/resources/data/assignments";
-import type { TypeFetchClientsDataProp, TypeItemIds } from "./types";
+import quotes from "features/Clients/Quotes/resources/data/quotes";
+import type { TypeFetchClientsDataProp, InterfaceQuotes, TypeItemIds } from "./types";
 
-const fetchClients = createAsyncThunk(
+const fetchClientsQuotes = createAsyncThunk(
     "clients/fetchClients",
     async (data: TypeFetchClientsDataProp, { rejectWithValue, getState, requestId, signal }) => {
         const { clients }: RootState = getState();
-        const { loading, currentRequestId } = clients.assignments;
+        const { loading, currentRequestId } = clients.quotes;
 
         if (loading === false || requestId !== currentRequestId) return undefined;
 
-        const result = assignments;
+        const result = quotes;
 
-        const ids = result.reduce((previousValue: TypeItemIds, currentValue) => {
+        const ids = quotes.reduce((previousValue: TypeItemIds, currentValue: InterfaceQuotes) => {
             const tempResult = previousValue;
-            const { id } = currentValue || 0;
+            const { id } = currentValue;
 
             tempResult[id] = {
                 ...currentValue,
@@ -33,4 +33,4 @@ const fetchClients = createAsyncThunk(
     }
 );
 
-export default fetchClients;
+export default fetchClientsQuotes;
