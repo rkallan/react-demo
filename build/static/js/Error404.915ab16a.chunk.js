@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkrrkallan_demo=self.webpackChunkrrkallan_demo||[]).push([[93],{1631:function(r,e,n){n.r(e);var l=n(6871),a=n(184);e.default=function(){var r=(0,l.TH)().state;return(0,a.jsxs)("div",{children:[(0,a.jsx)("h1",{children:"404 Error page"}),(0,a.jsxs)("p",{children:["Url: ",r.referer.href," could not be found"]})]})}}}]);
+//# sourceMappingURL=Error404.915ab16a.chunk.js.map

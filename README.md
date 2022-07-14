@@ -2,14 +2,75 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Important & recommendations
+## Development
 
-This demo project is build with React, NodeJs and NPM and focused on Linux based enviorment. Also used this application Local SSL certification.
+This demo project is build with React, NodeJs and NPM and focused on Linux based environment.
+This application is recommended to run with Local SSL certification, else there will be a notice in your browser about unsafe.It's possible to still run the application.
 
 This project is build with
 
-    NodeJS version 18.4.0
+    NodeJS version 18.5.0
     NPM version 8.13.2
+
+Install NodeJS and NPM on your device. See section Recommended how to install Node Version Manager
+
+Clone this project from GitHub to your device.
+
+Go to the application root folder on your device.
+run `npm install`
+
+For SSL Cert see next section
+
+### To run the application in development mode
+
+run `npm start`
+
+### To build and localy test the application with SSL
+
+run `npm run start:productionBuild`
+
+go to <https://localhost:1888>
+
+### Localy test the application with SSL on excisting build
+
+run `npm run start:production`
+
+go to <http://localhost:1888>
+
+### To build and localy test the application without SSL
+
+run `npm run start:productionBuild`
+
+go to <https://localhost:2888>
+
+### Localy test the application without SSL on excisting build
+
+run `npm run start:production-noSSL`
+
+go to <http://localhost:2888>
+
+## SSL Cert for local development
+
+Runing the react app with trusted ssl for development.
+
+Use mkcert to solve local trusted SSL certification.
+
+Documantation and guide at: <https://github.com/FiloSottile/mkcert> It's discribed how to use for Mac Os, Windows and Linux.
+
+When the cert and key files are generated and stored on the root folder `.cert`
+
+add or create on the root file `.env.developmen.local` and add these 2 lines
+
+    ```bash
+        SSL_CRT_FILE=./.cert/cert.pem
+        SSL_KEY_FILE=./.cert/key.pem
+    ```
+
+now run the app with `npm start`
+
+NOTE: Don't use this for production
+
+### Recommendations
 
 - [Visual Code](https://code.visualstudio.com/Download) (recommendation)
     IDE wich is Free, Open source, lightweight and Runs everywhere. It's available for Windows, OsX and Linux. Support multiple code languages, Project specific preferences which
@@ -39,27 +100,6 @@ This project is build with
 - Node Version Manager [Windows](https://github.com/coreybutler/nvm-windows) [OsX, Linux](https://github.com/creationix/nvm)
     _Italic_NOTE: use of Yarn is not recommendat. NPM is maybe a bit slower but the benefit which yarn had with the lock file is also avaible in npm_Italic_
     Support for multiple Node versions. Easy to switch between Node and npm versions if there are multiple projects with different requirements for node and npm versions. Also we want to have our solution updated with latest version. With Node Version Manager testing on serval versions is simple, easy and saves time.
-
-## SSL Cert for local development
-
-Runing the react app with trusted ssl for development.
-
-Use mkcert to solve local trusted SSL certification.
-
-Documantation and guide at: <https://github.com/FiloSottile/mkcert> It's discribed how to use for Mac Os, Windows and Linux.
-
-When the cert and key files are generated and stored on the root folder `.cert`
-
-add or create on the root file `.env.developmen.local` and add these 2 lines
-
-```bash
-    SSL_CRT_FILE=./.cert/cert.pem
-    SSL_KEY_FILE=./.cert/key.pem
-```
-
-now run the app with `npm start`
-
-NOTE: Don't use this for production
 
 ## Available Scripts
 
@@ -95,14 +135,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Useful commands
 
-- cleanup all local branches exept master, develop and current branche
-
-    `git branch | egrep -v "(master|develop|\*)" | xargs git branch -D`
-
-    This project is provided with a script to make it easier to clean up unused local branches
-
-    `npm run clean:branches`
-
 - package.json sorting from command line
 
     `npx sort-package-json`
@@ -111,22 +143,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
     `npm run sort:package`
 
-- npm packages update overview (add -u to update package.json)
-
-    `npx npm-check-updates`
-
-- commit style for feature and fix etc. (usefull when nit provided)
-
-    `npx commitizen init cz-conventional-changelog --save-dev --save-exact`
-
-    When provided in project
-
-    `npx git-cz`
-
-    This project is provided with a script
-
-    `npm run commit`
-
 - Check packages to update
 
     `npx npm-check-updates`
@@ -134,9 +150,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
     to update all packages to latest version
 
     `npx npm-check-updates -u`
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
