@@ -49,7 +49,7 @@ function Assignments(): JSX.Element {
                             return Custom;
                         }
                         return (
-                            <section key={layout.row} className={styles.unit} variant={layout.deviding}>
+                            <section key={layout.row} className={styles.unit} variant={layout.deviding.split("=")[0]}>
                                 {!!items &&
                                     items?.map((assignment: TypeAssignments | any) => {
                                         const assigmentType = getType(assignment);
@@ -58,7 +58,7 @@ function Assignments(): JSX.Element {
                                             const titleForUrl = assignment.title.trim().replace(/\s+/g, "-").toLowerCase();
                                             const url = `${assignment.id}/${titleForUrl}`;
                                             return (
-                                                <article key={assignment.id} className={styles.item}>
+                                                <article key={assignment.id} className={styles.item} variant="single">
                                                     <Link className={styles.link} to={url}>
                                                         <div className={styles.text}>
                                                             <span className={styles.client}>{assignment.client}</span>
@@ -89,7 +89,7 @@ function Assignments(): JSX.Element {
 
                                         if (assigmentType === "array") {
                                             return (
-                                                <article key={layout.row} className={styles.item}>
+                                                <article key={layout.row} className={styles.item} variant="list">
                                                     <ul className={styles.list}>
                                                         {assignment.map((item: any) => {
                                                             const titleForUrl = item.title.trim().replace(/\s+/g, "-").toLowerCase();
