@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Files stored at folder @rrkallan will be NPM packages
+
 ## Development
 
 This demo project is build with React, NodeJs and NPM and focused on Linux based environment.
