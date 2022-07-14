@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -148,25 +149,34 @@ function FilterClients(): JSX.Element {
     return (
         <section className={styles.container}>
             <div className={styles.unit}>
-                Show me
-                <Select
-                    label={clientSelectProperties.label}
-                    attributes={clientSelectProperties.attributes}
-                    optionGroup={clientSelectProperties.optionGroup}
-                    variant={undefined}
-                    defaultValue={searchParams.clientId}
-                    clearValue={undefined}
-                    customEventHandler={selectEventHandler}
-                />
-                <Select
-                    label={categorySelectProperties.label}
-                    attributes={categorySelectProperties.attributes}
-                    optionGroup={categorySelectProperties.optionGroup}
-                    variant={undefined}
-                    defaultValue={searchParams.categoryId}
-                    clearValue={undefined}
-                    customEventHandler={selectEventHandler}
-                />
+                <div className={styles.item}>
+                    <div className={styles.label}>
+                        <label htmlFor={clientSelectProperties.label.for}>Show client(s)</label>
+                    </div>
+                    <Select
+                        label={clientSelectProperties.label}
+                        attributes={clientSelectProperties.attributes}
+                        optionGroup={clientSelectProperties.optionGroup}
+                        variant={undefined}
+                        defaultValue={searchParams.clientId}
+                        clearValue={undefined}
+                        customEventHandler={selectEventHandler}
+                    />
+                </div>
+                <div className={styles.item}>
+                    <div className={styles.label}>
+                        <label htmlFor={categorySelectProperties.label.for}>Show category(s)</label>
+                    </div>
+                    <Select
+                        label={categorySelectProperties.label}
+                        attributes={categorySelectProperties.attributes}
+                        optionGroup={categorySelectProperties.optionGroup}
+                        variant={undefined}
+                        defaultValue={searchParams.categoryId}
+                        clearValue={undefined}
+                        customEventHandler={selectEventHandler}
+                    />
+                </div>
             </div>
         </section>
     );

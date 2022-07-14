@@ -12,5 +12,17 @@
         flex-direction: row;
         gap: 1rem;
         align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .label {
+            flex: none;
+        }
     }
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 // import loadable from "@loadable/component";
-import { getRandomAlphanumericInsensitive, getValidationTypes, isElementValid, getValueOfElement, getType } from "@rrkallan/js-helpers";
+import { getValidationTypes, isElementValid, getValueOfElement, getType } from "@rrkallan/js-helpers";
 
 import styles from "./resources/styles/select.module.scss";
 import OptionGroup from "./OptionGroup";
@@ -9,7 +9,6 @@ import OptionGroup from "./OptionGroup";
 // const Icons = loadable(() => import(/* webpackChunkName: "Icons" */ `../Icons`));
 
 function Select({ label, attributes, optionGroup, variant, clearValue, defaultValue, customEventHandler }) {
-    const [randomAlphanumericInsensitive] = useState(getRandomAlphanumericInsensitive());
     const elementAttributes = { ...Select.defaultProps.attributes, ...attributes };
     const { disabled, readOnly } = elementAttributes;
     const initState = disabled || readOnly || !elementAttributes["data-required"] ? "isValid" : "isEmpty";
@@ -77,12 +76,12 @@ function Select({ label, attributes, optionGroup, variant, clearValue, defaultVa
     return (
         <div className={styles.container} state={containerState} variant={containerVariant.join(" ")}>
             <div className={styles.unit}>
-                <label className={styles.label} htmlFor={`${label.for}-${randomAlphanumericInsensitive}`}>
+                <label className={styles.label} htmlFor={`${label.for}`}>
                     <span className={styles.placeholder}>{label.text}</span>
                 </label>
                 <div className={styles["select-container"]}>
                     <select
-                        id={`${label.for}-${randomAlphanumericInsensitive}`}
+                        id={`${label.for}`}
                         className={styles.select}
                         onBlur={selectEventHandler}
                         onFocus={selectEventHandler}
