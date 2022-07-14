@@ -7,8 +7,9 @@ const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rr
     fallback: <Loading />,
 });
 
-function Quote(): JSX.Element {
+function Quotes(): JSX.Element {
     const quote = quotes[0];
+
     return (
         <Container
             containerElementTag="section"
@@ -23,11 +24,11 @@ function Quote(): JSX.Element {
             </p>
             <p className={style.unit}>
                 <span>
-                    {quote.person.name} {quote.person.function} {quote.person.client}
+                    {quote.person.name} - {quote.person.function}, {quote.person.client}
                 </span>
             </p>
         </Container>
     );
 }
 
-export default Quote;
+export default Quotes;

@@ -77,8 +77,8 @@ const assignments = [
 
     {
         id: 15,
-        title: undefined,
-        intro: "Tapping into Ireland’s unique gaming culture and bringing a fresh flavour to their Xbox social media channels",
+        title: "Tapping into Ireland’s unique gaming culture and bringing a fresh flavour to their Xbox social media channels",
+        intro: undefined,
         client: "Microsoft",
         clientId: 6,
         mainImage: undefined,
@@ -89,8 +89,8 @@ const assignments = [
     },
     {
         id: 14,
-        title: undefined,
-        intro: "Integrating existing content into O’Neills’s new e-commerce platform",
+        title: "Integrating existing content into O’Neills’s new e-commerce platform",
+        intro: undefined,
         client: "O’Neill",
         clientId: 7,
         mainImage: undefined,
@@ -139,8 +139,8 @@ const assignments = [
 
     {
         id: 10,
-        title: undefined,
-        intro: "Tapping into Ireland’s unique gaming culture and bringing a fresh flavour to their Xbox social media channels",
+        title: "Tapping into Ireland’s unique gaming culture and bringing a fresh flavour to their Xbox social media channels",
+        intro: undefined,
         client: "Microsoft",
         clientId: 6,
         mainImage: undefined,
@@ -151,8 +151,8 @@ const assignments = [
     },
     {
         id: 9,
-        title: undefined,
-        intro: "Integrating existing content into O’Neills’s new e-commerce platform",
+        title: "Integrating existing content into O’Neills’s new e-commerce platform",
+        intro: undefined,
         client: "O’Neill",
         clientId: 7,
         mainImage: undefined,
@@ -260,4 +260,53 @@ const assignments = [
     },
 ];
 
-export default assignments;
+const clientLayout = [
+    {
+        row: 1,
+        items: 2,
+        deviding: "equal",
+    },
+    {
+        row: 2,
+        items: 2,
+        deviding: "equal",
+    },
+    {
+        row: 3,
+        items: 4,
+        deviding: "list=2,3,4",
+    },
+    {
+        row: 4,
+        items: 2,
+        deviding: "equal",
+    },
+    {
+        row: 5,
+        items: 4,
+        deviding: "list=1,2,3",
+    },
+    {
+        row: 6,
+        items: 2,
+        deviding: "equal",
+    },
+    {
+        row: 7,
+        items: 2,
+        deviding: "equal",
+    },
+    {
+        row: 8,
+        items: 0,
+        component: "quotes",
+        deviding: undefined,
+    },
+    {
+        row: 9,
+        items: 2,
+        deviding: "equal",
+    },
+];
+
+export { assignments, clientLayout };

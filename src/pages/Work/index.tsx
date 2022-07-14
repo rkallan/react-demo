@@ -6,11 +6,11 @@ const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/He
     fallback: <Loading />,
 });
 
-const Assignments = loadable(() => import(/* webpackChunkName: "Assignments" */ "features/Client/Assignments"), {
+const Assignments = loadable(() => import(/* webpackChunkName: "Assignments" */ "features/Clients/Assignments"), {
     fallback: <Loading />,
 });
 
-const Client = loadable(() => import(/* webpackChunkName: "Client" */ "features/Client"), {
+const Client = loadable(() => import(/* webpackChunkName: "Client" */ "features/Clients"), {
     fallback: <Loading />,
 });
 

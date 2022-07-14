@@ -7,6 +7,7 @@ import { ReactComponent as ArrowLeft } from "./resources/svg/arrow-left.svg";
 import { ReactComponent as ArrowRight } from "./resources/svg/arrow-right.svg";
 import { ReactComponent as ArrowUp } from "./resources/svg/arrow-up.svg";
 import { ReactComponent as Chat } from "./resources/svg/chat.svg";
+import { ReactComponent as Circle } from "./resources/svg/circle.svg";
 import { ReactComponent as Clock } from "./resources/svg/clock.svg";
 import { ReactComponent as Confirm } from "./resources/svg/confirm.svg";
 import { ReactComponent as Email } from "./resources/svg/email.svg";
@@ -37,6 +38,7 @@ const icons = {
     arrowRight: (props: TypeIconProps): JSX.Element => <ArrowRight className={styles.icon} {...props} />,
     arrowUp: (props: TypeIconProps): JSX.Element => <ArrowUp className={styles.icon} {...props} />,
     chat: (props: TypeIconProps): JSX.Element => <Chat className={styles.icon} {...props} />,
+    circle: (props: TypeIconProps): JSX.Element => <Circle className={styles.icon} {...props} />,
     clock: (props: TypeIconProps): JSX.Element => <Clock className={styles.icon} {...props} />,
     confirm: (props: TypeIconProps): JSX.Element => <Confirm className={styles.icon} {...props} />,
     email: (props: TypeIconProps): JSX.Element => <Email className={styles.icon} {...props} />,

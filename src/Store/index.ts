@@ -5,6 +5,7 @@ import storage from "reduxjs-toolkit-persist/lib/storage";
 import autoMergeLevel1 from "reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1";
 import { tvShowsReducers } from "features/TvShows/tvShowsSlice";
 import { layoutReducers } from "features/layout/layoutSlice";
+import { clientsReducers } from "features/Clients/clientsSlice";
 
 const persistConfig = {
     key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 };
 
 const reducer = combineReducers({
+    clients: clientsReducers,
     tvShows: tvShowsReducers,
     layout: layoutReducers,
 });

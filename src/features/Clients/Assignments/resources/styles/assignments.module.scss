@@ -1,0 +1,146 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, 1fr) repeat(1, auto) repeat(1, 1fr);
+
+    .unit {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+        align-items: stretch;
+
+        .item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex: 1;
+            overflow: hidden;
+
+            .link {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                transition: map-get($transition, default);
+
+                &:hover,
+                &:focus {
+                    transform: scale(1.02);
+
+                    .image {
+                        transform: scale(1.1);
+                    }
+                }
+
+                .image {
+                    transition: map-get($transition, default);
+                }
+
+                .readMore {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0.5rem;
+                    align-items: center;
+                }
+            }
+
+            .text {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                bottom: 1rem;
+                left: 1rem;
+                right: 1rem;
+                z-index: 5;
+
+                .title {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .client {
+                    font-family: $fontFamilyBase;
+                    font-size: 1rem;
+                    font-weight: 700;
+                }
+            }
+
+            .imageContainer {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+
+                .image {
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0.65;
+                    object-fit: cover;
+                }
+            }
+
+            .list {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                height: 100%;
+                margin: 0;
+                padding: 1rem 2rem;
+
+                .listItem {
+                    margin: 0;
+                    padding: 0;
+
+                    &:after {
+                        position: absolute;
+                        top: unset;
+                        left: 0;
+                        right: 0;
+                        bottom: -1rem;
+                        content: " ";
+                        width: 100%;
+                        height: 0.01625rem;
+                        background-color: safe-hsla(map-get($colorWhite, default));
+                        border-radius: unset;
+                        border: none;
+                    }
+
+                    &:last-of-type {
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
+
+                .link {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
+
+                    &:hover,
+                    &:focus {
+                        transform: scale(1.05);
+                    }
+
+                    &:after {
+                        display: none;
+                    }
+                }
+
+                .title {
+                    position: relative;
+                    font-family: $fontFamilyBase;
+                    font-size: 1rem;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

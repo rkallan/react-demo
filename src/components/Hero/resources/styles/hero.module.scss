@@ -5,10 +5,23 @@
     display: flex;
     gap: map-get($gap, default);
     flex-direction: row;
-    transition: map-get($transition, default);
     min-height: 14rem;
     align-items: flex-end;
     overflow: hidden;
+    transition: map-get($transition, default);
+
+    &[variant~="lower"] {
+        min-height: 7rem;
+
+        .unit {
+            &[variant~="title"] {
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+    &[variant~="default"] {
+        min-height: 14rem;
+    }
 
     .unit {
         &[variant~="title"] {
@@ -20,6 +33,7 @@
             margin-bottom: 3rem;
             margin-left: 2rem;
             z-index: 5;
+            transition: map-get($transition, default);
         }
 
         &[variant~="image"] {
