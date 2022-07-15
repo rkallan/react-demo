@@ -10,7 +10,7 @@ interface InterfaceHeroProps {
 
 type TypeHeroObject = {
     title: ReactNode;
-    image: string;
+    image?: string | undefined;
 };
 
 export type { InterfaceHeroProps, TypeHeroObject };

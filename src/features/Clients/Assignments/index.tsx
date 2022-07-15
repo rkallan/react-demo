@@ -60,7 +60,7 @@ function Assignments(): JSX.Element {
 
                                         if (assigmentType === "object") {
                                             const titleForUrl = assignment.title.trim().replace(/\s+/g, "-").toLowerCase();
-                                            const url = `${assignment.id}/${titleForUrl}`;
+                                            const url = `/work/${assignment.id}/${titleForUrl}`;
                                             const variant = ["single", !assignment.mainImage ? "no-image" : "has-image"];
 
                                             return (

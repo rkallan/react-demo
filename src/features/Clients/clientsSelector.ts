@@ -2,7 +2,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "Store/types";
 import { validations } from "@rrkallan/js-helpers";
-import { clientLayout } from "./Assignments/resources/data/assignments";
+import clientLayout from "./Assignments/resources/data/clientLayout";
 import type { InterfaceClientsState, TypeRowLayout, TypeEntitiesSelector } from "./types";
 
 const clientsState = ({ clients }: RootState): InterfaceClientsState => clients;
@@ -102,6 +102,14 @@ const assignmentsIsLoaded = createSelector(clientsState, ({ assignments }) => {
     return isLoaded;
 });
 
+const getAssignmentById = createSelector([clientsState, (_, data) => data], ({ assignments }, data) => {
+    const { id } = data || {};
+    const { ids } = assignments || {};
+    const assignment = ids?.[id];
+
+    return assignment;
+});
+
 const getQuotesLoading = createSelector(clientsState, ({ quotes }) => quotes.loading);
 const getQuotesError = createSelector(clientsState, ({ quotes }) => quotes.error);
 const getQuotesIsLoaded = createSelector(clientsState, ({ quotes }) => {
@@ -123,6 +131,7 @@ export {
     getAssignmentsError,
     getAssignmentsEntities,
     assignmentsIsLoaded,
+    getAssignmentById,
     getQuotesError,
     getQuotesIsLoaded,
     getQuotesLoading,

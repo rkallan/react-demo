@@ -1,6 +1,6 @@
 interface InterfaceClientsState {
-    quotes: TypeItems2;
-    assignments: TypeItems;
+    quotes: TypeItemsQuotes;
+    assignments: TypeItemsAssignments;
 }
 
 interface InterfaceAssignments {
@@ -30,25 +30,29 @@ type TypePerson = {
     function?: string | undefined;
 };
 
-type TypeItems = {
+type TypeItemsAssignments = {
     entities: InterfaceAssignments[] | undefined;
-    ids: TypeItemIds | undefined;
+    ids: TypeItemIdsAssignments | undefined;
     loading: boolean;
     currentRequestId: string | undefined;
     error: string | undefined;
     filter?: TypeFetchClientsDataProp;
 };
 
-type TypeItems2 = {
+type TypeItemsQuotes = {
     entities: InterfaceQuotes[] | undefined;
-    ids: TypeItemIds | undefined;
+    ids: TypeItemIdsQuotes | undefined;
     loading: boolean;
     currentRequestId: string | undefined;
     error: string | undefined;
 };
 
-type TypeItemIds = {
-    [key: number]: InterfaceAssignments | InterfaceQuotes;
+type TypeItemIdsAssignments = {
+    [key: number]: InterfaceAssignments;
+};
+
+type TypeItemIdsQuotes = {
+    [key: number]: InterfaceQuotes;
 };
 
 type TypeFetchClientsDataProp = {
@@ -74,12 +78,14 @@ type TypeEntitiesSelector = {
 
 export type {
     InterfaceClientsState,
-    TypeItems,
+    TypeItemsAssignments,
+    TypeItemsQuotes,
     TypeFetchClientsDataProp,
     InterfaceAssignments,
     TypeRowLayout,
     TypeEntitiesSelector,
-    TypeItemIds,
+    TypeItemIdsAssignments,
+    TypeItemIdsQuotes,
     InterfaceQuotes,
     TypePerson,
 };

@@ -14,6 +14,7 @@ const TvShows = loadable(() => import(/* webpackChunkName: "TvShows" */ "pages/T
 const TvShow = loadable(() => import(/* webpackChunkName: "TvShow" */ "pages/TvShow"));
 
 const Work = loadable(() => import(/* webpackChunkName: "Work" */ "pages/Work"));
+const WorkAssignment = loadable(() => import(/* webpackChunkName: "WorkAssignment" */ "pages/Work/Item"));
 
 const routeConfiguration = [
     {
@@ -55,6 +56,13 @@ const routeConfiguration = [
         id: 70,
         path: "/work",
         Element: Work,
+        exact: true,
+        authenticated: false,
+    },
+    {
+        id: 80,
+        path: "/work/:id/:title",
+        Element: WorkAssignment,
         exact: true,
         authenticated: false,
     },

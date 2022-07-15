@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "Store/types";
 import quotes from "features/Clients/Quotes/resources/data/quotes";
-import type { TypeFetchClientsDataProp, InterfaceQuotes, TypeItemIds } from "./types";
+import type { TypeFetchClientsDataProp, InterfaceQuotes, TypeItemIdsQuotes } from "./types";
 
 const fetchClientsQuotes = createAsyncThunk(
     "clients/fetchClients",
@@ -13,7 +13,7 @@ const fetchClientsQuotes = createAsyncThunk(
 
         const result = quotes;
 
-        const ids = quotes.reduce((previousValue: TypeItemIds, currentValue: InterfaceQuotes) => {
+        const ids = quotes.reduce((previousValue: TypeItemIdsQuotes, currentValue: InterfaceQuotes) => {
             const tempResult = previousValue;
             const { id } = currentValue;
 
