@@ -24,15 +24,17 @@
         "prestart:productionBuild-noSSL": "npm run build",
         "start:productionBuild-noSSL": "npx serve -s build -p 2888",
         "start:production-noSSL": "npx serve -s build -p 2888",
-        "test": "react-scripts test"
+        "test": "react-scripts test",
+        "npm-updates": "npx npm-check-updates",
+        "npm-updates-u": "npx npm-check-updates -u"
     },
     "dependencies": {
         "@loadable/component": "^5.15.2",
-        "@react-spring/web": "^9.4.5",
+        "@react-spring/web": "^9.5.0",
         "@reduxjs/toolkit": "^1.8.3",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "^13.3.0",
-        "@testing-library/user-event": "^14.2.1",
+        "@testing-library/user-event": "^14.2.3",
         "graphql": "^16.5.0",
         "graphql.macro": "^1.4.2",
         "prop-types": "^15.8.1",
@@ -51,9 +53,9 @@
         "web-vitals": "^2.1.4"
     },
     "devDependencies": {
-        "@types/jest": "^28.1.4",
+        "@types/jest": "^28.1.5",
         "@types/loadable__component": "^5.13.4",
-        "@types/node": "^18.0.3",
+        "@types/node": "^18.0.4",
         "@types/react": "^18.0.15",
         "@types/react-dom": "^18.0.6",
         "@typescript-eslint/eslint-plugin": "^5.30.6",
