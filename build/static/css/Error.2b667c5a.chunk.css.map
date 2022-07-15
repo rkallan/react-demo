@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/Error.2b667c5a.chunk.css","mappings":"AACI,2CACI","sources":["pages/Error/resources/styles/error.module.scss"],"sourcesContent":[".container {\n    .unit {\n        position: relative;\n    }\n}\n"],"names":[],"sourceRoot":""}
