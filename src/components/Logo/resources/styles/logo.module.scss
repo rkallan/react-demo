@@ -8,6 +8,17 @@
     padding: 0;
 
     .link {
+        &:hover,
+        &:focus {
+            transition: map-get($transition, default);
+
+            svg {
+                transform: scale(1.1);
+                color: safe-hsla(map-get($colorBlack, default));
+                filter: drop-shadow(0 0.0625rem 0.0625rem safe-hsla(map-get($colorWhite, default)))
+                    drop-shadow(0 0.25rem 0.5rem safe-hsla(map-get($colorWhite, default), 0.15));
+            }
+        }
         &:after {
             display: none;
         }
@@ -19,5 +30,6 @@
         color: safe-hsla(map-get($colorWhite, default));
         filter: drop-shadow(0 0.0625rem 0.0625rem safe-hsla(map-get($colorBlack, lighter)))
             drop-shadow(0 0.25rem 0.5rem safe-hsla(map-get($colorBlack, lighter), 0.15));
+        transition: map-get($transition, default);
     }
 }

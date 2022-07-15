@@ -2,7 +2,11 @@ import { useState, useEffect, MouseEvent } from "react";
 import { NavLink, NavLinkProps, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 import { getType } from "@rrkallan/js-helpers";
 
-function NavigationLink({ children, to, onClick, ...props }: NavLinkProps): JSX.Element {
+interface InterfaceNavigationLinkProps extends NavLinkProps {
+    setTabIndex?: boolean;
+}
+
+function NavigationLink({ children, to, onClick, setTabIndex = false, ...props }: InterfaceNavigationLinkProps): JSX.Element {
     const { pathname, hash, search } = useLocation();
     const resolved = useResolvedPath(to);
     const isActive = !!useMatch({ path: resolved.pathname, end: true });
@@ -27,7 +31,14 @@ function NavigationLink({ children, to, onClick, ...props }: NavLinkProps): JSX.
     }, [pathname, hash, search]);
 
     return (
-        <NavLink onClick={onClickHandlerNavLink} to={to} state={state} {...props} variant={isActive ? "is-active" : undefined}>
+        <NavLink
+            onClick={onClickHandlerNavLink}
+            to={to}
+            state={state}
+            {...props}
+            variant={isActive ? "is-active" : undefined}
+            tabIndex={setTabIndex && isActive ? -1 : 0}
+        >
             {children}
         </NavLink>
     );
