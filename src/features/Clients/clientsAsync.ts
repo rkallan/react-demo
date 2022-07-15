@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "Store/types";
-import { assignments } from "./Assignments/resources/data/assignments";
+import assignments from "./Assignments/resources/data/assignments";
 import type { TypeFetchClientsDataProp, TypeItemIdsAssignments } from "./types";
 
 const fetchClients = createAsyncThunk(

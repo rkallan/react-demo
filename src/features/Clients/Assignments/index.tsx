@@ -99,7 +99,7 @@ function Assignments(): JSX.Element {
                                                     <ul className={styles.list}>
                                                         {assignment.map((item: any) => {
                                                             const titleForUrl = item.title.trim().replace(/\s+/g, "-").toLowerCase();
-                                                            const url = `${item.id}/${titleForUrl}`;
+                                                            const url = `/work/${item.id}/${titleForUrl}`;
 
                                                             return (
                                                                 <li key={item.id} className={styles.listItem}>

@@ -7,7 +7,7 @@ interface InterfaceAssignments {
     id?: number;
     name?: string;
     title?: string | undefined;
-    text?: string | undefined;
+    content?: string[] | undefined;
     intro?: string | undefined;
     client?: string;
     clientId?: number;

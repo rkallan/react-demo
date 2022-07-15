@@ -6,8 +6,15 @@ import clientLayout from "./Assignments/resources/data/clientLayout";
 import type { InterfaceClientsState, TypeRowLayout, TypeEntitiesSelector } from "./types";
 
 const clientsState = ({ clients }: RootState): InterfaceClientsState => clients;
-const getAssignmentsLoading = createSelector(clientsState, ({ assignments }) => assignments.loading);
+
 const getAssignmentsError = createSelector(clientsState, ({ assignments }) => assignments.error);
+const getAssignmentsLoading = createSelector(clientsState, ({ assignments }) => assignments.loading);
+const assignmentsIsLoaded = createSelector(clientsState, ({ assignments }) => {
+    const { loading, entities, error } = assignments;
+    const isLoaded = (!loading && !!entities) || !!error;
+    return isLoaded;
+});
+
 const getAssignmentsEntities = createSelector(clientsState, ({ assignments }) => {
     const { entities, filter } = assignments || {};
     if (validations.isEmpty(entities)) return [];
@@ -96,22 +103,17 @@ const getAssignmentsEntities = createSelector(clientsState, ({ assignments }) =>
 
     return entitiesSplittedByRow.result;
 });
-const assignmentsIsLoaded = createSelector(clientsState, ({ assignments }) => {
-    const { loading, entities, error } = assignments;
-    const isLoaded = (!loading && !!entities) || !!error;
-    return isLoaded;
-});
 
 const getAssignmentById = createSelector([clientsState, (_, data) => data], ({ assignments }, data) => {
     const { id } = data || {};
     const { ids } = assignments || {};
     const assignment = ids?.[id];
 
-    return assignment;
+    return assignment || {};
 });
 
-const getQuotesLoading = createSelector(clientsState, ({ quotes }) => quotes.loading);
 const getQuotesError = createSelector(clientsState, ({ quotes }) => quotes.error);
+const getQuotesLoading = createSelector(clientsState, ({ quotes }) => quotes.loading);
 const getQuotesIsLoaded = createSelector(clientsState, ({ quotes }) => {
     const { loading, entities, error } = quotes;
     const isLoaded = (!loading && !!entities) || !!error;

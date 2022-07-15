@@ -1,6 +1,59 @@
 @import "resources/styles/variables/variables";
 @import "resources/styles/mixins/mixins";
 
+.heroContainer {
+    display: flex;
+    flex-direction: row;
+    gap: map-get($gap, large);
+    height: 100%;
+    padding-top: map-get($gap, default);
+    padding-bottom: map-get($gap, default);
+    justify-content: space-between;
+
+    .unit {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: map-get($gap, extrasmall);
+
+        &[variant~="date"] {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        .client {
+            font-size: 1.5rem;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .category {
+            font-weight: 500;
+            line-height: 1;
+        }
+    }
+}
+
 .container {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: map-get($gap, default);
+
+    .unit {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: map-get($gap, large);
+
+        &[variant~="intro"] {
+            p {
+                font-weight: 700;
+                line-height: 1.5;
+            }
+        }
+    }
 }

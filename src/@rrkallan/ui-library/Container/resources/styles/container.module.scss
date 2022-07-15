@@ -9,7 +9,7 @@
     justify-content: flex-start;
     color: inherit;
     min-width: 100%;
-    padding: map-get($gap, default);
+    padding: map-get($gap, large);
 
     &[variant~="full-width"] {
         padding: 0;
