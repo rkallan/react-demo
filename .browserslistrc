@@ -1,12 +1,16 @@
 defaults
-last 10 Chrome major versions
-last 10 Firefox major versions
+>= 0.5%
+last 2 major versions
+not dead
+
 last 3 Safari major versions
-last 10 Edge major versions
+last 20 Chrome major versions
+last 20 Firefox major versions
+last 15 Edge major versions
 last 4 Opera major versions
 
-last 3 Android major versions
-last 3 ChromeAndroid major versions
 last 3 iOS major versions
+last 2 ChromeAndroid major versions
+last 2 Android major versions
 
-> 0.1%
+not Explorer <= 11
