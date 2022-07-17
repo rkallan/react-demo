@@ -1,12 +1,26 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useRoutes } from "react-router-dom";
 import { useTransition, animated } from "@react-spring/web";
 import RedirectRoute from "Routes/RedirectRoute";
 import { pageAnimation, routeConfiguration } from "Routes/configuration";
 import styles from "./resources/styles/mainRoutes.module.scss";
 
-const MainRoutes = () => {
+function MainRoutes() {
     const location = useLocation();
-    const transition = useTransition(location, pageAnimation);
+    const { pathname } = location;
+    const transition = useTransition(location, { key: location.key, ...pageAnimation });
+    const element = useRoutes(routeConfiguration);
+    const [currentElement, setCurrentElement] = useState(() => element);
+
+    useEffect(() => {
+        console.log("rak");
+        setTimeout(() => {
+            setCurrentElement(() => element);
+        }, 300);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname]);
+
+    if (element.props.value.matches[0].route.redirect) <RedirectRoute redirect={currentElement.props.value.matches[0].route.redirect} />;
 
     return transition((style, item) => {
         const animationStyle =
@@ -14,21 +28,10 @@ const MainRoutes = () => {
 
         return (
             <animated.div className={styles.container} style={animationStyle}>
-                <Routes location={item}>
-                    <Route path="/">
-                        {routeConfiguration.map(({ id, path, exact, routes, redirect, Element }) => {
-                            if (redirect)
-                                return <Route key={id} exact={exact} path={path} element={<RedirectRoute redirect={redirect} />} />;
-
-                            return (
-                                <Route key={id} path={path} exact={exact} element={<Element path={path} exact={exact} routes={routes} />} />
-                            );
-                        })}
-                    </Route>
-                </Routes>
+                {currentElement}
             </animated.div>
         );
     });
-};
+}
 
 export default MainRoutes;

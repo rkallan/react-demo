@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
 import { getType } from "@rrkallan/js-helpers";
-import { useAppDispatch, useAppSelector } from "Store/hooks";
-import { fetchClients } from "features/Clients/clientsSlice";
-import { getAssignmentsEntities, assignmentsIsLoaded } from "features/Clients/clientsSelector";
+import { useAppSelector } from "Store/hooks";
+import { getAssignmentsEntities } from "features/Clients/clientsSelector";
 import { InterfaceAssignments } from "features/Clients/types";
 import styles from "./resources/styles/assignments.module.scss";
 
@@ -32,13 +30,7 @@ const getComponent: any = {
 };
 
 function Assignments(): JSX.Element {
-    const dispatch = useAppDispatch();
-    const isLoaded = useAppSelector(assignmentsIsLoaded);
     const assignmentsSplitedByRow = useAppSelector(getAssignmentsEntities);
-
-    useEffect(() => {
-        if (!isLoaded) dispatch(fetchClients({ key: "assignments" }));
-    }, [dispatch, isLoaded]);
 
     return (
         <Container variant="black" textColor="white" fullWidth>
@@ -48,8 +40,8 @@ function Assignments(): JSX.Element {
                         if (layout.component) {
                             if (getType(getComponent[layout.component]) !== "function") return null;
 
-                            const Custom = getComponent[layout.component]({ key: layout.row });
-                            return Custom;
+                            const Custom = getComponent[layout.component];
+                            return <Custom key={layout.row} />;
                         }
 
                         return (

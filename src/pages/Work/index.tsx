@@ -1,46 +1,25 @@
+import { useEffect } from "react";
 import loadable from "@loadable/component";
+import { useAppDispatch, useAppSelector } from "Store/hooks";
+import { fetchClients } from "features/Clients/clientsSlice";
+import { assignmentsIsLoaded } from "features/Clients/clientsSelector";
 import { Loading } from "@rrkallan/ui-library";
-import content from "./resources/data/content";
 
-const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rrkallan/ui-library/Container"), {
-    fallback: <Loading />,
-});
-
-const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
-    fallback: <Loading />,
-});
-
-const Assignments = loadable(() => import(/* webpackChunkName: "Assignments" */ "features/Clients/Assignments"), {
-    fallback: <Loading />,
-});
-
-const Client = loadable(() => import(/* webpackChunkName: "Client" */ "features/Clients"), {
-    fallback: <Loading />,
-});
-
-const Contact = loadable(() => import(/* webpackChunkName: "Contact" */ "components/Contact"), {
-    fallback: <Loading />,
-});
-
-const FilterClients = loadable(() => import(/* webpackChunkName: "FilterClients" */ "features/Clients/Assignments/Filter"), {
+const SubRoutes = loadable(() => import(/* webpackChunkName: "SubRoutes" */ "Routes/SubRoutes"), {
     fallback: <Loading />,
 });
 
 function Work(): JSX.Element {
-    const { pageHeader } = content;
+    const dispatch = useAppDispatch();
+    const isLoaded = useAppSelector(assignmentsIsLoaded);
 
-    return (
-        <>
-            <Hero {...pageHeader}>
-                <Container variant="white" textColor="black" fullWidth>
-                    <FilterClients />
-                </Container>
-            </Hero>
-            <Assignments />
-            <Client />
-            <Contact />
-        </>
-    );
+    useEffect(() => {
+        if (!isLoaded) dispatch(fetchClients({ key: "assignments" }));
+    }, [dispatch, isLoaded]);
+
+    if (!isLoaded) return <Loading />;
+
+    return <SubRoutes />;
 }
 
 export default Work;

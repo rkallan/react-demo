@@ -34,7 +34,7 @@
         "@reduxjs/toolkit": "^1.8.3",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "^13.3.0",
-        "@testing-library/user-event": "^14.2.3",
+        "@testing-library/user-event": "^14.2.5",
         "graphql": "^16.5.0",
         "graphql.macro": "^1.4.2",
         "prop-types": "^15.8.1",
@@ -53,9 +53,10 @@
         "web-vitals": "^2.1.4"
     },
     "devDependencies": {
-        "@types/jest": "^28.1.5",
+        "@testing-library/react-hooks": "^8.0.1",
+        "@types/jest": "^28.1.6",
         "@types/loadable__component": "^5.13.4",
-        "@types/node": "^18.0.4",
+        "@types/node": "^18.0.5",
         "@types/react": "^18.0.15",
         "@types/react-dom": "^18.0.6",
         "@typescript-eslint/eslint-plugin": "^5.30.6",

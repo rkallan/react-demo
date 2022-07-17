@@ -74,12 +74,12 @@ NOTE: Don't use this for production
 
 ### Recommendations
 
-- [Visual Code](https://code.visualstudio.com/Download) (recommendation)
+-   [Visual Code](https://code.visualstudio.com/Download) (recommendation)
     IDE wich is Free, Open source, lightweight and Runs everywhere. It's available for Windows, OsX and Linux. Support multiple code languages, Project specific preferences which
     which are ideal for code conferences and quality
     **Bold**Install extensions**Bold** - Better Comments - DotENV - EditorConfig for VS Code - ESLint - Git Blame - Git History - Git History Diff - Material Icon Theme - npm - npm Intellisense - Sass - SVG Viewer
 
-- [Cmder](https://cmder.net/) (recommendation for windows users)
+-   [Cmder](https://cmder.net/) (recommendation for windows users)
     A pre-configured software package providing you with the terminal emulator on Windows. You can use ls, rm and other linux terminal syntax
 
     **Bold**To run Cmder as the VS Code terminal**Bold**
@@ -88,10 +88,10 @@ NOTE: Don't use this for production
     2. Search for settings.json
     3. Click Edit in settings.json
     4. Append or modify the following variables into your configuration file:
-        "terminal.integrated.shell.windows": "cmd.exe",
-        "terminal.integrated.shellArgs.windows": [
-        "/k", "[cmder_root]\\vendor\\init.bat"
-        ],
+       "terminal.integrated.shell.windows": "cmd.exe",
+       "terminal.integrated.shellArgs.windows": [
+       "/k", "[cmder_root]\\vendor\\init.bat"
+       ],
 
         _Italic_ NOTE: Substitute [cmder_root] with your Cmder installation directory. _Italic_
         _Italic_ NOTE: You can also add a variable %path% for cmder _Italic_
@@ -99,7 +99,7 @@ NOTE: Don't use this for production
 
     5. Restart Visual Code en open the terminal with ctrl `
 
-- Node Version Manager [Windows](https://github.com/coreybutler/nvm-windows) [OsX, Linux](https://github.com/creationix/nvm)
+-   Node Version Manager [Windows](https://github.com/coreybutler/nvm-windows) [OsX, Linux](https://github.com/creationix/nvm)
     _Italic_NOTE: use of Yarn is not recommendat. NPM is maybe a bit slower but the benefit which yarn had with the lock file is also avaible in npm_Italic_
     Support for multiple Node versions. Easy to switch between Node and npm versions if there are multiple projects with different requirements for node and npm versions. Also we want to have our solution updated with latest version. With Node Version Manager testing on serval versions is simple, easy and saves time.
 
@@ -137,7 +137,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Useful commands
 
-- package.json sorting from command line
+-   package.json sorting from command line
 
     `npx sort-package-json`
 
@@ -145,7 +145,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
     `npm run sort:package`
 
-- Check packages to update
+-   Check packages to update
 
     `npx npm-check-updates`
 

@@ -8,7 +8,7 @@ function Error404(): JSX.Element {
     return (
         <div>
             <h1>404 Error page</h1>
-            <p>Url: {state.referer.href} could not be found</p>
+            <p>Url: {state?.referer?.href} could not be found</p>
         </div>
     );
 }

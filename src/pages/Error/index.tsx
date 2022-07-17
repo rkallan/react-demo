@@ -1,20 +1,11 @@
-import { Suspense } from "react";
-import loadable from "@loadable/component";
-import { Loading } from "@rrkallan/ui-library";
-import InterfaceError from "./types";
+import { Outlet } from "react-router-dom";
 import styles from "./resources/styles/error.module.scss";
 
-const SubRoutes = loadable(() => import(/* webpackChunkName: "SubRoutes" */ "Routes/SubRoutes"), {
-    fallback: <Loading />,
-});
-
-function Error({ routes }: InterfaceError): JSX.Element {
+function Error(): JSX.Element {
     return (
         <div className={styles.container}>
             <div className={styles.unit} variant="content">
-                <Suspense fallback={<Loading />}>
-                    <SubRoutes subRoutes={routes} />
-                </Suspense>
+                <Outlet />
             </div>
         </div>
     );

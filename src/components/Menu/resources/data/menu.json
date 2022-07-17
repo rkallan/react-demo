@@ -14,7 +14,7 @@
     {
         "id": 15,
         "title": "Work",
-        "url": "/work",
+        "url": "/work/overview",
         "exact": true
     }
 ]
