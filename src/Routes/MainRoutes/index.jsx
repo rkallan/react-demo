@@ -13,7 +13,6 @@ function MainRoutes() {
     const [currentElement, setCurrentElement] = useState(() => element);
 
     useEffect(() => {
-        console.log("rak");
         setTimeout(() => {
             setCurrentElement(() => element);
         }, 300);

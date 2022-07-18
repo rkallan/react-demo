@@ -15,6 +15,7 @@ import useOnClickOutside from "./useOnClickOutside";
 import usePagination from "./usePagination";
 import useScrollPosition from "./useScrollPosition";
 import useTernaryDarkMode from "./useTernaryDarkMode";
+import useTimeout from "./useTimeout";
 import useUpdateEffect from "./useUpdateEffect";
 
 export {
@@ -35,5 +36,6 @@ export {
     usePagination,
     useScrollPosition,
     useTernaryDarkMode,
+    useTimeout,
     useUpdateEffect,
 };
