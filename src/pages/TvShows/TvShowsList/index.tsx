@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, useCallback } from "react";
 import loadable from "@loadable/component";
 import { useAppDispatch, useAppSelector } from "Store/hooks";
@@ -5,6 +7,7 @@ import {
     getTvShowsLoading,
     getLastUpdatedLoaded,
     getTvShowsList,
+    getTvShowsListLength,
     getTvShowsSearchValue,
     getTvShowsError,
     getLastUpdatedError,
@@ -35,6 +38,7 @@ function TvShowsList(): JSX.Element | null {
     const tvShowsError = useAppSelector(getTvShowsError);
     const tvShowsLoading = useAppSelector(getTvShowsLoading);
     const tvShowsList = useAppSelector(getTvShowsList);
+    const tvShowsListLength = useAppSelector(getTvShowsListLength);
     const searchValue = useAppSelector(getTvShowsSearchValue);
     const { height } = useAppSelector(getFooterBoundingClientRect);
     const [tvShowsPageItems, setTvShowsPageItems] = useState((): TypeEntitiesList[] => []);
@@ -44,14 +48,10 @@ function TvShowsList(): JSX.Element | null {
     }, []);
 
     useEffect(() => {
-        if (lastUpdatedLoaded && !tvShowsError && !searchValue && !tvShowsList.length) dispatch(fetchTvShows({ urlParam: {} }));
-    }, [dispatch, lastUpdatedLoaded, searchValue, tvShowsError, tvShowsList]);
-
-    useEffect(() => {
-        if (lastUpdatedLoaded && searchValue) {
+        if (lastUpdatedLoaded && (tvShowsListLength === undefined || searchValue)) {
             dispatch(fetchTvShows({ urlParam: { q: searchValue } }));
         }
-    }, [dispatch, lastUpdatedLoaded, searchValue]);
+    }, [dispatch, lastUpdatedLoaded, tvShowsListLength, searchValue]);
 
     if (lastUpdatedError) return null;
 
@@ -76,27 +76,31 @@ function TvShowsList(): JSX.Element | null {
                         {tvShowsError || ""}
                     </Notification>
                 </section>
-                <section className={styles.container} variant="overview">
-                    {!!tvShowsPageItems?.length &&
-                        tvShowsPageItems.map((tvShow) => {
-                            const { id, title, imageUrl, showUrl } = tvShow;
-                            const image = imageUrl || noImage;
-                            return (
-                                <article key={id} className={styles.unit}>
-                                    <NavigationLink className={styles.link} to={showUrl} end>
-                                        <figure className={styles.imageContainer}>
-                                            <img className={styles.image} src={image} alt={title} title={title} />
-                                        </figure>
-                                        <h1 className={styles.title}>{title}</h1>
-                                    </NavigationLink>
-                                </article>
-                            );
-                        })}
-                </section>
+                {!tvShowsLoading && (
+                    <section className={styles.container} variant="overview">
+                        {!!tvShowsPageItems?.length &&
+                            tvShowsPageItems.map((tvShow) => {
+                                const { id, title, imageUrl, showUrl } = tvShow;
+                                const image = imageUrl || noImage;
+                                return (
+                                    <article key={id} className={styles.unit}>
+                                        <NavigationLink className={styles.link} to={showUrl} end>
+                                            <figure className={styles.imageContainer}>
+                                                <img className={styles.image} src={image} alt={title} title={title} />
+                                            </figure>
+                                            <h1 className={styles.title}>{title}</h1>
+                                        </NavigationLink>
+                                    </article>
+                                );
+                            })}
+                    </section>
+                )}
             </Container>
-            <section className={styles.container} variant="pagination" style={{ bottom: height }}>
-                <Pagination getPageContent={getPageContent} data={tvShowsList} itemsPerPage={8} prefixSearchParam={undefined} />
-            </section>
+            {!tvShowsLoading && !!tvShowsList.length && (
+                <section className={styles.container} variant="pagination" style={{ bottom: height }}>
+                    <Pagination getPageContent={getPageContent} data={tvShowsList} itemsPerPage={8} prefixSearchParam={undefined} />
+                </section>
+            )}
         </>
     );
 }

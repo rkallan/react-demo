@@ -87,6 +87,7 @@ const tvShows = createSlice({
 
                 if (state[stateShowKey].loading && state[stateShowKey].currentRequestId === requestId) {
                     if (!tempState[stateShowKey].entities) tempState[stateShowKey].entities = [];
+
                     tempState[stateShowKey].loading = false;
                     tempState[stateShowKey].entities = action.payload;
                     tempState[stateShowKey].currentRequestId = undefined;
@@ -102,7 +103,7 @@ const tvShows = createSlice({
             .addCase(fetchTvShows.rejected, (state, action) => {
                 const tempState = state;
                 const { requestId, arg } = action.meta;
-                const { error } = action.payload as { error: string };
+                const { error } = action.payload as { error: string | undefined };
                 const isSearchFetch = !!arg.urlParam.q;
                 const stateShowKey = isSearchFetch ? "search" : "overview";
 

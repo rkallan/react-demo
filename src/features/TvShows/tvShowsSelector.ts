@@ -3,11 +3,19 @@ import { RootState } from "Store/types";
 import type { InterfaceTvShowsState } from "./types";
 
 const tvShowsState = ({ tvShows }: RootState): InterfaceTvShowsState => tvShows;
+
 const getTvShowsList = createSelector(tvShowsState, (tvShows) => {
-    const getSearchResult = !!tvShows.search.value;
-    const stateShowKey = getSearchResult ? "search" : "overview";
+    const stateShowKey = tvShows.search?.value ? "search" : "overview";
 
     return tvShows[stateShowKey].entities || [];
+});
+
+const getTvShowsListLength = createSelector(tvShowsState, (tvShows) => {
+    const stateShowKey = tvShows.search?.value ? "search" : "overview";
+
+    if (tvShows[stateShowKey].entities?.length === 0 || tvShows[stateShowKey].entities?.length) return true;
+
+    return undefined;
 });
 
 const getTvShowsLoading = createSelector(tvShowsState, (tvShows) => {
@@ -51,6 +59,7 @@ const getLastFetchedTime = createSelector(tvShowsState, ({ lastUpdated }) => las
 export {
     tvShowsState,
     getTvShowsList,
+    getTvShowsListLength,
     getTvShowsLoading,
     getTvShowsError,
     getTvShowsSearchValue,
