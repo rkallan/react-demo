@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import loadable from "@loadable/component";
 import { Loading } from "@rrkallan/ui-library";
 import { getType } from "@rrkallan/js-helpers";
@@ -9,6 +9,10 @@ import { InterfaceAssignments } from "features/Clients/types";
 import styles from "./resources/styles/assignments.module.scss";
 
 const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rrkallan/ui-library/Container"), {
+    fallback: <Loading />,
+});
+
+const NavigationLink = loadable(() => import(/* webpackChunkName: "NavigationLink" */ "@rrkallan/ui-library/NavigationLink"), {
     fallback: <Loading />,
 });
 
@@ -57,7 +61,7 @@ function Assignments(): JSX.Element {
 
                                             return (
                                                 <article key={assignment.id} className={styles.item} variant={variant.join(" ")}>
-                                                    <Link className={styles.link} to={url}>
+                                                    <NavigationLink className={styles.link} to={url}>
                                                         <div className={styles.text}>
                                                             <span className={styles.client}>{assignment.client}</span>
                                                             <h2 className={styles.title}>{assignment.title}</h2>
@@ -80,7 +84,7 @@ function Assignments(): JSX.Element {
                                                                 />
                                                             </figure>
                                                         )}
-                                                    </Link>
+                                                    </NavigationLink>
                                                 </article>
                                             );
                                         }
@@ -95,7 +99,7 @@ function Assignments(): JSX.Element {
 
                                                             return (
                                                                 <li key={item.id} className={styles.listItem}>
-                                                                    <Link className={styles.link} to={url}>
+                                                                    <NavigationLink className={styles.link} to={url}>
                                                                         <span className={styles.client}>{item.client}</span>
                                                                         <h2 className={styles.title}>{item.title}</h2>
                                                                         <span className={styles.readMore}>
@@ -107,7 +111,7 @@ function Assignments(): JSX.Element {
                                                                             />
                                                                             Read more
                                                                         </span>
-                                                                    </Link>
+                                                                    </NavigationLink>
                                                                 </li>
                                                             );
                                                         })}

@@ -7,7 +7,8 @@ interface InterfaceNavigationLinkProps extends NavLinkProps {
 }
 
 function NavigationLink({ children, to, onClick, setTabIndex = false, ...props }: InterfaceNavigationLinkProps): JSX.Element {
-    const { pathname, hash, search } = useLocation();
+    const location = useLocation();
+    const { pathname, hash, search } = location;
     const resolved = useResolvedPath(to);
     const isActive = !!useMatch({ path: resolved.pathname, end: true });
     const [state, setState] = useState(() => {
@@ -21,6 +22,7 @@ function NavigationLink({ children, to, onClick, setTabIndex = false, ...props }
             event.preventDefault();
             return;
         }
+        event.currentTarget.blur();
 
         if (onClick && getType(onClick) === "function") onClick(event);
     };

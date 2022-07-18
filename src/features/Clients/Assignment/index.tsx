@@ -10,6 +10,10 @@ const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rr
     fallback: <Loading />,
 });
 
+const NavigationBackLink = loadable(() => import(/* webpackChunkName: "NavigationBackLink" */ "@rrkallan/ui-library/NavigationBackLink"), {
+    fallback: <Loading />,
+});
+
 const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
     fallback: <Loading />,
 });
@@ -25,6 +29,9 @@ function Assignment(): JSX.Element {
         <>
             <Hero hero={{ title: assignment?.title, image: assignment?.mainImage }} fullWidth>
                 <Container variant="red" textColor="white" noUnitElement classNameContainer={styles.heroContainer}>
+                    <div>
+                        <NavigationBackLink />
+                    </div>
                     <div className={styles.unit} variant="sub-heading">
                         <span className={styles.client}>{assignment?.client}</span>
                         <span className={styles.category}>{assignment?.category}</span>

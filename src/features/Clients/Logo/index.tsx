@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import loadable from "@loadable/component";
+import { Loading } from "@rrkallan/ui-library";
 import styles from "./resources/styles/logo.module.scss";
 import content from "../resources/data/client";
+
+const NavigationLink = loadable(() => import(/* webpackChunkName: "NavigationLink" */ "@rrkallan/ui-library/NavigationLink"), {
+    fallback: <Loading />,
+});
 
 function Logo(): JSX.Element {
     const { clients } = content;
@@ -13,11 +18,11 @@ function Logo(): JSX.Element {
 
                 return (
                     <article className={styles.unit} key={id}>
-                        <Link className={styles.link} to={{ pathname: url }} target="_blank" title={name}>
+                        <NavigationLink className={styles.link} to={{ pathname: url }} target="_blank" title={name}>
                             <figure>
                                 <LogoImage title={name} />
                             </figure>
-                        </Link>
+                        </NavigationLink>
                     </article>
                 );
             })}

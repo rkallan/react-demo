@@ -1,0 +1,53 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: map-get($borderRadius, round);
+    box-shadow: hsl(0deg 0% 0% / 25%) 0 0.125rem 0.625rem;
+    z-index: 15;
+    transition: map-get($transition, default);
+
+    .unit {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 2.5rem;
+        height: 2.5rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: map-get($borderRadius, round);
+        background-color: safe-hsla(map-get($colorWhite, default));
+        overflow: hidden;
+        transition: map-get($transition, default);
+
+        &:hover,
+        &:focus {
+            transform: scale(1.25);
+            background-color: safe-hsla(map-get($colorBlack, lighter));
+
+            [variant~="scroll-to-top"] {
+                color: safe-hsla(map-get($colorRed, default));
+            }
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        [variant~="scroll-to-top"] {
+            margin-left: -0.25rem;
+            color: safe-hsla(map-get($colorBlack, default));
+            transition: map-get($transition, default);
+        }
+
+        .text {
+            position: absolute;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+    }
+}
