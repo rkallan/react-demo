@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkrrkallan_demo=self.webpackChunkrrkallan_demo||[]).push([[93],{1631:function(r,e,n){n.r(e);var l=n(6871),d=n(184);e.default=function(){var r;const{state:e}=(0,l.TH)();return(0,d.jsxs)("div",{children:[(0,d.jsx)("h1",{children:"404 Error page"}),(0,d.jsxs)("p",{children:["Url: ",null===e||void 0===e||null===(r=e.referer)||void 0===r?void 0:r.href," could not be found"]})]})}}}]);
+//# sourceMappingURL=Error404.3758c553.chunk.js.map

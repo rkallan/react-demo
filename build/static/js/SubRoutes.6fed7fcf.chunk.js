@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkrrkallan_demo=self.webpackChunkrrkallan_demo||[]).push([[900],{6065:function(e,n,a){a.r(n),a.d(n,{default:function(){return c}});var s=a(6871),r=a(4753),t=a(1245),u="subRoutes_container__FTglw",l=a(184);var c=()=>{const e=(0,s.TH)();return(0,r.useTransition)(e.pathname,t.P)((e=>(0,l.jsx)(r.animated.section,{className:u,style:e,children:(0,l.jsx)(s.j3,{})})))}}}]);
+//# sourceMappingURL=SubRoutes.6fed7fcf.chunk.js.map
