@@ -2,15 +2,15 @@ import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "Store/types";
 import type { InterfaceTvShowsState } from "./types";
 
-const tvShowsState = ({ tvShows }: RootState): InterfaceTvShowsState => tvShows;
+const getTvShowsState = ({ tvShows }: RootState): InterfaceTvShowsState => tvShows;
 
-const getTvShowsList = createSelector(tvShowsState, (tvShows) => {
+const getTvShowsList = createSelector(getTvShowsState, (tvShows) => {
     const stateShowKey = tvShows.search?.value ? "search" : "overview";
 
     return tvShows[stateShowKey].entities || [];
 });
 
-const getTvShowsListLength = createSelector(tvShowsState, (tvShows) => {
+const getTvShowsListLength = createSelector(getTvShowsState, (tvShows) => {
     const stateShowKey = tvShows.search?.value ? "search" : "overview";
 
     if (tvShows[stateShowKey].entities?.length === 0 || tvShows[stateShowKey].entities?.length) return true;
@@ -18,21 +18,21 @@ const getTvShowsListLength = createSelector(tvShowsState, (tvShows) => {
     return undefined;
 });
 
-const getTvShowsLoading = createSelector(tvShowsState, (tvShows) => {
+const getTvShowsLoading = createSelector(getTvShowsState, (tvShows) => {
     const isLoadingSearchResult = !!tvShows.search.value;
     const stateShowKey = isLoadingSearchResult ? "search" : "overview";
 
     return tvShows[stateShowKey].loading;
 });
-const getTvShowsError = createSelector(tvShowsState, (tvShows) => {
-    const isLoadingSearchResult = !!tvShows.search.value;
-    const stateShowKey = isLoadingSearchResult ? "search" : "overview";
+const getTvShowsError = createSelector(getTvShowsState, (tvShows) => {
+    const stateShowKey = tvShows.search.value ? "search" : "overview";
+
     return tvShows[stateShowKey].error;
 });
 
-const getTvShowsSearchValue = createSelector(tvShowsState, (tvShows) => tvShows.search.value);
+const getTvShowsSearchValue = createSelector(getTvShowsState, (tvShows) => tvShows.search.value);
 
-const selectTvShowById = createSelector([tvShowsState, (_, data) => data], (shows, data) => {
+const selectTvShowById = createSelector([getTvShowsState, (_, data) => data], (shows, data) => {
     const { entities } = shows.items || {};
     const { id } = data || {};
     const showById = entities?.[id] || undefined;
@@ -40,10 +40,10 @@ const selectTvShowById = createSelector([tvShowsState, (_, data) => data], (show
     return showById;
 });
 
-const selectTvShowError = createSelector(tvShowsState, ({ items }) => items.error);
-const selectTvShowLoading = createSelector(tvShowsState, ({ items }) => items.loading);
+const selectTvShowError = createSelector(getTvShowsState, ({ items }) => items.error);
+const selectTvShowLoading = createSelector(getTvShowsState, ({ items }) => items.loading);
 
-const selectLastUpdatedOnServerByShowId = createSelector([tvShowsState, (_, data) => data], (shows, data) => {
+const selectLastUpdatedOnServerByShowId = createSelector([getTvShowsState, (_, data) => data], (shows, data) => {
     const { entities } = shows.lastUpdated || {};
     const { id } = data || {};
     const lastUpdated = entities?.[id] || undefined;
@@ -51,19 +51,19 @@ const selectLastUpdatedOnServerByShowId = createSelector([tvShowsState, (_, data
     return lastUpdated;
 });
 
-const getLastUpdatedLoaded = createSelector(tvShowsState, ({ lastUpdated }) => lastUpdated.loaded);
-const getLastUpdatedLoading = createSelector(tvShowsState, ({ lastUpdated }) => lastUpdated.loading);
-const getLastUpdatedError = createSelector(tvShowsState, ({ lastUpdated }) => lastUpdated.error);
-const getLastFetchedTime = createSelector(tvShowsState, ({ lastUpdated }) => lastUpdated.lastFetchedTime);
+const getIsLastUpdatedLoaded = createSelector(getTvShowsState, ({ lastUpdated }) => lastUpdated.loading === "fulfilled");
+const getLastUpdatedLoading = createSelector(getTvShowsState, ({ lastUpdated }) => lastUpdated.loading);
+const getLastUpdatedError = createSelector(getTvShowsState, ({ lastUpdated }) => lastUpdated.loading === "rejected" && lastUpdated.error);
+const getLastFetchedTime = createSelector(getTvShowsState, ({ lastUpdated }) => lastUpdated.lastFetchedTime);
 
 export {
-    tvShowsState,
+    getTvShowsState,
     getTvShowsList,
     getTvShowsListLength,
     getTvShowsLoading,
     getTvShowsError,
     getTvShowsSearchValue,
-    getLastUpdatedLoaded,
+    getIsLastUpdatedLoaded,
     getLastUpdatedLoading,
     getLastUpdatedError,
     getLastFetchedTime,

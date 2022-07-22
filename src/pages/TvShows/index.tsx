@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import loadable from "@loadable/component";
+import { useAppDispatch, useAppSelector } from "Store/hooks";
 import { Loading } from "@rrkallan/ui-library";
 import { fetchTvShowsLastUpdated } from "features/TvShows/tvShowsSlice";
-import { getLastUpdatedLoaded, getLastFetchedTime, getLastUpdatedError } from "features/TvShows/tvShowsSelector";
-import { useAppDispatch, useAppSelector } from "Store/hooks";
+import { getIsLastUpdatedLoaded, getLastFetchedTime, getLastUpdatedError } from "features/TvShows/tvShowsSelector";
 import { getDayDifference } from "@rrkallan/js-helpers";
 import styles from "./resources/styles/tvShows.module.scss";
 
-const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rrkallan/ui-library/Container"), {
+const SubRoutes = loadable(() => import(/* webpackChunkName: "SubRoutes" */ "Routes/SubRoutes"), {
     fallback: <Loading />,
 });
 
@@ -15,71 +15,61 @@ const Notification = loadable(() => import(/* webpackChunkName: "Notification" *
     fallback: <Loading />,
 });
 
-const PageHeader = loadable(() => import(/* webpackChunkName: "PageHeader" */ "components/PageHeader"), {
-    fallback: <Loading />,
-});
+const getUrlParam = ({ dayDifference }: { dayDifference: number }) => {
+    const urlParam = {
+        since:
+            (dayDifference === -1 && undefined) ||
+            ((dayDifference === 0 || !dayDifference) && undefined) ||
+            (dayDifference === 1 && "day") ||
+            (dayDifference > 1 && dayDifference < 8 && "week") ||
+            (dayDifference > 7 && dayDifference < 30 && "month") ||
+            (dayDifference > 29 && undefined) ||
+            (!dayDifference && undefined) ||
+            undefined,
+    };
 
-const SearchFornm = loadable(() => import(/* webpackChunkName: "SearchFornm" */ "./SearchForm"), {
-    fallback: <Loading />,
-});
-
-const TvShowsList = loadable(() => import(/* webpackChunkName: "TvShowsList" */ "./TvShowsList"), {
-    fallback: <Loading />,
-});
+    return urlParam;
+};
 
 function TvShows(): JSX.Element {
     const dispatch = useAppDispatch();
-    const lastUpdatedLoaded = useAppSelector(getLastUpdatedLoaded);
+    const lastUpdatedLoaded = useAppSelector(getIsLastUpdatedLoaded);
     const lastFetchedTime = useAppSelector(getLastFetchedTime);
-    const error = useAppSelector(getLastUpdatedError);
+    const errors = useAppSelector(getLastUpdatedError);
 
     useEffect(() => {
         const dayDifference = getDayDifference(lastFetchedTime) ?? -1;
+        const urlParam = getUrlParam({ dayDifference });
 
-        if (!lastUpdatedLoaded || dayDifference || error) {
-            const urlParam = {
-                since:
-                    (dayDifference > 6 && "week") ||
-                    (dayDifference === 1 && "day") ||
-                    (dayDifference > 29 && undefined) ||
-                    (!dayDifference && undefined) ||
-                    undefined,
-            };
-
+        if (!lastUpdatedLoaded || dayDifference) {
             dispatch(fetchTvShowsLastUpdated({ urlParam }));
         }
-    }, [dispatch, error, lastFetchedTime, lastUpdatedLoaded]);
+    }, [dispatch, lastFetchedTime, lastUpdatedLoaded]);
 
-    return (
-        <>
-            <PageHeader>
-                <div className={styles.container}>
-                    <h1 className={styles.unit} variant="title">
-                        Tv Shows
-                    </h1>
-                    <article className={styles.unit} variant="search">
-                        <SearchFornm />
-                    </article>
-                </div>
-            </PageHeader>
-            {!!error && (
-                <Container>
-                    <Notification
-                        variant="error"
-                        state="visible"
-                        iconSize="normal"
-                        icon={undefined}
-                        iconPosition="center"
-                        showCloseButton={false}
-                        customOnClickHandlerCloseButton={undefined}
-                    >
-                        {error}
-                    </Notification>
-                </Container>
-            )}
-            <TvShowsList />
-        </>
-    );
+    if (errors)
+        return (
+            <section className={styles.container}>
+                <Notification
+                    variant="error"
+                    state={errors ? "visible" : "hidden"}
+                    iconSize="normal"
+                    icon={undefined}
+                    iconPosition="center"
+                    showCloseButton={false}
+                    customOnClickHandlerCloseButton={undefined}
+                >
+                    <ul>
+                        {!!errors.length &&
+                            errors.map((error, index) => {
+                                const key = index;
+                                return <li key={key}>{error}</li>;
+                            })}
+                    </ul>
+                </Notification>
+            </section>
+        );
+
+    return <SubRoutes />;
 }
 
 export default TvShows;

@@ -12,7 +12,7 @@ const fetchTvShowsLastUpdated = createAsyncThunk(
         const currentTime = new Date().toJSON();
         const list = entities || {};
 
-        if (loading === false || requestId !== currentRequestId) return undefined;
+        if (loading === false || requestId !== currentRequestId) return rejectWithValue({ error: { message: "Rejected" } });
 
         const { urlParam } = data;
         const urlParams = objectAsUrlParams(urlParam);

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { validations, getCurrentUrlSearchAsObject, setUrlSearchParam } from "@rrkallan/js-helpers";
 
 const usePagination = (data, itemsPerPage = 10, prefixSearchParam = undefined) => {
@@ -8,12 +9,13 @@ const usePagination = (data, itemsPerPage = 10, prefixSearchParam = undefined) =
     const [endNumber, setEndNumber] = useState(() => Math.min(currentPage * itemsPerPage, totalItems));
     const [startNumber, setStartNumber] = useState(() => Math.max(currentPage * itemsPerPage - itemsPerPage + 1, 1));
     const [searchParamKeyPage] = useState(() => (prefixSearchParam ? `${prefixSearchParam}Page` : "page"));
+    const { search } = useLocation();
 
     const setPaginatorValues = useCallback(
         ({ page }) => {
             if (page) {
                 const param = {
-                    [searchParamKeyPage]: page,
+                    [searchParamKeyPage]: page > 1 ? page : undefined,
                 };
                 setCurrentPage(() => page);
                 setUrlSearchParam(param);
@@ -93,10 +95,10 @@ const usePagination = (data, itemsPerPage = 10, prefixSearchParam = undefined) =
 
     useEffect(() => {
         const currentUrlSearchAsObject = getCurrentUrlSearchAsObject();
-        const page = currentUrlSearchAsObject[searchParamKeyPage];
+        const page = currentUrlSearchAsObject[searchParamKeyPage] || 1;
 
         if (page) jump(page);
-    }, [jump, searchParamKeyPage]);
+    }, [jump, searchParamKeyPage, search]);
 
     return { next, prev, first, last, jump, currentData, currentPage, totalPages, totalItems, startNumber, endNumber };
 };

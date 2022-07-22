@@ -1,23 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { TypeLoading, TypeCurrentRequestId, TypeError } from "Store/types";
+
 interface InterfaceTvShowsState {
-    entities: [] | undefined;
-    totalShows: number | undefined;
-    apiPages: number | undefined;
-    loading: boolean;
-    currentRequestId: string | undefined;
-    error: string | object | undefined;
     overview: TypeOverview;
     search: TypeSearch;
     items: TypeItems;
     lastUpdated: TypeLastUpdated;
-    searchValue: string | undefined;
+    totalShows: number | undefined;
+    apiPages: number | undefined;
 }
 
 type TypeItems = {
     entities: ItemEntities | undefined;
-    loading: boolean;
-    currentRequestId: string | undefined;
-    error: string | undefined;
+    loading: TypeLoading;
+    currentRequestId: TypeCurrentRequestId;
+    error: TypeError;
 };
 
 type ItemEntities = {
@@ -45,26 +42,25 @@ type TypeEntitiesList = {
 
 type TypeOverview = {
     entities: TypeEntitiesList[] | undefined;
-    loading: boolean;
-    currentRequestId: string | undefined;
-    error: string | undefined;
+    loading: TypeLoading;
+    currentRequestId: TypeCurrentRequestId;
+    error: TypeError;
 };
 
 type TypeSearch = {
     entities: TypeEntitiesList[] | undefined;
-    loading: boolean;
+    loading: TypeLoading;
     value: string | undefined;
-    currentRequestId: string | undefined;
-    error: string | undefined;
+    currentRequestId: TypeCurrentRequestId;
+    error: TypeError;
 };
 
 type TypeLastUpdated = {
     entities: TypeLastUpdatedEntities | undefined;
-    loading: boolean;
-    loaded: boolean;
     lastFetchedTime: string | undefined;
-    currentRequestId: string | undefined;
-    error: string | undefined;
+    loading: TypeLoading;
+    currentRequestId: TypeCurrentRequestId;
+    error: TypeError;
 };
 
 type TypeLastUpdatedEntities = {

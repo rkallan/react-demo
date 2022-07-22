@@ -14,6 +14,7 @@ function Pagination({
     buttonNextText = Pagination.defaultProps.buttonNextText,
     buttonFirstText = Pagination.defaultProps.buttonFirstText,
     buttonLastText = Pagination.defaultProps.buttonLastText,
+    scrollToTop = false,
 }) {
     const paginationNumberRef = useRef();
     const { width } = useBoundingClientRect({ element: paginationNumberRef, delay: 5, includeUnit: false }) || {};
@@ -64,8 +65,16 @@ function Pagination({
     }, [currentPage, showMaxPageLinks, totalPages]);
 
     useEffect(() => {
+        if (scrollToTop) {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+            });
+        }
+
         getPageContent(currentData());
-    }, [getPageContent, currentData]);
+    }, [getPageContent, currentData, scrollToTop]);
 
     if (!totalPages && !pages) return null;
 
@@ -186,6 +195,7 @@ Pagination.defaultProps = {
     data: [],
     itemsPerPage: 16,
     prefixSearchParam: undefined,
+    scrollTo: false,
 };
 
 Pagination.propTypes = {
@@ -198,6 +208,7 @@ Pagination.propTypes = {
     showing: PropTypes.string,
     itemsPerPage: PropTypes.number,
     prefixSearchParam: PropTypes.string,
+    scrollTo: PropTypes.bool,
 };
 
 export default Pagination;

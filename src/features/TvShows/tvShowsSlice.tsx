@@ -5,40 +5,34 @@ import fetchTvShowsLastUpdated from "./tvShowsLastUpdatedAsync";
 import type { InterfaceTvShowsState } from "./types";
 
 const initialState: InterfaceTvShowsState = {
-    entities: undefined,
     totalShows: undefined,
     apiPages: undefined,
-    loading: false,
-    currentRequestId: undefined,
-    error: undefined,
     items: {
         entities: undefined,
-        loading: false,
+        loading: "idle",
         currentRequestId: undefined,
         error: undefined,
     },
     overview: {
         entities: undefined,
-        loading: false,
+        loading: "idle",
         currentRequestId: undefined,
         error: undefined,
     },
     search: {
         entities: undefined,
-        loading: false,
         value: undefined,
+        loading: "idle",
         currentRequestId: undefined,
         error: undefined,
     },
     lastUpdated: {
         entities: undefined,
-        loading: false,
-        loaded: false,
         lastFetchedTime: undefined,
+        loading: "idle",
         currentRequestId: undefined,
         error: undefined,
     },
-    searchValue: undefined,
 };
 
 const tvShows = createSlice({
@@ -46,94 +40,47 @@ const tvShows = createSlice({
     initialState,
     reducers: {
         setSearchValue: (state, action) => {
-            const newState = state;
+            const tempState: InterfaceTvShowsState = state;
             const { searchValue } = action.payload;
 
             if (searchValue === undefined) {
-                newState.search = {
+                tempState.search = {
                     ...initialState.search,
                 };
             }
 
-            newState.search.value = searchValue;
-            newState.search.error = undefined;
+            tempState.search.value = searchValue;
+            tempState.search.error = undefined;
 
-            return newState;
+            return tempState;
         },
         resetTvShows: () => {
-            const newState = initialState;
+            const tempState: InterfaceTvShowsState = initialState;
 
-            return newState;
+            return tempState;
         },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchTvShows.pending, (state, action) => {
-                const tempState = state;
-                const isSearchFetch = !!action.meta.arg.urlParam.q;
-                const stateShowKey = isSearchFetch ? "search" : "overview";
-
-                tempState[stateShowKey].loading = true;
-                tempState[stateShowKey].error = undefined;
-                tempState[stateShowKey].currentRequestId = action.meta.requestId;
-
-                return tempState;
-            })
-            .addCase(fetchTvShows.fulfilled, (state, action) => {
-                const tempState = state;
-                const { requestId, arg } = action.meta;
-                const isSearchFetch = !!arg.urlParam.q;
-                const stateShowKey = isSearchFetch ? "search" : "overview";
-
-                if (state[stateShowKey].loading && state[stateShowKey].currentRequestId === requestId) {
-                    if (!tempState[stateShowKey].entities) tempState[stateShowKey].entities = [];
-
-                    tempState[stateShowKey].loading = false;
-                    tempState[stateShowKey].entities = action.payload;
-                    tempState[stateShowKey].currentRequestId = undefined;
-                    tempState[stateShowKey].error = undefined;
-                }
-
-                if (isSearchFetch && !action.payload.length) {
-                    tempState[stateShowKey].error = "Sorry there are no results for your search";
-                }
-
-                return tempState;
-            })
-            .addCase(fetchTvShows.rejected, (state, action) => {
-                const tempState = state;
-                const { requestId, arg } = action.meta;
-                const { error } = action.payload as { error: string | undefined };
-                const isSearchFetch = !!arg.urlParam.q;
-                const stateShowKey = isSearchFetch ? "search" : "overview";
-
-                if (state[stateShowKey].loading && state[stateShowKey].currentRequestId === requestId) {
-                    tempState[stateShowKey].loading = false;
-                    tempState[stateShowKey].error = error;
-                    tempState[stateShowKey].currentRequestId = undefined;
-                }
-
-                return tempState;
-            })
-            .addCase(fetchTvShowsLastUpdated.pending, (state, action) => {
-                const tempState = state;
-                if (!state.lastUpdated.loading) {
-                    tempState.lastUpdated.loading = true;
-                    tempState.lastUpdated.loaded = false;
-                    tempState.lastUpdated.currentRequestId = action.meta.requestId;
+            .addCase(fetchTvShowsLastUpdated.pending, (state, { meta }) => {
+                const tempState: InterfaceTvShowsState = state;
+                const { requestId, requestStatus } = meta || {};
+                if (!state.lastUpdated.currentRequestId) {
+                    tempState.lastUpdated.loading = requestStatus;
+                    tempState.lastUpdated.currentRequestId = requestId;
+                    tempState.lastUpdated.error = undefined;
                 }
 
                 return tempState;
             })
             .addCase(fetchTvShowsLastUpdated.fulfilled, (state, { meta, payload }) => {
-                const tempState = state;
+                const tempState: InterfaceTvShowsState = state;
                 const { lastUpdated } = state || {};
-                const { requestId } = meta || {};
+                const { requestId, requestStatus } = meta || {};
                 const { lastUpdatedEntities, apiPages, totalShows, lastFetchedTime } = payload || {};
 
-                if (lastUpdated.loading && lastUpdated.currentRequestId === requestId) {
-                    tempState.lastUpdated.loading = false;
-                    tempState.lastUpdated.loaded = true;
+                if (lastUpdated.currentRequestId === requestId) {
+                    tempState.lastUpdated.loading = requestStatus;
                     tempState.lastUpdated.entities = lastUpdatedEntities;
                     tempState.lastUpdated.lastFetchedTime = lastFetchedTime;
                     tempState.lastUpdated.currentRequestId = undefined;
@@ -145,31 +92,81 @@ const tvShows = createSlice({
                 return tempState;
             })
             .addCase(fetchTvShowsLastUpdated.rejected, (state, action) => {
-                const tempState = state;
-                const { requestId } = action.meta;
-                const { error } = (action.payload as { error: { message: string } }) || action;
+                const tempState: InterfaceTvShowsState = state;
+                const { requestId, requestStatus } = action.meta;
+                const { error } = (action.payload as { error: { message: string } }) || action || {};
 
-                if (state.lastUpdated.loading && state.lastUpdated.currentRequestId === requestId) {
-                    tempState.lastUpdated.loading = false;
-                    tempState.lastUpdated.error = error.message;
+                if (state.lastUpdated.currentRequestId === requestId) {
+                    tempState.lastUpdated.loading = requestStatus;
+                    tempState.lastUpdated.error = (!!error?.message && [error?.message]) || [];
                     tempState.lastUpdated.currentRequestId = undefined;
                 }
 
                 return tempState;
             })
-            .addCase(fetchTvShow.pending, (state, action) => {
-                const tempState = state;
-                if (!state.items.loading) {
-                    tempState.items.loading = true;
-                    tempState.items.currentRequestId = action.meta.requestId;
+            .addCase(fetchTvShows.pending, (state, { meta }) => {
+                const { requestStatus, requestId } = meta;
+                const tempState: InterfaceTvShowsState = state;
+                const isSearchFetch = !!meta.arg.urlParam.q;
+                const stateShowKey = isSearchFetch ? "search" : "overview";
+
+                tempState[stateShowKey].currentRequestId = requestId;
+                tempState[stateShowKey].loading = requestStatus;
+                tempState[stateShowKey].error = undefined;
+
+                return tempState;
+            })
+            .addCase(fetchTvShows.fulfilled, (state, action) => {
+                const tempState: InterfaceTvShowsState = state;
+                const { requestId, arg, requestStatus } = action.meta;
+                const isSearchFetch = !!arg.urlParam.q;
+                const stateShowKey = isSearchFetch ? "search" : "overview";
+
+                if (state[stateShowKey].currentRequestId === requestId) {
+                    if (!tempState[stateShowKey].entities) tempState[stateShowKey].entities = [];
+
+                    tempState[stateShowKey].loading = requestStatus;
+                    tempState[stateShowKey].entities = action.payload;
+                    tempState[stateShowKey].currentRequestId = undefined;
+                    tempState[stateShowKey].error = undefined;
+                }
+
+                if (isSearchFetch && action.payload.length === 0) {
+                    tempState[stateShowKey].error = ["Sorry there are no results for your search value"];
+                }
+
+                return tempState;
+            })
+            .addCase(fetchTvShows.rejected, (state, action) => {
+                const tempState: InterfaceTvShowsState = state;
+                const { requestId, arg, requestStatus } = action.meta;
+                const { error } = (action.payload as { error: { message: string | undefined } }) || {};
+                const isSearchFetch = !!arg.urlParam.q;
+                const stateShowKey = isSearchFetch ? "search" : "overview";
+
+                if (state[stateShowKey].currentRequestId === requestId) {
+                    tempState[stateShowKey].loading = requestStatus;
+                    tempState[stateShowKey].error = (!!error?.message && [error?.message]) || [];
+                    tempState[stateShowKey].currentRequestId = undefined;
+                }
+
+                return tempState;
+            })
+            .addCase(fetchTvShow.pending, (state, { meta }) => {
+                const tempState: InterfaceTvShowsState = state;
+                const { requestId, requestStatus } = meta || {};
+                if (!state.items.currentRequestId) {
+                    tempState.items.loading = requestStatus;
+                    tempState.items.currentRequestId = requestId;
                 }
 
                 return tempState;
             })
             .addCase(fetchTvShow.fulfilled, (state, { meta, payload }) => {
-                const tempState = state;
+                const tempState: InterfaceTvShowsState = state;
+                const { requestStatus } = meta || {};
 
-                tempState.items.loading = false;
+                tempState.items.loading = requestStatus;
                 tempState.items.entities = { ...payload };
                 tempState.items.currentRequestId = undefined;
                 tempState.items.error = undefined;
@@ -177,13 +174,13 @@ const tvShows = createSlice({
                 return tempState;
             })
             .addCase(fetchTvShow.rejected, (state, action) => {
-                const tempState = state;
-                const { requestId } = action.meta;
-                const { error } = (action.payload as { error: { message: string } }) || action;
+                const tempState: InterfaceTvShowsState = state;
+                const { requestId, requestStatus } = action.meta;
+                const { error } = (action.payload as { error: { message: string } }) || action || {};
 
-                if (state.items.loading && state.items.currentRequestId === requestId) {
-                    tempState.items.loading = false;
-                    tempState.items.error = error.message;
+                if (state.items.currentRequestId === requestId) {
+                    tempState.items.loading = requestStatus;
+                    tempState.items.error = (!!error?.message && [error?.message]) || [];
                     tempState.items.currentRequestId = undefined;
                 }
 

@@ -11,7 +11,8 @@ const Terms = loadable(() => import(/* webpackChunkName: "Terms" */ "pages/Terms
 const Privacy = loadable(() => import(/* webpackChunkName: "Privacy" */ "pages/Privacy"));
 
 const TvShows = loadable(() => import(/* webpackChunkName: "TvShows" */ "pages/TvShows"));
-const TvShow = loadable(() => import(/* webpackChunkName: "TvShow" */ "pages/TvShow"));
+const TvShowsOverview = loadable(() => import(/* webpackChunkName: "TvShowsOverview" */ "pages/TvShows/Overview"));
+const TvShowsItem = loadable(() => import(/* webpackChunkName: "TvShowsItem" */ "pages/TvShows/Item"));
 
 const Work = loadable(() => import(/* webpackChunkName: "Work" */ "pages/Work"));
 const WorkOverview = loadable(() => import(/* webpackChunkName: "WorkOverview" */ "pages/Work/Overview"));
@@ -41,38 +42,61 @@ const routeConfiguration = [
     },
     {
         id: 50,
-        path: "/tv-shows",
+        path: "/tv-shows/*",
         element: <TvShows />,
-        exact: true,
-        authenticated: false,
+        children: [
+            {
+                id: 10,
+                routeId: 50,
+                index: true,
+                element: <TvShowsOverview />,
+                exact: true,
+                authenticated: false,
+            },
+            {
+                id: 20,
+                routeId: 50,
+                path: ":id/:title",
+                element: <TvShowsItem />,
+                exact: true,
+                authenticated: false,
+            },
+            {
+                id: 1000,
+                routeId: 50,
+                path: "*",
+                element: null,
+                redirect: "/error/404",
+            },
+        ],
     },
     {
         id: 60,
-        path: "/tv-show/:id/:title",
-        element: <TvShow />,
-        exact: true,
-        authenticated: false,
-    },
-    {
-        id: 70,
         path: "/work/*",
         element: <Work />,
         children: [
             {
                 id: 10,
-                routeId: 70,
-                path: "overview",
+                routeId: 60,
+                index: true,
                 element: <WorkOverview />,
                 exact: true,
                 authenticated: false,
             },
             {
                 id: 20,
-                routeId: 70,
+                routeId: 60,
                 path: ":id/:title",
                 element: <WorkAssignment />,
                 exact: true,
                 authenticated: false,
+            },
+            {
+                id: 1000,
+                routeId: 70,
+                path: "*",
+                element: null,
+                redirect: "/error/404",
             },
         ],
     },
@@ -110,7 +134,7 @@ const routeConfiguration = [
     {
         id: 5,
         path: "*",
-        element: <div />,
+        element: null,
         redirect: "/error/404",
     },
 ];

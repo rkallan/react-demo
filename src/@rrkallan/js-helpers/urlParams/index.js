@@ -79,10 +79,12 @@ const objectAsUrlParams = (data, addQuestionMark = true, addPrefix = true) => {
     const urlParams = new URLSearchParams();
 
     Object.keys(data).forEach((key) => {
-        const value = data[key];
-        if (!["", "null", "undefined", undefined, null].includes(value)) {
-            const urlValue = getType(value) === "object" ? JSON.stringify(value) : value;
-            urlParams.append(key, urlValue);
+        const tempValue = data[key];
+        if (!["", "null", "undefined", undefined, null].includes(tempValue)) {
+            const urlValue = getType(tempValue) === "object" ? JSON.stringify(tempValue) : tempValue;
+            const value = getType(urlValue) === "string" ? urlValue.replace(/\s+/g, " ") : urlValue;
+
+            urlParams.append(key, value);
         }
     });
 
@@ -106,7 +108,6 @@ const getCurrentUrlSearchAsObject = () => {
 
 const getNewUrlSearchAsObjectAndString = (data) => {
     const currentUrlSearchAsObject = getCurrentUrlSearchAsObject();
-
     const searchObject = {
         ...currentUrlSearchAsObject,
         ...data,
@@ -123,7 +124,7 @@ const setUrlSearchParam = (data) => {
     const currentUrlSearch = window.location.search;
     const { search } = getNewUrlSearchAsObjectAndString(data);
     const isSearchCurrentUrlSearch = search === currentUrlSearch;
-    if (!isSearchCurrentUrlSearch) window.history.pushState({}, "", !search ? window.location.pathname : search);
+    if (!isSearchCurrentUrlSearch) window.history.pushState({}, "", search || window.location.pathname);
 };
 
 export { urlParamsAsObject, objectAsUrlParams, getCurrentUrlSearchAsObject, getNewUrlSearchAsObjectAndString, setUrlSearchParam };

@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, useCallback } from "react";
 import loadable from "@loadable/component";
 import { useAppDispatch, useAppSelector } from "Store/hooks";
 import {
     getTvShowsLoading,
-    getLastUpdatedLoaded,
+    getIsLastUpdatedLoaded,
     getTvShowsList,
     getTvShowsListLength,
     getTvShowsSearchValue,
@@ -16,7 +14,7 @@ import { fetchTvShows } from "features/TvShows/tvShowsSlice";
 import { getFooterBoundingClientRect } from "features/layout/layoutSelector";
 import { Loading, NavigationLink } from "@rrkallan/ui-library";
 import { TypeEntitiesList } from "features/TvShows/types";
-import styles from "./resources/styles/tvShowList.module.scss";
+import styles from "./resources/styles/tvShowsList.module.scss";
 import noImage from "./resources/images/no-image.png";
 
 const Notification = loadable(() => import(/* webpackChunkName: "Notification" */ "@rrkallan/ui-library/Notification"), {
@@ -33,7 +31,7 @@ const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rr
 
 function TvShowsList(): JSX.Element | null {
     const dispatch = useAppDispatch();
-    const lastUpdatedLoaded = useAppSelector(getLastUpdatedLoaded);
+    const lastUpdatedLoaded = useAppSelector(getIsLastUpdatedLoaded);
     const lastUpdatedError = useAppSelector(getLastUpdatedError);
     const tvShowsError = useAppSelector(getTvShowsError);
     const tvShowsLoading = useAppSelector(getTvShowsLoading);
@@ -58,25 +56,29 @@ function TvShowsList(): JSX.Element | null {
     return (
         <>
             <Container>
-                {tvShowsLoading && (
+                {tvShowsLoading === "pending" && (
                     <section className={styles.container}>
                         <Loading text="Loading shows" delay={5} />
                     </section>
                 )}
-                <section className={styles.container}>
-                    <Notification
-                        variant="error"
-                        state={tvShowsError ? "visible" : "hidden"}
-                        iconSize="normal"
-                        icon={undefined}
-                        iconPosition="center"
-                        showCloseButton={false}
-                        customOnClickHandlerCloseButton={undefined}
-                    >
-                        {tvShowsError || ""}
-                    </Notification>
-                </section>
-                {!tvShowsLoading && (
+
+                {!!tvShowsError?.length && (
+                    <section className={styles.container}>
+                        <Notification
+                            variant="error"
+                            state={tvShowsError ? "visible" : "hidden"}
+                            iconSize="normal"
+                            icon={undefined}
+                            iconPosition="center"
+                            showCloseButton={false}
+                            customOnClickHandlerCloseButton={undefined}
+                        >
+                            {tvShowsError || ""}
+                        </Notification>
+                    </section>
+                )}
+
+                {tvShowsLoading === "fulfilled" && !tvShowsError?.length && (
                     <section className={styles.container} variant="overview">
                         {!!tvShowsPageItems?.length &&
                             tvShowsPageItems.map((tvShow) => {
@@ -86,9 +88,15 @@ function TvShowsList(): JSX.Element | null {
                                     <article key={id} className={styles.unit}>
                                         <NavigationLink className={styles.link} to={showUrl} end>
                                             <figure className={styles.imageContainer}>
-                                                <img className={styles.image} src={image} alt={title} title={title} />
+                                                <img
+                                                    className={styles.image}
+                                                    src={image}
+                                                    alt={title}
+                                                    title={title}
+                                                    crossOrigin="anonymous"
+                                                />
                                             </figure>
-                                            <h1 className={styles.title}>{title}</h1>
+                                            <h2 className={styles.title}>{title}</h2>
                                         </NavigationLink>
                                     </article>
                                 );
@@ -96,9 +104,16 @@ function TvShowsList(): JSX.Element | null {
                     </section>
                 )}
             </Container>
-            {!tvShowsLoading && !!tvShowsList.length && (
+
+            {tvShowsLoading === "fulfilled" && !!tvShowsList.length && (
                 <section className={styles.container} variant="pagination" style={{ bottom: height }}>
-                    <Pagination getPageContent={getPageContent} data={tvShowsList} itemsPerPage={8} prefixSearchParam={undefined} />
+                    <Pagination
+                        getPageContent={getPageContent}
+                        data={tvShowsList}
+                        itemsPerPage={8}
+                        prefixSearchParam={undefined}
+                        scrollToTop
+                    />
                 </section>
             )}
         </>

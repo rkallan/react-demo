@@ -7,11 +7,11 @@ import { useAppDispatch } from "Store/hooks";
 import { setSearchValue } from "features/TvShows/tvShowsSlice";
 import formData from "./constants/searchForm";
 
-const Form = loadable(() => import(/* webpackChunkName: "LoginForm" */ "@rrkallan/ui-library/Form"), {
+const Form = loadable(() => import(/* webpackChunkName: "Form" */ "@rrkallan/ui-library/Form"), {
     fallback: <Loading />,
 });
 
-function SearchFornm(): JSX.Element {
+function TvShowsSearchForm(): JSX.Element {
     const dispatch = useAppDispatch();
     const isFirstRender = useIsFirstRender();
     const searchFormData = formData();
@@ -63,4 +63,4 @@ function SearchFornm(): JSX.Element {
     );
 }
 
-export default SearchFornm;
+export default TvShowsSearchForm;

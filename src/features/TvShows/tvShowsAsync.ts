@@ -22,6 +22,7 @@ const fetchTvShows = createAsyncThunk(
             signal,
         });
         const contentType = response.headers.get("content-type").split(";")[0];
+
         if (contentType !== "application/json" || !response.ok) return rejectWithValue({ error: "Rejected" });
 
         const jsonResult = await response.json();
@@ -31,7 +32,7 @@ const fetchTvShows = createAsyncThunk(
             const item = currentItem.show || currentItem;
             const { id, name, rating, image, updated } = item;
             const nameForUrl = name?.trim().replace(/\s+/g, "-").toLowerCase();
-            const showUrl = `/tv-show/${id}/${nameForUrl}`;
+            const showUrl = `${id}/${nameForUrl}`;
             const newItem = {
                 id,
                 title: name,
@@ -49,7 +50,8 @@ const fetchTvShows = createAsyncThunk(
         if (isSearchFetch) return result;
 
         const overviewEntities = tvShows.overview.entities || [];
-        const overviewResult = [...overviewEntities, ...result];
+        const overviewResultCombined = [...overviewEntities, ...result];
+        const overviewResult = [...new Set(overviewResultCombined)];
 
         return overviewResult;
     }

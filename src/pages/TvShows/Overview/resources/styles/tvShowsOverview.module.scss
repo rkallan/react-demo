@@ -1,0 +1,16 @@
+@import "resources/styles/variables/variables";
+@import "resources/styles/mixins/mixins";
+
+.container {
+    display: flex;
+    gap: map-get($gap, default);
+    flex-direction: column;
+    transition: map-get($transition, default);
+    padding: map-get($gap, large)- 0.5rem map-get($gap, large) map-get($gap, large) calc(map-get($gap, large));
+
+    .unit {
+        &[variant~="search"] {
+            flex: auto;
+        }
+    }
+}

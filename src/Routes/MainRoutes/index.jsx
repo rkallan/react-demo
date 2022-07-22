@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useRoutes } from "react-router-dom";
 import { useTransition, animated } from "@react-spring/web";
+import { validations } from "@rrkallan/js-helpers";
 import RedirectRoute from "Routes/RedirectRoute";
 import { pageAnimation, routeConfiguration } from "Routes/configuration";
 import styles from "./resources/styles/mainRoutes.module.scss";
@@ -13,17 +14,23 @@ function MainRoutes() {
     const [currentElement, setCurrentElement] = useState(() => element);
 
     useEffect(() => {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
             setCurrentElement(() => element);
         }, 300);
+
+        return () => {
+            clearTimeout(timeout);
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
 
-    if (element.props.value.matches[0].route.redirect) <RedirectRoute redirect={currentElement.props.value.matches[0].route.redirect} />;
+    if (element.props.value.matches[0].route.redirect)
+        return <RedirectRoute redirect={currentElement.props.value.matches[0].route.redirect} />;
 
     return transition((style, item) => {
-        const animationStyle =
-            item.pathname.split("/")[1] !== location.pathname.split("/")[1] || item.pathname === location.pathname ? style : null;
+        const itemPathnameAsArray = item.pathname.split("/").filter((value) => validations.isNotEmpty(value, true));
+        const locationPathnameAsArray = location.pathname.split("/").filter((value) => validations.isNotEmpty(value, true));
+        const animationStyle = itemPathnameAsArray[0] !== locationPathnameAsArray[0] || item.pathname === location.pathname ? style : null;
 
         return (
             <animated.div className={styles.container} style={animationStyle}>

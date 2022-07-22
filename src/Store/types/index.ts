@@ -5,4 +5,8 @@ type AppDispatch = typeof store.dispatch;
 type RootState = ReturnType<typeof store.getState>;
 type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
 
-export type { AppDispatch, RootState, AppThunk };
+type TypeLoading = "idle" | "pending" | "fulfilled" | "rejected";
+type TypeCurrentRequestId = string | undefined;
+type TypeError = string[] | undefined;
+
+export type { AppDispatch, RootState, AppThunk, TypeLoading, TypeCurrentRequestId, TypeError };
