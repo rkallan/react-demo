@@ -140,6 +140,11 @@ function FilterClients(): JSX.Element {
         currentUrlSearchAsObject[data.name] = data.value;
         setUrlSearchParam(currentUrlSearchAsObject);
         dispatch(setAssignmentsFilter({ filter: currentUrlSearchAsObject }));
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     };
 
     useEffect(() => {
