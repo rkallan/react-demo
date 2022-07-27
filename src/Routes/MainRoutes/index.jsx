@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useRoutes } from "react-router-dom";
 import { useTransition, animated } from "@react-spring/web";
 import { validations } from "@rrkallan/js-helpers";
@@ -8,21 +8,9 @@ import styles from "./resources/styles/mainRoutes.module.scss";
 
 function MainRoutes() {
     const location = useLocation();
-    const { pathname } = location;
-    const transition = useTransition(location, { key: location.key, ...pageAnimation });
     const element = useRoutes(routeConfiguration);
     const [currentElement, setCurrentElement] = useState(() => element);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setCurrentElement(() => element);
-        }, 300);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pathname]);
+    const transition = useTransition(location, { key: location.key, ...pageAnimation, onRest: () => setCurrentElement(() => element) });
 
     if (element.props.value.matches[0].route.redirect)
         return <RedirectRoute redirect={currentElement.props.value.matches[0].route.redirect} />;

@@ -105,28 +105,28 @@ const tvShows = createSlice({
                 return tempState;
             })
             .addCase(fetchTvShows.pending, (state, { meta }) => {
-                const { requestStatus, requestId } = meta;
+                const { requestId } = meta;
                 const tempState: InterfaceTvShowsState = state;
                 const isSearchFetch = !!meta.arg.urlParam.q;
                 const stateShowKey = isSearchFetch ? "search" : "overview";
 
                 tempState[stateShowKey].currentRequestId = requestId;
-                tempState[stateShowKey].loading = requestStatus;
+                tempState[stateShowKey].loading = "pending";
                 tempState[stateShowKey].error = undefined;
 
                 return tempState;
             })
             .addCase(fetchTvShows.fulfilled, (state, action) => {
                 const tempState: InterfaceTvShowsState = state;
-                const { requestId, arg, requestStatus } = action.meta;
+                const { requestId, arg } = action.meta;
                 const isSearchFetch = !!arg.urlParam.q;
                 const stateShowKey = isSearchFetch ? "search" : "overview";
 
                 if (state[stateShowKey].currentRequestId === requestId) {
                     if (!tempState[stateShowKey].entities) tempState[stateShowKey].entities = [];
 
-                    tempState[stateShowKey].loading = requestStatus;
-                    tempState[stateShowKey].entities = action.payload;
+                    tempState[stateShowKey].loading = "fulfilled";
+                    tempState[stateShowKey].entities?.push(...action.payload);
                     tempState[stateShowKey].currentRequestId = undefined;
                     tempState[stateShowKey].error = undefined;
                 }

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, useCallback } from "react";
 import loadable from "@loadable/component";
 import { useAppDispatch, useAppSelector } from "Store/hooks";
@@ -40,6 +42,7 @@ function TvShowsList(): JSX.Element | null {
     const searchValue = useAppSelector(getTvShowsSearchValue);
     const { height } = useAppSelector(getFooterBoundingClientRect);
     const [tvShowsPageItems, setTvShowsPageItems] = useState((): TypeEntitiesList[] => []);
+    const [page, setPage] = useState(() => 1);
 
     const getPageContent = useCallback((currentData: TypeEntitiesList[]) => {
         setTvShowsPageItems(currentData);
@@ -78,15 +81,15 @@ function TvShowsList(): JSX.Element | null {
                     </section>
                 )}
 
-                {tvShowsLoading === "fulfilled" && !tvShowsError?.length && (
+                {!tvShowsError?.length && (
                     <section className={styles.container} variant="overview">
                         {!!tvShowsPageItems?.length &&
                             tvShowsPageItems.map((tvShow) => {
-                                const { id, title, imageUrl, showUrl } = tvShow;
+                                const { id, title, imageUrl, url } = tvShow;
                                 const image = imageUrl || noImage;
                                 return (
                                     <article key={id} className={styles.unit}>
-                                        <NavigationLink className={styles.link} to={showUrl} end>
+                                        <NavigationLink className={styles.link} to={url} end>
                                             <figure className={styles.imageContainer}>
                                                 <img
                                                     className={styles.image}

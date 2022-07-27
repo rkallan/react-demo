@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "Store/types";
-import { apiCall, objectAsUrlParams } from "@rrkallan/js-helpers";
+import { apiCall, objectAsUrlParams, getStringAsUrlfriendly } from "@rrkallan/js-helpers";
 import type { TypeFetchTvShowsDataProp, TypeEntitiesList } from "./types";
 
 const fetchTvShows = createAsyncThunk(
@@ -30,15 +30,24 @@ const fetchTvShows = createAsyncThunk(
         const result = jsonResult.reduce((data: TypeEntitiesList[], currentItem: TypeEntitiesList) => {
             const tempData = data;
             const item = currentItem.show || currentItem;
-            const { id, name, rating, image, updated } = item;
-            const nameForUrl = name?.trim().replace(/\s+/g, "-").toLowerCase();
+            const { id, name, rating, image, updated, genres, premiered, ended, status, language } = item;
+            const nameForUrl = getStringAsUrlfriendly(name);
             const showUrl = `${id}/${nameForUrl}`;
+            const genresAsLowerCase = genres?.map((genre) => genre.toLowerCase());
+            const imageUrl = image?.medium?.split(":")?.slice(-1)[0] || image?.original?.split(":")?.slice(-1)[0] || undefined;
+            const imageOriginalUrl = image?.original?.split(":")?.slice(-1)[0] || undefined;
             const newItem = {
                 id,
                 title: name,
-                avarageRating: rating?.avarage || undefined,
-                imageUrl: image?.medium || image?.original || undefined,
-                showUrl,
+                averageRating: rating?.average || null,
+                imageUrl,
+                imageOriginalUrl,
+                genres: genresAsLowerCase,
+                premiered,
+                ended,
+                status: status?.toLowerCase(),
+                url: showUrl,
+                language,
                 updated,
             };
 

@@ -26,18 +26,24 @@ type ItemEntities = {
 type TypeEntitiesList = {
     id: number;
     title: string | undefined;
-    avarageRating: number | undefined;
+    averageRating: number | null;
     imageUrl: string | undefined;
+    imageOriginalUrl: string | undefined;
+    genres: string[] | undefined;
+    premiered: string | undefined;
+    ended: string | undefined;
+    status: string | undefined;
+    url: string;
+    language: string | undefined;
     updated: number;
-    showUrl: string;
     name?: string;
-    show?: TypeEntitiesList;
     rating?: {
-        avarage: number | null;
+        average: number | null;
     };
     image?: {
         [key: string]: string;
     } | null;
+    show?: TypeEntitiesList;
 };
 
 type TypeOverview = {

@@ -5,26 +5,25 @@ const pageAnimation = {
         position: "absolute",
         left: "-100%",
         top: 0,
-        opacity: 1,
+        opacity: 0,
         zIndex: 4,
     },
     enter: {
         position: "relative",
-        top: 0,
+        top: "unset",
         left: "0%",
         opacity: 1,
         zIndex: 4,
     },
     leave: {
-        position: "fixed",
+        position: "relative",
         top: 0,
-        left: "200%",
+        left: "100%",
         opacity: 0,
         zIndex: 4,
     },
-    Expires: false,
     exitBeforeEnter: true,
-    onChange: (): void => {
+    onStart: (): void => {
         window.scrollTo({
             top: 0,
             behavior: "smooth",

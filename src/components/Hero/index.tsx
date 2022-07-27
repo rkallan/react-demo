@@ -16,7 +16,7 @@ function Hero({ variant, fullWidth, textColor, hero, children }: InterfaceHeroPr
 
     useEffect(() => {
         if (scrollPositionY > changeOnPosition) setHeaderVariant(() => "lower");
-        if (scrollPositionY <= changeOnPosition - 100) setHeaderVariant(() => "default");
+        if (scrollPositionY <= changeOnPosition - 150) setHeaderVariant(() => "default");
     }, [changeOnPosition, scrollPositionY]);
 
     return (

@@ -67,6 +67,10 @@ module.exports = {
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "import/no-cycle": [0],
         "import/no-unresolved": [0],
+        "jsx-a11y/label-has-associated-control": [2, {
+            "labelAttributes": ["label"],
+            "depth": 3,
+        }],
     },
     overrides: [
         {

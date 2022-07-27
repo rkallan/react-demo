@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import loadable from "@loadable/component";
 import { useAppDispatch } from "Store/hooks";
@@ -13,6 +9,11 @@ import styles from "./resources/styles/filterClients.module.scss";
 const Select = loadable(() => import(/* webpackChunkName: "Container" */ "@rrkallan/ui-library/Select"), {
     fallback: <Loading />,
 });
+
+type TypeSelectEventData = {
+    name: string;
+    value: string | number;
+};
 
 const clientSelectProperties = {
     label: {
@@ -135,7 +136,7 @@ function FilterClients(): JSX.Element {
     const dispatch = useAppDispatch();
     const [searchParams] = useState(() => getCurrentUrlSearchAsObject());
 
-    const selectEventHandler = (data: any) => {
+    const selectEventHandler = (data: TypeSelectEventData) => {
         const currentUrlSearchAsObject = getCurrentUrlSearchAsObject();
         currentUrlSearchAsObject[data.name] = data.value;
         setUrlSearchParam(currentUrlSearchAsObject);
