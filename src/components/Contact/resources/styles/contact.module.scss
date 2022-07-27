@@ -9,9 +9,14 @@
 
     .unit {
         display: flex;
-        flex-direction: row;
-        align-self: center;
-        gap: 4rem;
+        flex-direction: column;
+        gap: 2rem;
+
+        @include respond-to("medium") {
+            flex-direction: row;
+            align-self: center;
+            gap: 4rem;
+        }
 
         &[variant~="title"] {
             flex: 1;
