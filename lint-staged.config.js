@@ -1,4 +1,4 @@
 module.exports = {
     "*": ["npm run format"],
-    "*.t|js*": ["npm run lint"],
+    "*.{js,jsx,ts,tsx}": ["npm run lint"],
 };
