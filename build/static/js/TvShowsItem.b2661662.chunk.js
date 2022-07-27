@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkrrkallan_demo=self.webpackChunkrrkallan_demo||[]).push([[782],{2829:function(n,e,a){a.r(e);var l=a(3081),r=a(8895),s=a(184);const t=(0,l.ZP)((()=>a.e(738).then(a.bind(a,7875))),{fallback:(0,s.jsx)(r.gb,{})});e.default=function(){return(0,s.jsx)(t,{})}}}]);
+//# sourceMappingURL=TvShowsItem.b2661662.chunk.js.map
