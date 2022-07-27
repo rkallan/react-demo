@@ -10,8 +10,8 @@ const clientsState = ({ clients }: RootState): InterfaceClientsState => clients;
 const getAssignmentsError = createSelector(clientsState, ({ assignments }) => assignments.error);
 const getAssignmentsLoading = createSelector(clientsState, ({ assignments }) => assignments.loading);
 const assignmentsIsLoaded = createSelector(clientsState, ({ assignments }) => {
-    const { loading, entities, error } = assignments;
-    const isLoaded = (!loading && !!entities) || !!error;
+    const { loading } = assignments;
+    const isLoaded = ["fulfilled", "rejected"].includes(loading);
     return isLoaded;
 });
 

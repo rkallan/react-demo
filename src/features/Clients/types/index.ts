@@ -1,3 +1,5 @@
+import type { TypeLoading, TypeCurrentRequestId, TypeError } from "Store/types";
+
 interface InterfaceClientsState {
     quotes: TypeItemsQuotes;
     assignments: TypeItemsAssignments;
@@ -33,18 +35,18 @@ type TypePerson = {
 type TypeItemsAssignments = {
     entities: InterfaceAssignments[] | undefined;
     ids: TypeItemIdsAssignments | undefined;
-    loading: boolean;
-    currentRequestId: string | undefined;
-    error: string | undefined;
+    loading: TypeLoading;
+    currentRequestId: TypeCurrentRequestId;
+    error: TypeError;
     filter?: TypeFetchClientsDataProp;
 };
 
 type TypeItemsQuotes = {
     entities: InterfaceQuotes[] | undefined;
     ids: TypeItemIdsQuotes | undefined;
-    loading: boolean;
-    currentRequestId: string | undefined;
-    error: string | undefined;
+    loading: TypeLoading;
+    currentRequestId: TypeCurrentRequestId;
+    error: TypeError;
 };
 
 type TypeItemIdsAssignments = {

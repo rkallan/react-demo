@@ -8,14 +8,14 @@ const initialState: InterfaceClientsState = {
     quotes: {
         entities: undefined,
         ids: undefined,
-        loading: false,
+        loading: "idle",
         currentRequestId: undefined,
         error: undefined,
     },
     assignments: {
         entities: undefined,
         ids: undefined,
-        loading: false,
+        loading: "idle",
         currentRequestId: undefined,
         error: undefined,
         filter: undefined,
@@ -54,9 +54,11 @@ const clients = createSlice({
                 const isQuotes = arg.key === "quotes";
                 const stateKey = isQuotes ? "quotes" : "assignments";
 
-                tempState[stateKey].loading = true;
-                tempState[stateKey].error = undefined;
-                tempState[stateKey].currentRequestId = requestId;
+                if (["idle", "rejected"].includes(state[stateKey].loading) && tempState[stateKey].currentRequestId === undefined) {
+                    tempState[stateKey].loading = "pending";
+                    tempState[stateKey].error = undefined;
+                    tempState[stateKey].currentRequestId = requestId;
+                }
 
                 return tempState;
             })
@@ -66,10 +68,10 @@ const clients = createSlice({
                 const isQuotes = arg.key === "quotes";
                 const stateKey = isQuotes ? "quotes" : "assignments";
 
-                if (state[stateKey].loading && state[stateKey].currentRequestId === requestId) {
+                if (state[stateKey].loading === "pending" && state[stateKey].currentRequestId === requestId) {
                     if (!tempState[stateKey].entities) tempState[stateKey].entities = [];
 
-                    tempState[stateKey].loading = false;
+                    tempState[stateKey].loading = "fulfilled";
                     tempState[stateKey].entities = action.payload?.entities;
                     tempState[stateKey].ids = action.payload?.ids;
                     tempState[stateKey].currentRequestId = undefined;
@@ -82,10 +84,10 @@ const clients = createSlice({
                 const { requestId, arg } = action.meta;
                 const isQuotes = arg.key === "quotes";
                 const stateKey = isQuotes ? "quotes" : "assignments";
-                const { error } = action.payload as { error: string };
+                const { error } = action.payload as { error: [] };
 
-                if (state[stateKey].loading && state[stateKey].currentRequestId === requestId) {
-                    tempState[stateKey].loading = false;
+                if (state[stateKey].loading === "pending" && state[stateKey].currentRequestId === requestId) {
+                    tempState[stateKey].loading = "rejected";
                     tempState[stateKey].error = error;
                     tempState[stateKey].currentRequestId = undefined;
                 }

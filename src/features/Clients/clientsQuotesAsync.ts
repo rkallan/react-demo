@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { apiCall } from "@rrkallan/js-helpers";
 import type { RootState } from "Store/types";
-import quotes from "features/Clients/Quotes/resources/data/quotes";
 import type { TypeFetchClientsDataProp, InterfaceQuotes, TypeItemIdsQuotes } from "./types";
 
 const fetchClientsQuotes = createAsyncThunk(
@@ -8,12 +8,22 @@ const fetchClientsQuotes = createAsyncThunk(
     async (data: TypeFetchClientsDataProp, { rejectWithValue, getState, requestId, signal }) => {
         const { clients }: RootState = getState();
         const { loading, currentRequestId } = clients.quotes;
+        const url = `${process.env.REACT_APP_API_QUOTES}`;
 
-        if (loading === false || requestId !== currentRequestId) return undefined;
+        if (loading !== "pending" || requestId !== currentRequestId) return undefined;
 
-        const result = quotes;
+        const response = await apiCall({
+            url,
+            signal,
+            method: "GET",
+        });
 
-        const ids = quotes.reduce((previousValue: TypeItemIdsQuotes, currentValue: InterfaceQuotes) => {
+        const contentType = response.headers.get("content-type").split(";")[0];
+        if (contentType !== "application/json" || !response.ok) return rejectWithValue({ error: ["Oops! Something Went Wrong"] });
+
+        const result = await response.json();
+
+        const ids = result.reduce((previousValue: TypeItemIdsQuotes, currentValue: InterfaceQuotes) => {
             const tempResult = previousValue;
             const { id } = currentValue;
 
