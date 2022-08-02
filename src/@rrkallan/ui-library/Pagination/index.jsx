@@ -33,7 +33,10 @@ function Pagination({
     });
 
     const onClickHandlerPagination = (event) => {
-        const { value } = event.currentTarget;
+        const { currentTarget } = event;
+        const { value } = currentTarget;
+
+        currentTarget.blur();
 
         if (validations.number(value, true)) paginated.jump(value);
 
@@ -195,7 +198,7 @@ Pagination.defaultProps = {
     data: [],
     itemsPerPage: 16,
     prefixSearchParam: undefined,
-    scrollTo: false,
+    scrollToTop: false,
 };
 
 Pagination.propTypes = {
@@ -208,7 +211,7 @@ Pagination.propTypes = {
     showing: PropTypes.string,
     itemsPerPage: PropTypes.number,
     prefixSearchParam: PropTypes.string,
-    scrollTo: PropTypes.bool,
+    scrollToTop: PropTypes.bool,
 };
 
 export default Pagination;

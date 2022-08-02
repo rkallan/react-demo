@@ -16,8 +16,8 @@ function Button({ children, type = "button", disabled = false }: InterfaceButton
         currentTarget.blur();
     };
 
-    /* eslint-disable react/button-has-type */
     return (
+        /* eslint-disable react/button-has-type */
         <button className={styles.container} type={type} disabled={disabled} onClick={onClickHandlerButton}>
             <div className={styles.unit} variant="loading">
                 <Icon icon="check" variant="small" svgProps={undefined} noContainer={undefined} />
