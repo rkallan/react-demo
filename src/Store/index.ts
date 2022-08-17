@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { combineReducers, configureStore, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "reduxjs-toolkit-persist";
 import storage from "reduxjs-toolkit-persist/lib/storage";
@@ -27,7 +26,8 @@ const rootReducer = (state: TypeRootState, action: PayloadAction) => {
     return reducer(state, action);
 };
 
-const persistedRootReducer = persistReducer(persistConfig, rootReducer as any);
+// @ts-expect-error: rootReducer is a combinedReducer
+const persistedRootReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
     reducer: persistedRootReducer,
