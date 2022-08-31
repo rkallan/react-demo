@@ -1,6 +1,7 @@
 {
-    "name": "rrkallan-react-ts",
-    "short_name": "rrk-ts",
+    "name": "RRKallan-React-Demo-Application",
+    "short_name": "rrk-demo",
+    "description": "RR Kallan React Demo / Playground application",
     "theme_color": "#d60000",
     "background_color": "#ffffff",
     "display": "standalone",

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import type { InterfaceRedirectRouteProps } from "./types";
 
-function RedirectRoute({ redirect }) {
+function RedirectRoute({ redirect }: InterfaceRedirectRouteProps): null {
     const [referer] = useState(() => {
         return {
             href: window.location.href,
