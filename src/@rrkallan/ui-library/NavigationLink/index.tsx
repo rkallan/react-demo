@@ -39,7 +39,7 @@ function NavigationLink({ children, to, onClick, setTabIndex = false, ...props }
             state={state}
             {...props}
             variant={isActive ? "is-active" : undefined}
-            tabIndex={setTabIndex && isActive ? -1 : 0}
+            tabIndex={setTabIndex && isActive ? -1 : undefined}
         >
             {children}
         </NavLink>

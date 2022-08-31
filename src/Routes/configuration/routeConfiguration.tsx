@@ -132,6 +132,13 @@ const routeConfiguration = [
                 title: "Error404",
                 exact: true,
             },
+            {
+                id: 1000,
+                routeId: 10,
+                path: "*",
+                element: null,
+                redirect: "/error/404",
+            },
         ],
     },
     {
