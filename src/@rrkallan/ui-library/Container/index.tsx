@@ -7,17 +7,20 @@ function Container({
     variant = "white",
     textColor = "default",
     fullWidth = false,
-    containerElementTag = "section",
+    containerElementTag = "div",
     classNameContainer,
     noUnitElement = false,
-    unitElementTag = "section",
+    unitElementTag = "div",
     classNameUnit,
 }: InterfaceContainer): JSX.Element {
     const [containerVariant] = useState(() =>
-        `${variant} ${textColor !== "default" ? `text-color-${textColor}` : ""} ${fullWidth ? `full-width` : ""}`.trim()
+        [variant, textColor !== "default" ? `text-color-${textColor}` : undefined, fullWidth ? "full-width" : undefined]
+            .join(" ")
+            .replace(/[\s]+/g, " ")
+            .trim()
     );
-    const [containerClassName] = useState(() => [styles.container, classNameContainer].join(" "));
-    const [unitClassName] = useState(() => [styles.unit, classNameUnit].join(" "));
+    const [containerClassName] = useState(() => [styles.container, classNameContainer].join(" ").replace(/[\s]+/g, " ").trim());
+    const [unitClassName] = useState(() => [styles.unit, classNameUnit].join(" ").replace(/[\s]+/g, " ").trim());
     const [ContainerElementTag] = useState((): TypeElementTag => containerElementTag);
     const [UnitElementTag] = useState((): TypeElementTag => unitElementTag);
 

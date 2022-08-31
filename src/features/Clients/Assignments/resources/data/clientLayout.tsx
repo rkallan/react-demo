@@ -6,7 +6,7 @@ const clientLayout = [
     },
     {
         row: 2,
-        items: 2,
+        items: 3,
         deviding: "equal",
     },
     {

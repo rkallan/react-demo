@@ -32,15 +32,14 @@ const customRoutes = JSON.parse(fs.readFileSync(customRoutesFilePath));
 server.use(jsonServer.rewriter(customRoutes));
 
 // custom behaviour for login
-server.post("/users", (req, res, next) => {
+server.get("/user", (req, res, next) => {
     const users = router.db.get("users").valueOf();
     const { email, password } = req.body;
     const user = users.find((item) => item.email === email && item.password === password);
+    delete user.password;
 
     if (user) {
-        res.jsonp({
-            user,
-        });
+        res.jsonp(user);
     }
 
     if (!user) {
