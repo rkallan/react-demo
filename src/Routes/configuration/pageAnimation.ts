@@ -10,7 +10,7 @@ const pageAnimation = {
     },
     enter: {
         position: "relative",
-        top: "unset",
+        top: 0,
         left: "0%",
         opacity: 1,
         zIndex: 4,
