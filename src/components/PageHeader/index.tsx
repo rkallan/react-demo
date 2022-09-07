@@ -7,13 +7,11 @@ const Container = loadable(() => import(/* webpackChunkName: "MainRoutes" */ "@r
     fallback: <Loading />,
 });
 
-function PageHeader({ children, fullWidth = false, textColor = "red", variant = "white" }: InterfacePageHeader): JSX.Element {
+function PageHeader({ children, fullWidth = true, textColor = "red", variant = "white" }: InterfacePageHeader): JSX.Element {
     return (
-        <div className={styles.container}>
-            <Container variant={variant} textColor={textColor} fullWidth={fullWidth}>
-                {children}
-            </Container>
-        </div>
+        <Container classNameContainer={styles.container} variant={variant} textColor={textColor} fullWidth={fullWidth}>
+            {children}
+        </Container>
     );
 }
 

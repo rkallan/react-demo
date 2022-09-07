@@ -6,6 +6,10 @@ const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rr
     fallback: <Loading />,
 });
 
+const PageHeader = loadable(() => import(/* webpackChunkName: "PageHeader" */ "components/PageHeader"), {
+    fallback: <Loading />,
+});
+
 const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
     fallback: <Loading />,
 });
@@ -28,14 +32,16 @@ const FilterClients = loadable(() => import(/* webpackChunkName: "FilterClients"
 
 function WorkOverview(): JSX.Element {
     const { pageHeader } = content;
+    const { hero } = pageHeader;
 
     return (
         <>
-            <Hero {...pageHeader}>
+            <PageHeader>
+                <Hero {...hero} />
                 <Container variant="white" textColor="black" fullWidth>
                     <FilterClients />
                 </Container>
-            </Hero>
+            </PageHeader>
             <Assignments />
             <Client />
             <Contact />

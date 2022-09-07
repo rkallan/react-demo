@@ -11,7 +11,7 @@ const layout = createSlice({
     initialState,
     reducers: {
         setElementClientRect: (state, action) => {
-            const newState = state;
+            const newState = { ...state };
             const { payload } = action;
 
             const { element, ...boundingClientRect } = payload;

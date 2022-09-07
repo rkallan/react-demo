@@ -7,6 +7,10 @@ const Container = loadable(() => import(/* webpackChunkName: "Container" */ "@rr
     fallback: <Loading />,
 });
 
+const PageHeader = loadable(() => import(/* webpackChunkName: "PageHeader" */ "components/PageHeader"), {
+    fallback: <Loading />,
+});
+
 const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
     fallback: <Loading />,
 });
@@ -21,16 +25,18 @@ const TvShowsSearchForm = loadable(() => import(/* webpackChunkName: "TvShowsSea
 
 function TvShowsOverview(): JSX.Element {
     const { pageHeader } = content;
+    const { hero } = pageHeader;
 
     return (
         <>
-            <Hero {...pageHeader}>
+            <PageHeader>
+                <Hero {...hero} />
                 <Container variant="white" textColor="red" classNameContainer={styles.container}>
                     <section className={styles.unit} variant="search">
                         <TvShowsSearchForm />
                     </section>
                 </Container>
-            </Hero>
+            </PageHeader>
             <TvShowsList />
         </>
     );

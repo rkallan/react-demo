@@ -14,6 +14,10 @@ const NavigationBackLink = loadable(() => import(/* webpackChunkName: "Navigatio
     fallback: <Loading />,
 });
 
+const PageHeader = loadable(() => import(/* webpackChunkName: "PageHeader" */ "components/PageHeader"), {
+    fallback: <Loading />,
+});
+
 const Hero = loadable(() => import(/* webpackChunkName: "Hero" */ "components/Hero"), {
     fallback: <Loading />,
 });
@@ -27,7 +31,8 @@ function Assignment(): JSX.Element {
 
     return (
         <>
-            <Hero hero={{ title: assignment?.title, image: assignment?.mainImage }} fullWidth>
+            <PageHeader>
+                <Hero title={assignment?.title} image={assignment?.mainImage} />
                 <Container variant="red" textColor="white" noUnitElement classNameContainer={styles.heroContainer}>
                     <div>
                         <NavigationBackLink />
@@ -42,7 +47,7 @@ function Assignment(): JSX.Element {
                         </div>
                     )}
                 </Container>
-            </Hero>
+            </PageHeader>
             <Container classNameContainer={styles.container} variant="white" textColor="black" noUnitElement>
                 <section className={styles.unit} variant="intro">
                     <p>{assignment?.intro}</p>

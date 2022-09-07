@@ -4,6 +4,7 @@
 declare module "@rrkallan/ui-library";
 declare module "@rrkallan/js-helpers";
 declare module "@rrkallan/react-hookss";
+declare module "html-to-react";
 
 namespace React {
     interface HTMLAttributes<T> {

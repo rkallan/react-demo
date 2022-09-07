@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import loadable from "@loadable/component";
-import { Loading } from "@rrkallan/ui-library";
 import { useScrollPosition } from "@rrkallan/react-hooks";
+import HtmlToReactParser from "html-to-react";
 import styles from "./resources/styles/hero.module.scss";
 import { InterfaceHeroProps } from "./types";
 
-const PageHeader = loadable(() => import(/* webpackChunkName: "PageHeader" */ "components/PageHeader"), {
-    fallback: <Loading />,
-});
+const htmlToReactParser = new HtmlToReactParser.Parser();
 
-function Hero({ variant, fullWidth, textColor, hero, children }: InterfaceHeroProps): JSX.Element {
+function Hero({ title, image }: InterfaceHeroProps): JSX.Element {
     const { scrollPositionY } = useScrollPosition();
     const [headerVariant, setHeaderVariant] = useState(() => "default");
     const [changeOnPosition] = useState(() => 450);
+    const titleHtml = htmlToReactParser.parse(title);
 
     useEffect(() => {
         if (scrollPositionY > changeOnPosition) setHeaderVariant(() => "lower");
@@ -20,19 +18,16 @@ function Hero({ variant, fullWidth, textColor, hero, children }: InterfaceHeroPr
     }, [changeOnPosition, scrollPositionY]);
 
     return (
-        <PageHeader variant={variant} fullWidth={fullWidth} textColor={textColor}>
-            <div className={styles.container} variant={headerVariant}>
-                <h1 className={styles.unit} variant="title">
-                    {hero.title}
-                </h1>
-                <div className={styles.unit} variant="image">
-                    <figure className={styles.imageContainer}>
-                        <img className={styles.image} src={hero.image} alt="Hero backgropund image" aria-hidden />
-                    </figure>
-                </div>
+        <article className={styles.container} variant={headerVariant}>
+            <h1 className={styles.unit} variant="title">
+                {titleHtml}
+            </h1>
+            <div className={styles.unit} variant="image">
+                <figure className={styles.imageContainer}>
+                    <img className={styles.image} src={image} alt="Hero background image" aria-hidden />
+                </figure>
             </div>
-            {children}
-        </PageHeader>
+        </article>
     );
 }
 

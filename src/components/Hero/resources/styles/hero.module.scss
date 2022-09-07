@@ -2,6 +2,7 @@
 @import "resources/styles/mixins/mixins";
 
 .container {
+    position: relative;
     display: flex;
     gap: map-get($gap, default);
     flex-direction: row;
@@ -33,7 +34,7 @@
 
     .unit {
         &[variant~="title"] {
-            display: flex;
+            display: block;
             font-size: 1.5rem;
             font-weight: 400;
             max-width: 75%;
