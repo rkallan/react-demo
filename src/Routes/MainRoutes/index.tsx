@@ -12,7 +12,7 @@ function MainRoutes(): JSX.Element {
     const location = useLocation();
     const element = useRoutes(routeConfiguration);
     const [currentElement, setCurrentElement] = useState(() => element);
-    const { title, redirect } = element?.props.value.matches[0].route || {};
+    const { title, redirect } = element?.props.match?.route || {};
     const pageTitle = getPageTitle({ titles: [title] });
     const transition = useTransition(location, { key: location.key, ...pageAnimation, onRest: () => setCurrentElement(() => element) });
 

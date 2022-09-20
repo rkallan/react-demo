@@ -10,8 +10,8 @@ function SubRoutes(): JSX.Element {
     const { pathname } = useLocation();
     const element = useOutlet();
     const transition = useTransition(pathname, pageAnimation);
-    const matches = [...(element?.props.children.props.value.matches || {})];
-    const { title, redirect } = matches.reverse()[0].route;
+    const matches = element?.props?.children?.props?.match || {};
+    const { title, redirect } = matches?.route || {};
     const pageTitle = getPageTitle({ titles: [title] });
 
     if (redirect) return <RedirectRoute redirect={redirect} />;

@@ -1,14 +1,18 @@
 $colorWhite: (
     default: hsla(0, 0%, 100%, 1),
+    darker: hsla(0, 0%, 96%, 1),
 );
 
 $colorBlack: (
-    default: hsla(0, 0%, 0%, 1),
+    default: hsla(0, 0%, 9%, 1),
+    darker: hsla(0, 0%, 0%, 1),
     lighter: hsla(0, 0%, 14%, 1),
 );
 
 $colorGray: (
-    default: hsla(0, 0%, 14%, 1),
+    default: hsla(0, 0%, 75%, 1),
+    darker: hsla(0, 0%, 66%, 1),
+    lighter: hsla(0, 0%, 86%, 1),
 );
 
 $colorYellow: (

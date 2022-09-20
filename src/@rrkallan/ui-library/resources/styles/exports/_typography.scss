@@ -1,0 +1,48 @@
+@import "../mixins/mixins";
+@import "../variables/variables";
+
+@function json-stringify($map) {
+    @if type-of($map) == map {
+        $counterMap: 0;
+        $mapLenght: length($map);
+        $valueAsString: "";
+
+        @each $key, $value in $map {
+            $valueType: type-of($value);
+            $counterMap: $counterMap + 1;
+
+            @if $valueType != map {
+                $valueAsString: "#{$valueAsString}#{$key}: #{$value}, ";
+            }
+
+            @if $valueType == map {
+                $counterSubMap: 0;
+                $subMap: map-get($map, $key);
+                $subMapLenght: length($subMap);
+                $subString: "";
+
+                @each $subKey, $subValue in $subMap {
+                    $counterSubMap: $counterSubMap + 1;
+                    $subValue: unquote("#{$subKey}: #{$subValue}");
+                    $subString: "#{$subString}#{$subValue}";
+
+                    @if $counterSubMap < $subMapLenght {
+                        $subString: "#{$subString},";
+                    }
+                }
+
+                $valueAsString: "#{$valueAsString}#{$key} = #{$subString}";
+
+                @if $counterMap < $mapLenght {
+                    $valueAsString: "#{$valueAsString}, ";
+                }
+            }
+        }
+
+        @return $valueAsString;
+    }
+}
+
+:export {
+    fonts: json-stringify($fontFamily);
+}

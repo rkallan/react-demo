@@ -36,7 +36,7 @@ module.exports = {
     settings: {
         react: {
             pragma: "React",
-            version: "18.0.0",
+            version: "18.2.0",
         },
         "import/parsers": {
             "@typescript-eslint/parser": [".ts", ".tsx"],
@@ -78,6 +78,7 @@ module.exports = {
             rules: {
                 "@typescript-eslint/explicit-module-boundary-types": ["error"],
                 "react/require-default-props": ["off"],
+                "react/no-unknown-property": ['error', { ignore: ['variant', 'state'] }],
             },
         },
     ],

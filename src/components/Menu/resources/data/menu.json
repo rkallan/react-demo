@@ -16,5 +16,11 @@
         "title": "Work",
         "url": "/work",
         "exact": true
+    },
+    {
+        "id": 20,
+        "title": "Resume",
+        "url": "/resume",
+        "exact": true
     }
 ]

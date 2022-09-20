@@ -1,0 +1,10 @@
+@import "../mixins/mixins";
+@import "../variables/variables";
+
+:export {
+    gapDefault: map-get($gap, default);
+    gapExtraSmall: map-get($gap, extraSmall);
+    gapSmall: map-get($gap, small);
+    gapLarge: map-get($gap, large);
+    gapExtraLarge: map-get($gap, extraLarge);
+}

@@ -18,16 +18,18 @@ const Work = loadable(() => import(/* webpackChunkName: "Work" */ "pages/Work"))
 const WorkOverview = loadable(() => import(/* webpackChunkName: "WorkOverview" */ "pages/Work/Overview"));
 const WorkAssignment = loadable(() => import(/* webpackChunkName: "WorkAssignment" */ "pages/Work/Item"));
 
+const Resume = loadable(() => import(/* webpackChunkName: "Resume" */ "pages/Resume"));
+
 const routeConfiguration = [
     {
-        id: 20,
+        pid: 20,
         path: "/",
         exact: true,
         authenticated: false,
         element: <Homepage />,
     },
     {
-        id: 30,
+        pid: 30,
         path: "/terms-and-conditions",
         element: <Terms />,
         title: "Terms and conditions",
@@ -35,7 +37,7 @@ const routeConfiguration = [
         authenticated: false,
     },
     {
-        id: 40,
+        pid: 40,
         path: "/privacy-policy",
         element: <Privacy />,
         title: "Privacy policy",
@@ -43,13 +45,13 @@ const routeConfiguration = [
         authenticated: false,
     },
     {
-        id: 50,
+        pid: 50,
         path: "/tv-shows/*",
         element: <TvShows />,
         children: [
             {
-                id: 10,
-                routeId: 50,
+                pid: 500,
+                routeId: 10,
                 index: true,
                 element: <TvShowsOverview />,
                 title: "TV Shows",
@@ -57,7 +59,7 @@ const routeConfiguration = [
                 authenticated: false,
             },
             {
-                id: 20,
+                pid: 20,
                 routeId: 50,
                 path: ":id/:title",
                 element: <TvShowsItem />,
@@ -65,7 +67,7 @@ const routeConfiguration = [
                 authenticated: false,
             },
             {
-                id: 1000,
+                pid: 1000,
                 routeId: 50,
                 path: "*",
                 element: null,
@@ -74,12 +76,12 @@ const routeConfiguration = [
         ],
     },
     {
-        id: 60,
+        pid: 60,
         path: "/work/*",
         element: <Work />,
         children: [
             {
-                id: 10,
+                pid: 10,
                 routeId: 60,
                 index: true,
                 element: <WorkOverview />,
@@ -87,7 +89,7 @@ const routeConfiguration = [
                 authenticated: false,
             },
             {
-                id: 20,
+                pid: 20,
                 routeId: 60,
                 path: ":id/:title",
                 element: <WorkAssignment />,
@@ -95,8 +97,8 @@ const routeConfiguration = [
                 authenticated: false,
             },
             {
-                id: 1000,
-                routeId: 70,
+                pid: 1000,
+                routeId: 60,
                 path: "*",
                 element: null,
                 redirect: "/error/404",
@@ -104,20 +106,28 @@ const routeConfiguration = [
         ],
     },
     {
-        id: 1000,
+        pid: 70,
+        path: "/resume",
+        element: <Resume />,
+        title: "Resume",
+        exact: true,
+        authenticated: false,
+    },
+    {
+        pid: 1000,
         path: "/example",
         element: <Example />,
         exact: true,
         authenticated: false,
     },
     {
-        id: 10,
+        pid: 10,
         path: "/error/*",
         element: <Error />,
         title: "Error",
         children: [
             {
-                id: 10,
+                pid: 10,
                 routeId: 10,
                 path: "403",
                 element: <Error403 />,
@@ -125,7 +135,7 @@ const routeConfiguration = [
                 exact: true,
             },
             {
-                id: 20,
+                pid: 20,
                 routeId: 10,
                 path: "404",
                 element: <Error404 />,
@@ -133,7 +143,7 @@ const routeConfiguration = [
                 exact: true,
             },
             {
-                id: 1000,
+                pid: 1000,
                 routeId: 10,
                 path: "*",
                 element: null,
@@ -142,7 +152,7 @@ const routeConfiguration = [
         ],
     },
     {
-        id: 5,
+        pid: 5,
         path: "*",
         element: null,
         redirect: "/error/404",

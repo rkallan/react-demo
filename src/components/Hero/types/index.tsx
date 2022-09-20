@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { ReactNode } from "react";
 
 interface InterfaceHeroProps {
@@ -5,4 +6,4 @@ interface InterfaceHeroProps {
     image?: string | undefined;
 }
 
-export default InterfaceHeroProps;
+export type { InterfaceHeroProps };
