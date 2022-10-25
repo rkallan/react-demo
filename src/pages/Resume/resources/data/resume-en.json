@@ -1,0 +1,460 @@
+{
+    "document": {
+        "title": "Resume RR Kallan",
+        "subject": "Resume RR Kallan Nederlands",
+        "author": "Ravi Rishaad Kallan",
+        "language": "nl",
+        "pdfVersion": "1.7"
+    },
+    "personalInformation": {
+        "address": ["Ravi Rishaad Kallan", "Troelstrakade 259", "2531AE 's Gravenhage", "Nederland"],
+        "phoneNumber": "+31618591995",
+        "emailaddress": "r.kallan@icloud.com",
+        "webPages": ["htps://github.com/rkallan", "htps://www.linkedin.com/in/ravikallan"],
+        "remaining": [
+            {
+                "label": "Date of birth",
+                "value": "1983-08-10"
+            },
+            {
+                "label": "Birthplace",
+                "value": "Rotterdam"
+            },
+            {
+                "label": "Nationality",
+                "value": "Nederlands"
+            },
+            {
+                "label": "Drivers license",
+                "value": "B"
+            },
+            {
+                "label": "Marital status",
+                "value": "ongehuwd"
+            }
+        ]
+    },
+    "aboutMe": [
+        [
+            {
+                "style": "default",
+                "content": "Ravi Kallan is an experienced passionate "
+            },
+            {
+                "style": "bold",
+                "content": "lead frontend developer. "
+            },
+            {
+                "style": "default",
+                "content": "Ravi has developed websites & web applications for government institutions, small, medium, and large (inter)national companies."
+            }
+        ],
+        [
+            {
+                "style": "default",
+                "content": "Ravi has developed as a lead frontend developer. His most important spearheads are quality, perfection, performance, scalability and coaching / guidance."
+            }
+        ],
+        [
+            {
+                "style": "default",
+                "content": "Ravi masters and uses the following techniques: HTML5, CSS3, JavaScript, NodeJs, NPM, ReactJS, AngularJS, Redux, various CLI tools, CSS pre-processors (SASS, LESS), Storybook, Jest, Enzyme, MochaJS, Babel, Webpack, version control system and Agile Scrum"
+            }
+        ],
+        [
+            {
+                "style": "default",
+                "content": "Ravi has mastered new frontend techniques / frameworks quickly. He shares his acquired knowledge and vision with colleagues"
+            }
+        ],
+        [
+            {
+                "style": "default",
+                "content": "On several projects, Ravi was responsible for setting up and monitoring frontend architecture, structure, code quality and coached / supervised fellow frontend developers"
+            }
+        ],
+        [
+            {
+                "style": "default",
+                "content": "Ravi has developed the following webshops / websites / web applications: Heineken.com, Omoda.nl, SuperTrash.com, Slimleren.nl, Travelbags.com, Daka.nl, Voorwinden.nl, abnamro.nl, Kateinnovations.com"
+            }
+        ]
+    ],
+    "workExperience": [
+        {
+            "id": 10,
+            "company": "Kateinnovations",
+            "function": "Lead Frontend developer / Team Lead development",
+            "place": "Utrecht",
+            "date": {
+                "start": "2020-06",
+                "end": "2022-03"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Kateinnovations is developing a web application for valuers in the business sector"
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi was responsible for the entire development process at Kateinnovations, including frontend, backend and deployment."
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi has rewritten / structured the main modules. The aim is quality, scalable, manageable and performance improvements."
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi has created private NPM packages for ao UI components (Storybook) and JavaScript functions."
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi has introduced Agile Scrum at Kateinnovations. Implementation of Agile Scrum methodology has been trained, coached and guided by Ravi."
+                    }
+                ]
+            ],
+            "toolsAndTechniques": [
+                "HTML(5)",
+                "Sass",
+                "CSS(3)",
+                "JavaScript",
+                "ReactJS",
+                "Redux",
+                "NPM",
+                "NodeJS",
+                "Storybook",
+                "Jest",
+                "Jenkins",
+                "PHP Symphony / Laravel",
+                "Selenium",
+                "Docker",
+                "Git",
+                "Bitbucket",
+                "Ansable",
+                "Nginx",
+                "Let’s Encrypt",
+                "Certbot",
+                "Agile Scrum"
+            ]
+        },
+        {
+            "id": 9,
+            "company": "Content Guru - The Redwood Technologies Group",
+            "function": "Lead Frontend developer",
+            "place": "The Hague & Bracknell (UK)",
+            "date": {
+                "start": "2018-12",
+                "end": "2020-05"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Content Guru is a leading provider of cloud communications solutions that help organizations deliver the best customer engagement and experience."
+                    },
+                    {
+                        "style": "default",
+                        "content": "At Content Guru, Ravi is responsible for the front-end development of a new application to be set up. Within this application, current portals are integrated and provided with new styling."
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi has a leading role, in the front-end area, in the redevelopment of existing application"
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi has set up a UI Component libary with Storybook and javascript reusable functions libary. Ravi has thus created uniformity and more efficient management."
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi has shared his knowledge with colleagues through seminars and mentoring. Ravi traveled frequently to Bracknel where his other team members were stationed."
+                    }
+                ]
+            ],
+            "toolsAndTechniques": [
+                "HTML(5)",
+                "Sass",
+                "CSS(3)",
+                "JavaScript",
+                "ReactJS",
+                "Redux",
+                "NPM",
+                "NodeJS",
+                "Storybook",
+                "Jest",
+                "CumcumberJS",
+                "Puppet",
+                "Solar Cube",
+                "Docker",
+                "Git",
+                "GitLab",
+                "Nginx",
+                "Windows Server",
+                "Agile Scrum"
+            ]
+        },
+        {
+            "id": 8,
+            "company": "Yacht",
+            "function": "Senior Frontend developer",
+            "place": "Rotterdam",
+            "date": {
+                "start": "2018-07",
+                "end": "2018-12"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Ravi is door Yacht gedetacheert bij Randstand Group Nederland te Amsterdam"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": [
+                "HTML(5)",
+                "Sass",
+                "CSS(3)",
+                "JavaScript",
+                "ReactJS",
+                "Redux",
+                "NPM",
+                "NodeJS",
+                "Git",
+                "GitLab",
+                "Agile Scrum"
+            ]
+        },
+        {
+            "id": 7,
+            "company": "Brunel",
+            "function": "Senior Frontend developer",
+            "place": "Rotterdam",
+            "date": {
+                "start": "2018-01",
+                "end": "2018-06"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Ravi is door Brunel gedetacheert bij Bed and Breakfast te Eindhoven"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": ["HTML(5)", "Sass", "CSS(3)", "JavaScript", "ReactJS", "Redux", "NPM", "NodeJS", "Git"]
+        },
+        {
+            "id": 6,
+            "company": "ABN Amro",
+            "function": "Senior Frontend developer",
+            "place": "Amsterdam",
+            "date": {
+                "start": "2016-03",
+                "end": "2018-01"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Ravi is onderdeel van het Minor Changes Team. Het Minor Changes Team beheert en ontwikkelt modules aan de particuliere en waar geen autenticatie bij vereist is"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": [
+                "HTML(5)",
+                "Sass",
+                "CSS(3)",
+                "JavaScript",
+                "NPM",
+                "NodeJS",
+                "SVN",
+                "TortoiseSVN",
+                "AngularJs 2 & 1.3",
+                "Gulp",
+                "Grunt",
+                "Liquid"
+            ]
+        },
+        {
+            "id": 5,
+            "company": "Macaw",
+            "function": "Lead / Senior Frontend developer",
+            "place": "Schiphol-Rijk",
+            "date": {
+                "start": "2015-03",
+                "end": "2016-02"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Ravi is lead frontend developer voor rebuild Heineken.com"
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi heeft voor hoofdkantoor Hema te Amsterdam overzicht pagina met diverse social media kanalen gecreert. Voor Hema.nl heeft Ravi enkele aanpassingen aan de webshop gedaan"
+                    },
+                    {
+                        "style": "default",
+                        "content": "Ravi heeft voor Scotch & Soda pdf huisstijl document vertaalt naar HTML zodat deze met intern via het web gedeelt kan worden"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": ["HTML(5)", "Sass", "CSS(3)", "JavaScript", "Git", "Liquid", "Sitecore", "SharePoint", "Agile Scrum"]
+        },
+        {
+            "id": 4,
+            "company": "Slimleren.nl",
+            "function": "Frontend developer",
+            "place": "Amsterdam",
+            "date": {
+                "start": "2014-08",
+                "end": "2015-03"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Slimleren.nl is een online wiskunde educatie applicatie voor middelbare scholieren"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": ["HTML(5)", "Sass", "CSS(3)", "JavaScript", "jQuery", "Git", "Github", "PHP", "Zend Framework", "GruntJS"]
+        },
+        {
+            "id": 3,
+            "company": "Alternet Internet Solution",
+            "function": "Frontend developer",
+            "place": "Hendrik-Ido-Ambacht",
+            "date": {
+                "start": "2013-11",
+                "end": "2014-07"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Alternet beheerd en ontwikkelt webapplicaties voor gemeentelijke en overheidsinstanties"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": ["HTML(5)", "Sass", "CSS(3)", "JavaScript", "jQuery", "Git", "TYPO3"]
+        },
+        {
+            "id": 2,
+            "company": "XSARUS E-development",
+            "function": "Web / Frontend developer",
+            "place": "Middelharnis",
+            "date": {
+                "start": "2008-09",
+                "end": "2013-10"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Xsarus beheerd en ontwikkelt webshop voor voornamelijk de fashion en retail branche"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": ["HTML", "CSS(3)", "JavaScript", "jQuery", "SVN", "TortoiseSVN", "PHP", "Zend Framework"]
+        },
+        {
+            "id": 1,
+            "company": "Het Internetgilde",
+            "function": "Web developer",
+            "place": "Gouda",
+            "date": {
+                "start": "2007-04",
+                "end": "2008-09"
+            },
+            "description": [
+                [
+                    {
+                        "style": "default",
+                        "content": "Internetgilde beheert en ontwikkelt websites voor midden en kleine bedrijven"
+                    }
+                ]
+            ],
+            "toolsAndTechniques": [
+                "HTML",
+                "CSS(3)",
+                "JavaScript",
+                "jQuery",
+                "Prototype",
+                "PHP",
+                "SQL",
+                "Ruby on Rails",
+                "Windows Server",
+                "Plesk",
+                "Photoshop"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "id": 3,
+            "education": "Grafimedia Technologie",
+            "institute": "Hoogeschool Rotterdam ism Grafisch Lyceum Rotterdam",
+            "period": "2005 - 2007"
+        },
+        {
+            "id": 2,
+            "education": "Communication Multimedia Design",
+            "institute": "Willem de Kooning Academie ism Hoogeschool Rotterdam",
+            "period": "2004 - 2005"
+        },
+        {
+            "id": 1,
+            "education": "IT-Mediaproductie",
+            "institute": "Grafisch Lyceum Rotterdam",
+            "period": "2000 - 2004"
+        }
+    ],
+    "skills": [
+        {
+            "style": "default",
+            "content": "HTML(5)"
+        },
+        {
+            "style": "default",
+            "content": "CSS(3)"
+        },
+        {
+            "style": "default",
+            "content": "SASS"
+        },
+        {
+            "style": "default",
+            "content": "LESS"
+        },
+        {
+            "style": "default",
+            "content": "JavaScript"
+        },
+        {
+            "style": "default",
+            "content": "ReactJS"
+        },
+        {
+            "style": "default",
+            "content": "Redux"
+        },
+        {
+            "style": "default",
+            "content": "Storybook"
+        },
+        {
+            "style": "default",
+            "content": "Styleguidist"
+        },
+        {
+            "style": "default",
+            "content": "Jest"
+        },
+        {
+            "style": "default",
+            "content": "Enzyme"
+        }
+    ]
+}

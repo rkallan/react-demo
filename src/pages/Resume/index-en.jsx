@@ -4,7 +4,7 @@
 import { PDFViewer, Document, Font, Page, Text, Link, Image, View, StyleSheet } from "@react-pdf/renderer";
 import { ucFirst } from "@rrkallan/js-helpers";
 import stylesExport from "@rrkallan/ui-library/resources/styles/exports/_exports.scss";
-import resumeData from "./resources/data/resume.json";
+import resumeData from "./resources/data/resume-en.json";
 
 const convertToPt = (value) => {
     const [size, unitFromValue] = value.split(/([\d.]+)/).filter(Boolean);
@@ -327,7 +327,7 @@ function Resume() {
                                     return (
                                         <Text key={content} style={[styles.skill]}>
                                             {content}
-                                            {", "}
+                                            {"   "}
                                         </Text>
                                     );
                                 })}
@@ -339,9 +339,9 @@ function Resume() {
                                 <Text>Language</Text>
                             </View>
 
-                            <Text style={[styles.container.content]}>Nederlands*</Text>
+                            <Text style={[styles.container.content]}>Dutch*</Text>
 
-                            <Text style={[styles.container.content]}>Engels</Text>
+                            <Text style={[styles.container.content]}>English</Text>
                         </View>
 
                         <View style={styles.container}>
@@ -349,8 +349,12 @@ function Resume() {
                                 <Text>Hobbies</Text>
                             </View>
 
-                            <Text style={[styles.container.content]}>
+                            {/* <Text style={[styles.container.content]}>
                                 Voetbal, Reizen, Snowboarden, Koken, Auto's, Formule 1, Netflix, Games, Playstation, Muziek, Team sport, BBQ
+                            </Text> */}
+                            <Text style={[styles.container.content]}>
+                                Football, To travel vacation, Snowboard, To cook, Cars, Formule 1, Netflix, Games, Playstation, Music, Team
+                                sport, BBQ
                             </Text>
                         </View>
                     </View>
@@ -405,9 +409,9 @@ function Resume() {
                                                 <Text style={styles.experience.subTitle.place}>{experience.place}</Text>
                                             </Text>
                                             <Text style={styles.experience.subTitle.date}>
-                                                {`${new Date(experience.date.start).toLocaleDateString("nl", workDateOption)} - ${new Date(
+                                                {`${new Date(experience.date.start).toLocaleDateString("en", workDateOption)} - ${new Date(
                                                     experience.date.end
-                                                ).toLocaleDateString("nl", workDateOption)}`}
+                                                ).toLocaleDateString("en", workDateOption)}`}
                                             </Text>
                                         </View>
 
